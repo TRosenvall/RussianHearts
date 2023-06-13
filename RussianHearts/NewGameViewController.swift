@@ -12,6 +12,9 @@ class NewGameViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet var newGameView: UIView!
     @IBOutlet var verticalStackView: UIStackView!
+    @IBOutlet var imageContainerView: UIView!
+    @IBOutlet var logoImageView: UIImageView!
+    @IBOutlet var spacerView: UIView!
     @IBOutlet var numberOfPlayersStackView: UIStackView!
     @IBOutlet var numberOfPlayersLabel: UILabel!
     @IBOutlet var removePlayerButton: UIButton!

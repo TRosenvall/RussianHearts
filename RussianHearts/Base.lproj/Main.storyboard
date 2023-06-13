@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RussianHearts" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="GameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,6 +92,15 @@
                             <constraint firstItem="dIb-dI-ydy" firstAttribute="width" secondItem="Eme-f4-gka" secondAttribute="width" id="yqn-9m-gwi"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dimmerView" destination="nQq-24-tz3" id="e5M-SG-lBO"/>
+                        <outlet property="handView" destination="8ZM-d8-vMS" id="scD-9q-vWo"/>
+                        <outlet property="newRoundView" destination="dIb-dI-ydy" id="1AX-DT-2fX"/>
+                        <outlet property="nextTurnView" destination="Eme-f4-gka" id="tlA-TB-mhR"/>
+                        <outlet property="playAreaView" destination="Pcq-Cy-zuv" id="1Ru-Wp-gMK"/>
+                        <outlet property="statusBarView" destination="AwR-Pt-hXN" id="JAt-Tu-MBg"/>
+                        <outlet property="verticalStackView" destination="L7c-B5-ChT" id="hbF-jG-Zdj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -111,8 +120,34 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EAQ-wl-GkH">
                                         <rect key="frame" x="11" y="60.666666666666686" width="371" height="731"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mfz-rQ-LVJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="371" height="371"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V7H-dv-l1b">
+                                                        <rect key="frame" x="57.666666666666686" y="57.333333333333343" width="256" height="256"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="256" id="Yi1-5T-lxs"/>
+                                                            <constraint firstAttribute="width" secondItem="V7H-dv-l1b" secondAttribute="height" id="cYH-DI-4fp"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="V7H-dv-l1b" firstAttribute="centerX" secondItem="Mfz-rQ-LVJ" secondAttribute="centerX" id="Rc5-Ox-puq"/>
+                                                    <constraint firstAttribute="width" constant="371" id="ft5-of-IPa"/>
+                                                    <constraint firstItem="V7H-dv-l1b" firstAttribute="centerY" secondItem="Mfz-rQ-LVJ" secondAttribute="centerY" id="jhh-6d-bdB"/>
+                                                    <constraint firstAttribute="width" secondItem="Mfz-rQ-LVJ" secondAttribute="height" id="tDp-zc-VOT"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJ1-zE-MIT">
+                                                <rect key="frame" x="0.0" y="371" width="371" height="22"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="FL7-9p-Ips"/>
+                                                </constraints>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ret-sC-qoS">
-                                                <rect key="frame" x="0.0" y="0.0" width="371" height="34.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="393" width="371" height="34.333333333333314"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Players" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYh-LS-0lH">
                                                         <rect key="frame" x="0.0" y="0.0" width="237.66666666666666" height="34.333333333333336"/>
@@ -139,7 +174,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSY-3g-FRL">
-                                                <rect key="frame" x="0.0" y="34.333333333333314" width="371" height="696.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="427.33333333333326" width="371" height="303.66666666666674"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Start Game"/>
                                                 <connections>
@@ -170,11 +205,14 @@
                     </view>
                     <connections>
                         <outlet property="addPlayerButton" destination="Jhw-su-mKO" id="Zso-hd-qyd"/>
+                        <outlet property="imageContainerView" destination="Mfz-rQ-LVJ" id="ivL-YV-08G"/>
+                        <outlet property="logoImageView" destination="V7H-dv-l1b" id="Ke8-ei-2VB"/>
                         <outlet property="newGameView" destination="0Oh-HU-h2j" id="UsH-0i-wA9"/>
                         <outlet property="numberOfPlayersLabel" destination="eYh-LS-0lH" id="TQN-1a-KM0"/>
                         <outlet property="numberOfPlayersStackView" destination="ret-sC-qoS" id="aoL-s7-2r8"/>
                         <outlet property="playerCountLabel" destination="ZiP-4f-hcB" id="50w-ux-fBC"/>
                         <outlet property="removePlayerButton" destination="Ke5-7z-qpL" id="pYy-Cp-72A"/>
+                        <outlet property="spacerView" destination="rJ1-zE-MIT" id="EhO-BF-Ppc"/>
                         <outlet property="startGameButton" destination="cSY-3g-FRL" id="vlF-4U-zyk"/>
                         <outlet property="verticalStackView" destination="EAQ-wl-GkH" id="TiA-J2-5MC"/>
                     </connections>

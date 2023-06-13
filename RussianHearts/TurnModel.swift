@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class Turn {
+    var activePlayer: Player
+
+    init(activePlayer: Player) {
+        self.activePlayer = activePlayer
+    }
+}
