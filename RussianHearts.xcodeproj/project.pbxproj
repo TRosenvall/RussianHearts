@@ -1,0 +1,659 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785B2A3684FE00D8A2A1 /* GameModel.swift */; };
+		85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785D2A36850B00D8A2A1 /* RoundModel.swift */; };
+		85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785F2A36851300D8A2A1 /* TurnModel.swift */; };
+		85DB78622A36851E00D8A2A1 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB78612A36851E00D8A2A1 /* CardModel.swift */; };
+		85DB78682A39071500D8A2A1 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB78672A39071500D8A2A1 /* NewGameViewController.swift */; };
+		85DD62D72A33D42D00A6DA51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62D62A33D42D00A6DA51 /* AppDelegate.swift */; };
+		85DD62D92A33D42D00A6DA51 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62D82A33D42D00A6DA51 /* SceneDelegate.swift */; };
+		85DD62DB2A33D42D00A6DA51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62DA2A33D42D00A6DA51 /* ViewController.swift */; };
+		85DD62DE2A33D42D00A6DA51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85DD62DC2A33D42D00A6DA51 /* Main.storyboard */; };
+		85DD62E02A33D43E00A6DA51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85DD62DF2A33D43E00A6DA51 /* Assets.xcassets */; };
+		85DD62E32A33D43E00A6DA51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85DD62E12A33D43E00A6DA51 /* LaunchScreen.storyboard */; };
+		85DD62EE2A33D43F00A6DA51 /* RussianHeartsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62ED2A33D43F00A6DA51 /* RussianHeartsTests.swift */; };
+		85DD62F82A33D43F00A6DA51 /* RussianHeartsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62F72A33D43F00A6DA51 /* RussianHeartsUITests.swift */; };
+		85DD62FA2A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62F92A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		85DD62EA2A33D43F00A6DA51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85DD62CB2A33D42C00A6DA51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85DD62D22A33D42D00A6DA51;
+			remoteInfo = RussianHearts;
+		};
+		85DD62F42A33D43F00A6DA51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85DD62CB2A33D42C00A6DA51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85DD62D22A33D42D00A6DA51;
+			remoteInfo = RussianHearts;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		85DB785B2A3684FE00D8A2A1 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		85DB785D2A36850B00D8A2A1 /* RoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundModel.swift; sourceTree = "<group>"; };
+		85DB785F2A36851300D8A2A1 /* TurnModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnModel.swift; sourceTree = "<group>"; };
+		85DB78612A36851E00D8A2A1 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		85DB78672A39071500D8A2A1 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
+		85DD62D32A33D42D00A6DA51 /* RussianHearts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RussianHearts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85DD62D62A33D42D00A6DA51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		85DD62D82A33D42D00A6DA51 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		85DD62DA2A33D42D00A6DA51 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		85DD62DD2A33D42D00A6DA51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		85DD62DF2A33D43E00A6DA51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		85DD62E22A33D43E00A6DA51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85DD62E42A33D43E00A6DA51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85DD62E92A33D43F00A6DA51 /* RussianHeartsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RussianHeartsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85DD62ED2A33D43F00A6DA51 /* RussianHeartsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianHeartsTests.swift; sourceTree = "<group>"; };
+		85DD62F32A33D43F00A6DA51 /* RussianHeartsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RussianHeartsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85DD62F72A33D43F00A6DA51 /* RussianHeartsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianHeartsUITests.swift; sourceTree = "<group>"; };
+		85DD62F92A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianHeartsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		85DD62D02A33D42D00A6DA51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85DD62E62A33D43F00A6DA51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85DD62F02A33D43F00A6DA51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		85DB78632A36852300D8A2A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				85DB785B2A3684FE00D8A2A1 /* GameModel.swift */,
+				85DB785D2A36850B00D8A2A1 /* RoundModel.swift */,
+				85DB785F2A36851300D8A2A1 /* TurnModel.swift */,
+				85DB78612A36851E00D8A2A1 /* CardModel.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		85DB78642A36853000D8A2A1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				85DB78672A39071500D8A2A1 /* NewGameViewController.swift */,
+				85DD62DA2A33D42D00A6DA51 /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		85DB78652A36854E00D8A2A1 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ModelControllers;
+			sourceTree = "<group>";
+		};
+		85DB78662A36856100D8A2A1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85DD62DF2A33D43E00A6DA51 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		85DD62CA2A33D42C00A6DA51 = {
+			isa = PBXGroup;
+			children = (
+				85DD62D52A33D42D00A6DA51 /* RussianHearts */,
+				85DD62EC2A33D43F00A6DA51 /* RussianHeartsTests */,
+				85DD62F62A33D43F00A6DA51 /* RussianHeartsUITests */,
+				85DD62D42A33D42D00A6DA51 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		85DD62D42A33D42D00A6DA51 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85DD62D32A33D42D00A6DA51 /* RussianHearts.app */,
+				85DD62E92A33D43F00A6DA51 /* RussianHeartsTests.xctest */,
+				85DD62F32A33D43F00A6DA51 /* RussianHeartsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85DD62D52A33D42D00A6DA51 /* RussianHearts */ = {
+			isa = PBXGroup;
+			children = (
+				85DD62D62A33D42D00A6DA51 /* AppDelegate.swift */,
+				85DD62D82A33D42D00A6DA51 /* SceneDelegate.swift */,
+				85DD62DC2A33D42D00A6DA51 /* Main.storyboard */,
+				85DD62E12A33D43E00A6DA51 /* LaunchScreen.storyboard */,
+				85DD62E42A33D43E00A6DA51 /* Info.plist */,
+				85DB78662A36856100D8A2A1 /* Resources */,
+				85DB78632A36852300D8A2A1 /* Models */,
+				85DB78652A36854E00D8A2A1 /* ModelControllers */,
+				85DB78642A36853000D8A2A1 /* ViewControllers */,
+			);
+			path = RussianHearts;
+			sourceTree = "<group>";
+		};
+		85DD62EC2A33D43F00A6DA51 /* RussianHeartsTests */ = {
+			isa = PBXGroup;
+			children = (
+				85DD62ED2A33D43F00A6DA51 /* RussianHeartsTests.swift */,
+			);
+			path = RussianHeartsTests;
+			sourceTree = "<group>";
+		};
+		85DD62F62A33D43F00A6DA51 /* RussianHeartsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				85DD62F72A33D43F00A6DA51 /* RussianHeartsUITests.swift */,
+				85DD62F92A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift */,
+			);
+			path = RussianHeartsUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		85DD62D22A33D42D00A6DA51 /* RussianHearts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85DD62FD2A33D43F00A6DA51 /* Build configuration list for PBXNativeTarget "RussianHearts" */;
+			buildPhases = (
+				85DD62CF2A33D42D00A6DA51 /* Sources */,
+				85DD62D02A33D42D00A6DA51 /* Frameworks */,
+				85DD62D12A33D42D00A6DA51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RussianHearts;
+			productName = RussianHearts;
+			productReference = 85DD62D32A33D42D00A6DA51 /* RussianHearts.app */;
+			productType = "com.apple.product-type.application";
+		};
+		85DD62E82A33D43F00A6DA51 /* RussianHeartsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85DD63002A33D43F00A6DA51 /* Build configuration list for PBXNativeTarget "RussianHeartsTests" */;
+			buildPhases = (
+				85DD62E52A33D43F00A6DA51 /* Sources */,
+				85DD62E62A33D43F00A6DA51 /* Frameworks */,
+				85DD62E72A33D43F00A6DA51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85DD62EB2A33D43F00A6DA51 /* PBXTargetDependency */,
+			);
+			name = RussianHeartsTests;
+			productName = RussianHeartsTests;
+			productReference = 85DD62E92A33D43F00A6DA51 /* RussianHeartsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		85DD62F22A33D43F00A6DA51 /* RussianHeartsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85DD63032A33D43F00A6DA51 /* Build configuration list for PBXNativeTarget "RussianHeartsUITests" */;
+			buildPhases = (
+				85DD62EF2A33D43F00A6DA51 /* Sources */,
+				85DD62F02A33D43F00A6DA51 /* Frameworks */,
+				85DD62F12A33D43F00A6DA51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85DD62F52A33D43F00A6DA51 /* PBXTargetDependency */,
+			);
+			name = RussianHeartsUITests;
+			productName = RussianHeartsUITests;
+			productReference = 85DD62F32A33D43F00A6DA51 /* RussianHeartsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		85DD62CB2A33D42C00A6DA51 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					85DD62D22A33D42D00A6DA51 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					85DD62E82A33D43F00A6DA51 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 85DD62D22A33D42D00A6DA51;
+					};
+					85DD62F22A33D43F00A6DA51 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 85DD62D22A33D42D00A6DA51;
+					};
+				};
+			};
+			buildConfigurationList = 85DD62CE2A33D42C00A6DA51 /* Build configuration list for PBXProject "RussianHearts" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 85DD62CA2A33D42C00A6DA51;
+			productRefGroup = 85DD62D42A33D42D00A6DA51 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				85DD62D22A33D42D00A6DA51 /* RussianHearts */,
+				85DD62E82A33D43F00A6DA51 /* RussianHeartsTests */,
+				85DD62F22A33D43F00A6DA51 /* RussianHeartsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85DD62D12A33D42D00A6DA51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85DD62E32A33D43E00A6DA51 /* LaunchScreen.storyboard in Resources */,
+				85DD62E02A33D43E00A6DA51 /* Assets.xcassets in Resources */,
+				85DD62DE2A33D42D00A6DA51 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85DD62E72A33D43F00A6DA51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85DD62F12A33D43F00A6DA51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85DD62CF2A33D42D00A6DA51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85DD62DB2A33D42D00A6DA51 /* ViewController.swift in Sources */,
+				85DB78682A39071500D8A2A1 /* NewGameViewController.swift in Sources */,
+				85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */,
+				85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */,
+				85DB78622A36851E00D8A2A1 /* CardModel.swift in Sources */,
+				85DD62D72A33D42D00A6DA51 /* AppDelegate.swift in Sources */,
+				85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */,
+				85DD62D92A33D42D00A6DA51 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85DD62E52A33D43F00A6DA51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85DD62EE2A33D43F00A6DA51 /* RussianHeartsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85DD62EF2A33D43F00A6DA51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85DD62F82A33D43F00A6DA51 /* RussianHeartsUITests.swift in Sources */,
+				85DD62FA2A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		85DD62EB2A33D43F00A6DA51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85DD62D22A33D42D00A6DA51 /* RussianHearts */;
+			targetProxy = 85DD62EA2A33D43F00A6DA51 /* PBXContainerItemProxy */;
+		};
+		85DD62F52A33D43F00A6DA51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85DD62D22A33D42D00A6DA51 /* RussianHearts */;
+			targetProxy = 85DD62F42A33D43F00A6DA51 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		85DD62DC2A33D42D00A6DA51 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85DD62DD2A33D42D00A6DA51 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		85DD62E12A33D43E00A6DA51 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85DD62E22A33D43E00A6DA51 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		85DD62FB2A33D43F00A6DA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		85DD62FC2A33D43F00A6DA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		85DD62FE2A33D43F00A6DA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YY8J3FPYX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RussianHearts/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timothyrosenvall.RussianHearts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		85DD62FF2A33D43F00A6DA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YY8J3FPYX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RussianHearts/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timothyrosenvall.RussianHearts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		85DD63012A33D43F00A6DA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YY8J3FPYX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timothyrosenvall.RussianHeartsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RussianHearts.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RussianHearts";
+			};
+			name = Debug;
+		};
+		85DD63022A33D43F00A6DA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YY8J3FPYX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timothyrosenvall.RussianHeartsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RussianHearts.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RussianHearts";
+			};
+			name = Release;
+		};
+		85DD63042A33D43F00A6DA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YY8J3FPYX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timothyrosenvall.RussianHeartsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RussianHearts;
+			};
+			name = Debug;
+		};
+		85DD63052A33D43F00A6DA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YY8J3FPYX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timothyrosenvall.RussianHeartsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RussianHearts;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		85DD62CE2A33D42C00A6DA51 /* Build configuration list for PBXProject "RussianHearts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85DD62FB2A33D43F00A6DA51 /* Debug */,
+				85DD62FC2A33D43F00A6DA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85DD62FD2A33D43F00A6DA51 /* Build configuration list for PBXNativeTarget "RussianHearts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85DD62FE2A33D43F00A6DA51 /* Debug */,
+				85DD62FF2A33D43F00A6DA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85DD63002A33D43F00A6DA51 /* Build configuration list for PBXNativeTarget "RussianHeartsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85DD63012A33D43F00A6DA51 /* Debug */,
+				85DD63022A33D43F00A6DA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85DD63032A33D43F00A6DA51 /* Build configuration list for PBXNativeTarget "RussianHeartsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85DD63042A33D43F00A6DA51 /* Debug */,
+				85DD63052A33D43F00A6DA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 85DD62CB2A33D42C00A6DA51 /* Project object */;
+}
