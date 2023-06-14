@@ -117,13 +117,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Oh-HU-h2j" userLabel="New Game">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EAQ-wl-GkH">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="EAQ-wl-GkH">
                                         <rect key="frame" x="11" y="60.666666666666686" width="371" height="731"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mfz-rQ-LVJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="371" height="371"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V7H-dv-l1b">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="V7H-dv-l1b">
                                                         <rect key="frame" x="57.666666666666686" y="57.333333333333343" width="256" height="256"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="256" id="Yi1-5T-lxs"/>
@@ -139,53 +139,149 @@
                                                     <constraint firstAttribute="width" secondItem="Mfz-rQ-LVJ" secondAttribute="height" id="tDp-zc-VOT"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJ1-zE-MIT">
-                                                <rect key="frame" x="0.0" y="371" width="371" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="FL7-9p-Ips"/>
-                                                </constraints>
-                                            </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ret-sC-qoS">
-                                                <rect key="frame" x="0.0" y="393" width="371" height="34.333333333333314"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ret-sC-qoS">
+                                                <rect key="frame" x="0.0" y="374" width="371" height="34"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Players" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYh-LS-0lH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="237.66666666666666" height="34.333333333333336"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ke5-7z-qpL">
-                                                        <rect key="frame" x="237.66666666666663" y="0.0" width="58" height="34.333333333333336"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="&lt;"/>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZiP-4f-hcB">
-                                                        <rect key="frame" x="295.66666666666669" y="0.0" width="17.333333333333314" height="34.333333333333336"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jhw-su-mKO">
-                                                        <rect key="frame" x="313" y="0.0" width="58" height="34.333333333333336"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="&gt;"/>
-                                                    </button>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUV-jq-93T">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mrm-K6-hVj">
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="34"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="51" id="Trp-eH-vXC"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ACk-4o-W4h">
+                                                <rect key="frame" x="0.0" y="411" width="371" height="34"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 2" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBe-bb-vX8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ma-Cm-74j">
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="34"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="51" id="CPe-2l-4ef"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="V4q-Us-PTJ">
+                                                <rect key="frame" x="0.0" y="448" width="371" height="34"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf2-rA-hgo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bnV-PN-srN">
+                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="51" id="RSw-e8-c1q"/>
+                                                        </constraints>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dJ2-3C-E8d">
+                                                <rect key="frame" x="0.0" y="484.99999999999994" width="371" height="34.000000000000057"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 4" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iBV-WQ-rnn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ukS-iQ-IWO">
+                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="51" id="GGM-0r-q1b"/>
+                                                        </constraints>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QcF-ZT-VBe">
+                                                <rect key="frame" x="0.0" y="522" width="371" height="34"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 5" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5uW-fY-7ZZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-5m-4eX">
+                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="51" id="uh4-IY-33u"/>
+                                                        </constraints>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cVp-ci-zq2">
+                                                <rect key="frame" x="0.0" y="559" width="371" height="34"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 6" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KLw-Pg-tUG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jw9-mY-yyD">
+                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="51" id="rSY-TS-1Dl"/>
+                                                        </constraints>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upq-ud-OIC">
+                                                <rect key="frame" x="0.0" y="596" width="371" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="pkn-gt-SeN"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSY-3g-FRL">
-                                                <rect key="frame" x="0.0" y="427.33333333333326" width="371" height="303.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="639" width="371" height="49"/>
+                                                <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Start Game"/>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Start Game">
+                                                            <attributes>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <font key="NSFont" size="18" name="Helvetica-Bold"/>
+                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
                                                 <connections>
-                                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="WO9-Nq-daE"/>
+                                                    <action selector="startGameButtonAction:" destination="mcz-hv-deq" eventType="touchUpInside" id="DHm-bZ-FQn"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQO-BP-6D2">
+                                                <rect key="frame" x="0.0" y="691" width="371" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.94518298820000002" green="0.5607087878" blue="0.34935041849999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="upq-ud-OIC" firstAttribute="height" secondItem="AQO-BP-6D2" secondAttribute="height" id="BHW-Hp-NiZ"/>
+                                            <constraint firstItem="ret-sC-qoS" firstAttribute="height" secondItem="QcF-ZT-VBe" secondAttribute="height" id="QQH-Ah-WK9"/>
+                                            <constraint firstItem="ret-sC-qoS" firstAttribute="height" secondItem="dJ2-3C-E8d" secondAttribute="height" id="Rm9-ft-G82"/>
+                                            <constraint firstItem="ret-sC-qoS" firstAttribute="height" secondItem="cVp-ci-zq2" secondAttribute="height" id="hgQ-vH-Nhv"/>
+                                            <constraint firstItem="ret-sC-qoS" firstAttribute="height" secondItem="ACk-4o-W4h" secondAttribute="height" id="mbW-bc-axR"/>
+                                            <constraint firstItem="ret-sC-qoS" firstAttribute="height" secondItem="V4q-Us-PTJ" secondAttribute="height" id="nKE-7H-zAq"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemMintColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="EAQ-wl-GkH" firstAttribute="width" secondItem="0Oh-HU-h2j" secondAttribute="width" constant="-22" id="cuU-5C-xow"/>
                                     <constraint firstItem="EAQ-wl-GkH" firstAttribute="centerY" secondItem="0Oh-HU-h2j" secondAttribute="centerY" id="ke1-zU-dTi"/>
@@ -204,15 +300,29 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addPlayerButton" destination="Jhw-su-mKO" id="Zso-hd-qyd"/>
                         <outlet property="imageContainerView" destination="Mfz-rQ-LVJ" id="ivL-YV-08G"/>
                         <outlet property="logoImageView" destination="V7H-dv-l1b" id="Ke8-ei-2VB"/>
                         <outlet property="newGameView" destination="0Oh-HU-h2j" id="UsH-0i-wA9"/>
-                        <outlet property="numberOfPlayersLabel" destination="eYh-LS-0lH" id="TQN-1a-KM0"/>
-                        <outlet property="numberOfPlayersStackView" destination="ret-sC-qoS" id="aoL-s7-2r8"/>
-                        <outlet property="playerCountLabel" destination="ZiP-4f-hcB" id="50w-ux-fBC"/>
-                        <outlet property="removePlayerButton" destination="Ke5-7z-qpL" id="pYy-Cp-72A"/>
-                        <outlet property="spacerView" destination="rJ1-zE-MIT" id="EhO-BF-Ppc"/>
+                        <outlet property="player1NameTextField" destination="hUV-jq-93T" id="LUA-Ky-Dlv"/>
+                        <outlet property="player1SpacerView" destination="Mrm-K6-hVj" id="2yO-Zw-ejb"/>
+                        <outlet property="player1StackView" destination="ret-sC-qoS" id="9vU-27-63d"/>
+                        <outlet property="player2NameTextField" destination="oBe-bb-vX8" id="3dK-N5-Lc2"/>
+                        <outlet property="player2SpacerView" destination="3ma-Cm-74j" id="Wl5-7e-0HD"/>
+                        <outlet property="player2StackView" destination="ACk-4o-W4h" id="cLf-ne-ghG"/>
+                        <outlet property="player3NameTextField" destination="tf2-rA-hgo" id="Sw0-aA-5Oz"/>
+                        <outlet property="player3StackView" destination="V4q-Us-PTJ" id="EWs-QP-czC"/>
+                        <outlet property="player3ToggleSwitch" destination="bnV-PN-srN" id="R2U-7t-Qav"/>
+                        <outlet property="player4NameTextField" destination="iBV-WQ-rnn" id="D9M-7C-8fp"/>
+                        <outlet property="player4StackView" destination="dJ2-3C-E8d" id="Qxy-Yj-6c8"/>
+                        <outlet property="player4ToggleSwitch" destination="ukS-iQ-IWO" id="XL4-Fb-Yip"/>
+                        <outlet property="player5NameTextField" destination="5uW-fY-7ZZ" id="1EX-hB-GAF"/>
+                        <outlet property="player5StackView" destination="QcF-ZT-VBe" id="GgQ-IN-Oqh"/>
+                        <outlet property="player5ToggleSwitch" destination="bXT-5m-4eX" id="nSq-5m-8Hn"/>
+                        <outlet property="player6NameTextField" destination="KLw-Pg-tUG" id="eM1-1C-PU2"/>
+                        <outlet property="player6StackView" destination="cVp-ci-zq2" id="Vk6-dh-wA3"/>
+                        <outlet property="player6ToggleSwitch" destination="jw9-mY-yyD" id="gBe-4c-d7u"/>
+                        <outlet property="spacer1View" destination="upq-ud-OIC" id="Fc1-jZ-0Tw"/>
+                        <outlet property="spacer2View" destination="AQO-BP-6D2" id="H0y-JT-yds"/>
                         <outlet property="startGameButton" destination="cSY-3g-FRL" id="vlF-4U-zyk"/>
                         <outlet property="verticalStackView" destination="EAQ-wl-GkH" id="TiA-J2-5MC"/>
                     </connections>
@@ -223,6 +333,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AppIcon" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -231,9 +342,6 @@
         </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemMintColor">
-            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

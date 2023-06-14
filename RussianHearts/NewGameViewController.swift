@@ -14,33 +14,45 @@ class NewGameViewController: UIViewController {
     @IBOutlet var verticalStackView: UIStackView!
     @IBOutlet var imageContainerView: UIView!
     @IBOutlet var logoImageView: UIImageView!
-    @IBOutlet var spacerView: UIView!
-    @IBOutlet var numberOfPlayersStackView: UIStackView!
-    @IBOutlet var numberOfPlayersLabel: UILabel!
-    @IBOutlet var removePlayerButton: UIButton!
-    @IBOutlet var playerCountLabel: UILabel!
-    @IBOutlet var addPlayerButton: UIButton!
+    @IBOutlet var player1StackView: UIStackView!
+    @IBOutlet var player1NameTextField: UITextField!
+    @IBOutlet var player1SpacerView: UIView!
+    @IBOutlet var player2StackView: UIStackView!
+    @IBOutlet var player2NameTextField: UITextField!
+    @IBOutlet var player2SpacerView: UIView!
+    @IBOutlet var player3StackView: UIStackView!
+    @IBOutlet var player3NameTextField: UITextField!
+    @IBOutlet var player3ToggleSwitch: UISwitch!
+    @IBOutlet var player4StackView: UIStackView!
+    @IBOutlet var player4NameTextField: UITextField!
+    @IBOutlet var player4ToggleSwitch: UISwitch!
+    @IBOutlet var player5StackView: UIStackView!
+    @IBOutlet var player5NameTextField: UITextField!
+    @IBOutlet var player5ToggleSwitch: UISwitch!
+    @IBOutlet var player6StackView: UIStackView!
+    @IBOutlet var player6NameTextField: UITextField!
+    @IBOutlet var player6ToggleSwitch: UISwitch!
+    @IBOutlet var spacer1View: UIView!
     @IBOutlet var startGameButton: UIButton!
+    @IBOutlet var spacer2View: UIView!
 
     // MARK: - Properties
-
+    
     // MARK: - Lifecycle Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        logoImageView.image = Assets.appIcon
+        self.view.backgroundColor = Assets.backgroundColor
     }
-    
 
-    /*
-    // MARK: - Navigation
+    // MARK: - Actions
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func startGameButtonAction(_ sender: Any) {
+        let controller = GameViewController()
+        self.present(controller, animated: false)
     }
-    */
+
+    // MARK: - Helpers
 
 }

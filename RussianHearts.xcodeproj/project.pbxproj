@@ -11,6 +11,7 @@
 		8528CEC92A391F580018620A /* NumberCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEC82A391F580018620A /* NumberCard.swift */; };
 		8528CECB2A391F5F0018620A /* SpecialCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CECA2A391F5F0018620A /* SpecialCard.swift */; };
 		8528CECD2A39212F0018620A /* BidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CECC2A39212F0018620A /* BidModel.swift */; };
+		8528CECF2A3998B10018620A /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CECE2A3998B10018620A /* Assets.swift */; };
 		85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785B2A3684FE00D8A2A1 /* GameModel.swift */; };
 		85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785D2A36850B00D8A2A1 /* RoundModel.swift */; };
 		85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785F2A36851300D8A2A1 /* TurnModel.swift */; };
@@ -49,6 +50,7 @@
 		8528CEC82A391F580018620A /* NumberCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCard.swift; sourceTree = "<group>"; };
 		8528CECA2A391F5F0018620A /* SpecialCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCard.swift; sourceTree = "<group>"; };
 		8528CECC2A39212F0018620A /* BidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidModel.swift; sourceTree = "<group>"; };
+		8528CECE2A3998B10018620A /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		85DB785B2A3684FE00D8A2A1 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		85DB785D2A36850B00D8A2A1 /* RoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundModel.swift; sourceTree = "<group>"; };
 		85DB785F2A36851300D8A2A1 /* TurnModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnModel.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				85DD62DF2A33D43E00A6DA51 /* Assets.xcassets */,
+				8528CECE2A3998B10018620A /* Assets.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				8528CEC72A391F330018620A /* PlayerModel.swift in Sources */,
 				85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */,
 				85DB78622A36851E00D8A2A1 /* CardModel.swift in Sources */,
+				8528CECF2A3998B10018620A /* Assets.swift in Sources */,
 				85DD62D72A33D42D00A6DA51 /* AppDelegate.swift in Sources */,
 				8528CECD2A39212F0018620A /* BidModel.swift in Sources */,
 				85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */,
