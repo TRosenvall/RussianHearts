@@ -10,6 +10,7 @@ import UIKit
 class GameViewController: UIViewController {
 
     // MARK: - Outlets
+
     @IBOutlet var verticalStackView: UIStackView!
     @IBOutlet var statusBarView: UIView!
     @IBOutlet var playAreaView: UIView!

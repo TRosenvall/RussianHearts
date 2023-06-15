@@ -140,112 +140,249 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ret-sC-qoS">
-                                                <rect key="frame" x="0.0" y="374" width="371" height="34"/>
+                                                <rect key="frame" x="0.0" y="374" width="371" height="36.333333333333314"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUV-jq-93T">
-                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 1" borderStyle="roundedRect" placeholder="Player 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUV-jq-93T">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="player1NameTextFieldChanged:" destination="mcz-hv-deq" eventType="editingChanged" id="BSC-rF-9n2"/>
+                                                        </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mrm-K6-hVj">
-                                                        <rect key="frame" x="320" y="0.0" width="51" height="34"/>
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="36.333333333333336"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1a-ra-hKv">
+                                                                <rect key="frame" x="0.0" y="0.0" width="51" height="36.333333333333336"/>
+                                                                <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="xmark.bin.fill" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="player1ClearButtonTapped:" destination="mcz-hv-deq" eventType="touchUpInside" id="k5F-NR-Jhg"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="F1a-ra-hKv" firstAttribute="centerX" secondItem="Mrm-K6-hVj" secondAttribute="centerX" id="FmB-Nd-ecb"/>
                                                             <constraint firstAttribute="width" constant="51" id="Trp-eH-vXC"/>
+                                                            <constraint firstItem="F1a-ra-hKv" firstAttribute="width" secondItem="Mrm-K6-hVj" secondAttribute="width" id="UbH-aq-pms"/>
+                                                            <constraint firstItem="F1a-ra-hKv" firstAttribute="height" secondItem="Mrm-K6-hVj" secondAttribute="height" id="Z3h-rr-TN4"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="F1a-ra-hKv" firstAttribute="centerY" secondItem="hUV-jq-93T" secondAttribute="centerY" id="z3S-gV-QDU"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ACk-4o-W4h">
-                                                <rect key="frame" x="0.0" y="411" width="371" height="34"/>
+                                                <rect key="frame" x="0.0" y="413.33333333333331" width="371" height="36.333333333333314"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 2" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBe-bb-vX8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 2" borderStyle="roundedRect" placeholder="Player 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBe-bb-vX8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="player2NameTextFieldChanged:" destination="mcz-hv-deq" eventType="editingChanged" id="6v1-EU-QhP"/>
+                                                        </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ma-Cm-74j">
-                                                        <rect key="frame" x="320" y="0.0" width="51" height="34"/>
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="36.333333333333336"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qB8-OC-5of">
+                                                                <rect key="frame" x="0.0" y="0.0" width="51" height="36.333333333333336"/>
+                                                                <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="xmark.bin.fill" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="player2ClearButtonTapped:" destination="mcz-hv-deq" eventType="touchUpInside" id="9pV-KH-csA"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="qB8-OC-5of" firstAttribute="centerX" secondItem="3ma-Cm-74j" secondAttribute="centerX" id="6bg-Ds-ufD"/>
                                                             <constraint firstAttribute="width" constant="51" id="CPe-2l-4ef"/>
+                                                            <constraint firstItem="qB8-OC-5of" firstAttribute="width" secondItem="3ma-Cm-74j" secondAttribute="width" id="Kw6-CP-KVq"/>
+                                                            <constraint firstItem="qB8-OC-5of" firstAttribute="height" secondItem="3ma-Cm-74j" secondAttribute="height" id="SUE-Vm-n2M"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="qB8-OC-5of" firstAttribute="centerY" secondItem="oBe-bb-vX8" secondAttribute="centerY" id="BHr-yU-5Vo"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="V4q-Us-PTJ">
-                                                <rect key="frame" x="0.0" y="448" width="371" height="34"/>
+                                                <rect key="frame" x="0.0" y="452.66666666666669" width="371" height="36.333333333333314"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf2-rA-hgo">
-                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="player3NameTextFieldChanged:" destination="mcz-hv-deq" eventType="editingChanged" id="v0Q-Nk-cSz"/>
+                                                        </connections>
                                                     </textField>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bnV-PN-srN">
-                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nm0-5J-yEF">
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="36.333333333333336"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ve-DX-8Yd">
+                                                                <rect key="frame" x="0.0" y="0.0" width="51" height="36.333333333333336"/>
+                                                                <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="xmark.bin.fill" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="player3ClearButtonTapped:" destination="mcz-hv-deq" eventType="touchUpInside" id="9QW-OO-iTU"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="51" id="RSw-e8-c1q"/>
+                                                            <constraint firstItem="1ve-DX-8Yd" firstAttribute="width" secondItem="nm0-5J-yEF" secondAttribute="width" id="0Xz-Ak-af5"/>
+                                                            <constraint firstItem="1ve-DX-8Yd" firstAttribute="centerX" secondItem="nm0-5J-yEF" secondAttribute="centerX" id="0hP-T4-fyR"/>
+                                                            <constraint firstAttribute="width" constant="51" id="LRf-Ol-jnl"/>
+                                                            <constraint firstItem="1ve-DX-8Yd" firstAttribute="height" secondItem="nm0-5J-yEF" secondAttribute="height" id="WmB-Jx-aBZ"/>
                                                         </constraints>
-                                                    </switch>
+                                                    </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="1ve-DX-8Yd" firstAttribute="centerY" secondItem="tf2-rA-hgo" secondAttribute="centerY" id="9h8-xM-k26"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dJ2-3C-E8d">
-                                                <rect key="frame" x="0.0" y="484.99999999999994" width="371" height="34.000000000000057"/>
+                                                <rect key="frame" x="0.0" y="491.99999999999994" width="371" height="36.333333333333314"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 4" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iBV-WQ-rnn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="player4NameTextFieldChanged:" destination="mcz-hv-deq" eventType="editingChanged" id="X60-fo-Crp"/>
+                                                        </connections>
                                                     </textField>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ukS-iQ-IWO">
-                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pz1-a1-mku">
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="36.333333333333336"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHB-jc-OfK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="51" height="36.333333333333336"/>
+                                                                <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="xmark.bin.fill" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="player4ClearButtonTapped:" destination="mcz-hv-deq" eventType="touchUpInside" id="k6P-bI-1gk"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="51" id="GGM-0r-q1b"/>
+                                                            <constraint firstAttribute="width" constant="51" id="IFP-81-BBT"/>
+                                                            <constraint firstItem="BHB-jc-OfK" firstAttribute="centerX" secondItem="pz1-a1-mku" secondAttribute="centerX" id="kdF-fv-Q8M"/>
+                                                            <constraint firstItem="BHB-jc-OfK" firstAttribute="width" secondItem="pz1-a1-mku" secondAttribute="width" id="p1O-DH-d5k"/>
+                                                            <constraint firstItem="BHB-jc-OfK" firstAttribute="height" secondItem="pz1-a1-mku" secondAttribute="height" id="v0p-iO-sHx"/>
                                                         </constraints>
-                                                    </switch>
+                                                    </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="BHB-jc-OfK" firstAttribute="centerY" secondItem="iBV-WQ-rnn" secondAttribute="centerY" id="mtc-fb-Q63"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QcF-ZT-VBe">
-                                                <rect key="frame" x="0.0" y="522" width="371" height="34"/>
+                                                <rect key="frame" x="0.0" y="531.33333333333337" width="371" height="36.333333333333371"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 5" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5uW-fY-7ZZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="player5NameTextFieldChanged:" destination="mcz-hv-deq" eventType="editingDidEnd" id="wSx-Wc-ZxK"/>
+                                                        </connections>
                                                     </textField>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-5m-4eX">
-                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xx9-21-bsz">
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="36.333333333333336"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIE-JT-fyv">
+                                                                <rect key="frame" x="0.0" y="0.0" width="51" height="36.333333333333336"/>
+                                                                <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="xmark.bin.fill" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="player5ClearButtonTapped:" destination="mcz-hv-deq" eventType="touchUpInside" id="HUh-EJ-qeI"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="51" id="uh4-IY-33u"/>
+                                                            <constraint firstItem="iIE-JT-fyv" firstAttribute="centerX" secondItem="xx9-21-bsz" secondAttribute="centerX" id="7Nx-mJ-7tt"/>
+                                                            <constraint firstAttribute="width" constant="51" id="I1w-kv-gqr"/>
+                                                            <constraint firstItem="iIE-JT-fyv" firstAttribute="width" secondItem="xx9-21-bsz" secondAttribute="width" id="Ipi-bv-LBq"/>
+                                                            <constraint firstItem="iIE-JT-fyv" firstAttribute="height" secondItem="xx9-21-bsz" secondAttribute="height" id="J5h-S1-ULp"/>
                                                         </constraints>
-                                                    </switch>
+                                                    </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="iIE-JT-fyv" firstAttribute="centerY" secondItem="5uW-fY-7ZZ" secondAttribute="centerY" id="lg9-US-Jj4"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cVp-ci-zq2">
-                                                <rect key="frame" x="0.0" y="559" width="371" height="34"/>
+                                                <rect key="frame" x="0.0" y="570.66666666666674" width="371" height="36.333333333333371"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 6" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KLw-Pg-tUG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="player6NameTextFieldChanged:" destination="mcz-hv-deq" eventType="editingDidEnd" id="CHM-Uc-BBK"/>
+                                                        </connections>
                                                     </textField>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jw9-mY-yyD">
-                                                        <rect key="frame" x="320" y="0.0" width="53" height="34"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQe-XQ-b42">
+                                                        <rect key="frame" x="320" y="0.0" width="51" height="36.333333333333336"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLW-6J-fDm">
+                                                                <rect key="frame" x="0.0" y="0.0" width="51" height="36.333333333333336"/>
+                                                                <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="xmark.bin.fill" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="player6ClearButtonTapped:" destination="mcz-hv-deq" eventType="touchUpInside" id="Lef-Lw-o7c"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="51" id="rSY-TS-1Dl"/>
+                                                            <constraint firstAttribute="width" constant="51" id="KPc-bC-VX7"/>
+                                                            <constraint firstItem="eLW-6J-fDm" firstAttribute="centerX" secondItem="MQe-XQ-b42" secondAttribute="centerX" id="Pi6-Zv-SWs"/>
+                                                            <constraint firstItem="eLW-6J-fDm" firstAttribute="width" secondItem="MQe-XQ-b42" secondAttribute="width" id="VL1-GW-4LB"/>
+                                                            <constraint firstItem="eLW-6J-fDm" firstAttribute="centerY" secondItem="MQe-XQ-b42" secondAttribute="centerY" id="gdM-9i-fRr"/>
+                                                            <constraint firstItem="eLW-6J-fDm" firstAttribute="height" secondItem="MQe-XQ-b42" secondAttribute="height" id="joK-cK-9IZ"/>
                                                         </constraints>
-                                                    </switch>
+                                                    </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="MQe-XQ-b42" firstAttribute="centerY" secondItem="KLw-Pg-tUG" secondAttribute="centerY" id="qDZ-aO-szE"/>
+                                                </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upq-ud-OIC">
-                                                <rect key="frame" x="0.0" y="596" width="371" height="40"/>
+                                                <rect key="frame" x="0.0" y="610" width="371" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="pkn-gt-SeN"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSY-3g-FRL">
-                                                <rect key="frame" x="0.0" y="639" width="371" height="49"/>
+                                                <rect key="frame" x="0.0" y="653" width="371" height="35"/>
                                                 <color key="backgroundColor" red="0.55720574239999998" green="0.17849994990000001" blue="0.1328807306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain">
@@ -303,24 +440,26 @@
                         <outlet property="imageContainerView" destination="Mfz-rQ-LVJ" id="ivL-YV-08G"/>
                         <outlet property="logoImageView" destination="V7H-dv-l1b" id="Ke8-ei-2VB"/>
                         <outlet property="newGameView" destination="0Oh-HU-h2j" id="UsH-0i-wA9"/>
+                        <outlet property="player1ClearButton" destination="F1a-ra-hKv" id="OR4-Ci-i01"/>
                         <outlet property="player1NameTextField" destination="hUV-jq-93T" id="LUA-Ky-Dlv"/>
                         <outlet property="player1SpacerView" destination="Mrm-K6-hVj" id="2yO-Zw-ejb"/>
                         <outlet property="player1StackView" destination="ret-sC-qoS" id="9vU-27-63d"/>
+                        <outlet property="player2ClearButton" destination="qB8-OC-5of" id="FU1-lL-aed"/>
                         <outlet property="player2NameTextField" destination="oBe-bb-vX8" id="3dK-N5-Lc2"/>
                         <outlet property="player2SpacerView" destination="3ma-Cm-74j" id="Wl5-7e-0HD"/>
                         <outlet property="player2StackView" destination="ACk-4o-W4h" id="cLf-ne-ghG"/>
+                        <outlet property="player3ClearButton" destination="1ve-DX-8Yd" id="Wq3-pU-kVD"/>
                         <outlet property="player3NameTextField" destination="tf2-rA-hgo" id="Sw0-aA-5Oz"/>
                         <outlet property="player3StackView" destination="V4q-Us-PTJ" id="EWs-QP-czC"/>
-                        <outlet property="player3ToggleSwitch" destination="bnV-PN-srN" id="R2U-7t-Qav"/>
+                        <outlet property="player4ClearButton" destination="BHB-jc-OfK" id="DaK-7Z-bmE"/>
                         <outlet property="player4NameTextField" destination="iBV-WQ-rnn" id="D9M-7C-8fp"/>
                         <outlet property="player4StackView" destination="dJ2-3C-E8d" id="Qxy-Yj-6c8"/>
-                        <outlet property="player4ToggleSwitch" destination="ukS-iQ-IWO" id="XL4-Fb-Yip"/>
+                        <outlet property="player5ClearButton" destination="iIE-JT-fyv" id="aDE-CQ-SzU"/>
                         <outlet property="player5NameTextField" destination="5uW-fY-7ZZ" id="1EX-hB-GAF"/>
                         <outlet property="player5StackView" destination="QcF-ZT-VBe" id="GgQ-IN-Oqh"/>
-                        <outlet property="player5ToggleSwitch" destination="bXT-5m-4eX" id="nSq-5m-8Hn"/>
+                        <outlet property="player6ClearButton" destination="eLW-6J-fDm" id="Wwx-0B-aSt"/>
                         <outlet property="player6NameTextField" destination="KLw-Pg-tUG" id="eM1-1C-PU2"/>
                         <outlet property="player6StackView" destination="cVp-ci-zq2" id="Vk6-dh-wA3"/>
-                        <outlet property="player6ToggleSwitch" destination="jw9-mY-yyD" id="gBe-4c-d7u"/>
                         <outlet property="spacer1View" destination="upq-ud-OIC" id="Fc1-jZ-0Tw"/>
                         <outlet property="spacer2View" destination="AQO-BP-6D2" id="H0y-JT-yds"/>
                         <outlet property="startGameButton" destination="cSY-3g-FRL" id="vlF-4U-zyk"/>
@@ -334,6 +473,7 @@
     </scenes>
     <resources>
         <image name="AppIcon" width="128" height="128"/>
+        <image name="xmark.bin.fill" catalog="system" width="128" height="92"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

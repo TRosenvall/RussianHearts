@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CardValues: Int {
+enum CardValues: Int, CaseIterable {
     case one = 1
     case two = 2
     case three = 3
@@ -25,11 +25,11 @@ enum CardValues: Int {
 }
 
 // Raw value is the card tint color
-enum CardSuit: String {
-    case sickles = "green"
-    case swords = "red"
-    case crosses = "yellow"
-    case crowns = "blue"
+enum CardSuit: String, CaseIterable {
+    case sickles = "Sickle"
+    case swords = "Sword"
+    case crosses = "Cross"
+    case crowns = "Crown"
 }
 
 class NumberCard: Card {
@@ -38,10 +38,9 @@ class NumberCard: Card {
     var image: UIImage
 
     init(value: CardValues,
-         suit: CardSuit,
-         image: UIImage) {
+         suit: CardSuit) {
         self.value = value
         self.suit = suit
-        self.image = image
+        self.image = Assets.image(from: suit)
     }
 }

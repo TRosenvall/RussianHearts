@@ -10,17 +10,17 @@ import Foundation
 class Player {
     var cards: [Card]
     var name: String
-    var activeBid: Bid
+    var activeBid: Bid?
     var wonBids: [Bid]
     var lostBids: [Bid]
     var score: Int
 
-    init(cards: [Card],
+    init(cards: [Card] = [],
          name: String,
-         activeBid: Bid,
-         wonBids: [Bid],
-         lostBids: [Bid],
-         score: Int) {
+         activeBid: Bid? = nil,
+         wonBids: [Bid] = [],
+         lostBids: [Bid] = [],
+         score: Int = 0) {
         self.cards = cards
         self.name = name
         self.activeBid = activeBid

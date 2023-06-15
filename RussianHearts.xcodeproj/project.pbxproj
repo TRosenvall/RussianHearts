@@ -12,6 +12,9 @@
 		8528CECB2A391F5F0018620A /* SpecialCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CECA2A391F5F0018620A /* SpecialCard.swift */; };
 		8528CECD2A39212F0018620A /* BidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CECC2A39212F0018620A /* BidModel.swift */; };
 		8528CECF2A3998B10018620A /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CECE2A3998B10018620A /* Assets.swift */; };
+		8528CED12A3AC53F0018620A /* GameModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED02A3AC53F0018620A /* GameModelController.swift */; };
+		8528CED32A3B3F360018620A /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED22A3B3F360018620A /* DeckModel.swift */; };
+		8528CED52A3B3F950018620A /* DeckModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED42A3B3F950018620A /* DeckModelController.swift */; };
 		85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785B2A3684FE00D8A2A1 /* GameModel.swift */; };
 		85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785D2A36850B00D8A2A1 /* RoundModel.swift */; };
 		85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785F2A36851300D8A2A1 /* TurnModel.swift */; };
@@ -51,6 +54,9 @@
 		8528CECA2A391F5F0018620A /* SpecialCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCard.swift; sourceTree = "<group>"; };
 		8528CECC2A39212F0018620A /* BidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidModel.swift; sourceTree = "<group>"; };
 		8528CECE2A3998B10018620A /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		8528CED02A3AC53F0018620A /* GameModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModelController.swift; sourceTree = "<group>"; };
+		8528CED22A3B3F360018620A /* DeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
+		8528CED42A3B3F950018620A /* DeckModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModelController.swift; sourceTree = "<group>"; };
 		85DB785B2A3684FE00D8A2A1 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		85DB785D2A36850B00D8A2A1 /* RoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundModel.swift; sourceTree = "<group>"; };
 		85DB785F2A36851300D8A2A1 /* TurnModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnModel.swift; sourceTree = "<group>"; };
@@ -107,6 +113,7 @@
 				8528CEC82A391F580018620A /* NumberCard.swift */,
 				8528CECA2A391F5F0018620A /* SpecialCard.swift */,
 				8528CECC2A39212F0018620A /* BidModel.swift */,
+				8528CED22A3B3F360018620A /* DeckModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -123,6 +130,8 @@
 		85DB78652A36854E00D8A2A1 /* ModelControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8528CED02A3AC53F0018620A /* GameModelController.swift */,
+				8528CED42A3B3F950018620A /* DeckModelController.swift */,
 			);
 			name = ModelControllers;
 			sourceTree = "<group>";
@@ -320,9 +329,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8528CED52A3B3F950018620A /* DeckModelController.swift in Sources */,
 				8528CEC92A391F580018620A /* NumberCard.swift in Sources */,
+				8528CED32A3B3F360018620A /* DeckModel.swift in Sources */,
 				85DD62DB2A33D42D00A6DA51 /* GameViewController.swift in Sources */,
 				85DB78682A39071500D8A2A1 /* NewGameViewController.swift in Sources */,
+				8528CED12A3AC53F0018620A /* GameModelController.swift in Sources */,
 				8528CECB2A391F5F0018620A /* SpecialCard.swift in Sources */,
 				85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */,
 				8528CEC72A391F330018620A /* PlayerModel.swift in Sources */,

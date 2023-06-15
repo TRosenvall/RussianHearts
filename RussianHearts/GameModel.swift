@@ -18,18 +18,18 @@ enum RoundOrder: Int {
     case roundSeven = 6
 }
 
-class Model {
+class GameModel {
     var activeRound: RoundOrder
     var players: [Player]
     var deck: [Card]
-    var trump: Card
+    var trump: Card?
     var discard: [Card]
 
-    init(activeRound: RoundOrder,
+    init(activeRound: RoundOrder = .roundOne,
          players: [Player],
          deck: [Card],
-         trump: Card,
-         discard: [Card]) {
+         trump: Card? = nil,
+         discard: [Card] = []) {
         self.activeRound = activeRound
         self.players = players
         self.deck = deck
