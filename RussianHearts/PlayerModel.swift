@@ -7,25 +7,20 @@
 
 import Foundation
 
-class Player {
-    var cards: [Card]
+class PlayerModel: Equatable {
+    var cards: [Card] = []
     var name: String
-    var activeBid: Bid?
-    var wonBids: [Bid]
-    var lostBids: [Bid]
-    var score: Int
+    var activeBid: Bid? = nil
+    var score: Int = 0
+    var id: Int
 
-    init(cards: [Card] = [],
-         name: String,
-         activeBid: Bid? = nil,
-         wonBids: [Bid] = [],
-         lostBids: [Bid] = [],
-         score: Int = 0) {
-        self.cards = cards
+    init(name: String,
+         id: Int) {
         self.name = name
-        self.activeBid = activeBid
-        self.wonBids = wonBids
-        self.lostBids = lostBids
-        self.score = score
+        self.id = id
+    }
+
+    static func == (lhs: PlayerModel, rhs: PlayerModel) -> Bool {
+        return lhs.id == rhs.id
     }
 }

@@ -29,22 +29,26 @@ class DeckModelController {
         assert(self.deckModel.cards.count == 60, "Deck Did Not Build, \(self.deckModel.cards.count)")
     }
     
-    func newGame() {
-        self.deckModel.cards = self.deckModel.cards + self.deckModel.discardPile
+    func newRound() {
+        for card in self.deckModel.discardPile {
+            moveCardFromOneStackIntoAnother(card: card,
+                                            stack1: &self.deckModel.discardPile,
+                                            stack2: &self.deckModel.cards)
+        }
+
+        for player in Game.players {
+            for card in player.cards {
+                moveCardFromOneStackIntoAnother(card: card,
+                                                stack1: &player.cards,
+                                                stack2: &self.deckModel.cards)
+            }
+        }
+
         self.deckModel.cards.shuffle()
-        
-//        self.deckModel.cards.forEach { card in
-//            print("=============")
-//            if let numberCard = card as? NumberCard {
-//                print(numberCard.suit)
-//                print(numberCard.value)
-//            }
-//            if let specialCard = card as? SpecialCard {
-//                print(specialCard.type)
-//                print(specialCard.name)
-//            }
-//            print("")
-//        }
+
+        dealCards(players: &Game.players, round: Round.activeRound!)
+
+        Round.activeRound?.trump = getTrump()
     }
     
     func moveCardFromTopIntoDeck() {
@@ -88,8 +92,8 @@ class DeckModelController {
                                         stack2: &self.deckModel.discardPile)
     }
 
-    func dealCards(players: inout [Player], round: RoundOrder) {
-        for _ in 0..<round.rawValue {
+    func dealCards(players: inout [PlayerModel], round: RoundModel) {
+        for _ in 0..<round.numberOfCardsToPlay {
             for player in players {
                 let topCard: Card = self.deckModel.cards.first!
                 moveCardFromOneStackIntoAnother(card: topCard,
@@ -97,5 +101,19 @@ class DeckModelController {
                                                 stack2: &player.cards)
             }
         }
+    }
+
+    func getTrump() -> Card {
+        var numberCard: Card? = nil
+        for card in self.deckModel.cards {
+            let specialCard = card as? SpecialCard
+            if specialCard != nil {
+                moveCardFromTopIntoDeck()
+            } else {
+                numberCard = card
+                break
+            }
+        }
+        return numberCard!
     }
 }

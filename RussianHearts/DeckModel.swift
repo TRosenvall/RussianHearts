@@ -9,6 +9,7 @@ import Foundation
 
 class DeckModel {
     var cards: [Card]
+    var trump: CardSuit?
     var discardPile: [Card]
 
     init(cards: [Card],

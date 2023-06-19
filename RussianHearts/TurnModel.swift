@@ -7,10 +7,15 @@
 
 import Foundation
 
-class Turn {
-    var activePlayer: Player
+class TurnModel: Equatable {
 
-    init(activePlayer: Player) {
+    var activePlayer: PlayerModel
+
+    init(activePlayer: PlayerModel) {
         self.activePlayer = activePlayer
+    }
+
+    static func == (lhs: TurnModel, rhs: TurnModel) -> Bool {
+        return lhs.activePlayer == rhs.activePlayer
     }
 }

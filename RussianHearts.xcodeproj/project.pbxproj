@@ -15,6 +15,12 @@
 		8528CED12A3AC53F0018620A /* GameModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED02A3AC53F0018620A /* GameModelController.swift */; };
 		8528CED32A3B3F360018620A /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED22A3B3F360018620A /* DeckModel.swift */; };
 		8528CED52A3B3F950018620A /* DeckModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED42A3B3F950018620A /* DeckModelController.swift */; };
+		8528CED72A3BC66D0018620A /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED62A3BC66D0018620A /* ScoreViewController.swift */; };
+		8528CED92A3EF9EF0018620A /* PhaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED82A3EF9EF0018620A /* PhaseModel.swift */; };
+		8528CEDB2A3F10D20018620A /* RoundModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEDA2A3F10D20018620A /* RoundModelController.swift */; };
+		8528CEDD2A3F10E00018620A /* PhaseModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEDC2A3F10E00018620A /* PhaseModelController.swift */; };
+		8528CEDF2A3F10E70018620A /* TurnModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEDE2A3F10E70018620A /* TurnModelController.swift */; };
+		8528CEE22A402B0C0018620A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEE12A402B0C0018620A /* CardView.swift */; };
 		85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785B2A3684FE00D8A2A1 /* GameModel.swift */; };
 		85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785D2A36850B00D8A2A1 /* RoundModel.swift */; };
 		85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785F2A36851300D8A2A1 /* TurnModel.swift */; };
@@ -57,6 +63,12 @@
 		8528CED02A3AC53F0018620A /* GameModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModelController.swift; sourceTree = "<group>"; };
 		8528CED22A3B3F360018620A /* DeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
 		8528CED42A3B3F950018620A /* DeckModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModelController.swift; sourceTree = "<group>"; };
+		8528CED62A3BC66D0018620A /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		8528CED82A3EF9EF0018620A /* PhaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseModel.swift; sourceTree = "<group>"; };
+		8528CEDA2A3F10D20018620A /* RoundModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundModelController.swift; sourceTree = "<group>"; };
+		8528CEDC2A3F10E00018620A /* PhaseModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseModelController.swift; sourceTree = "<group>"; };
+		8528CEDE2A3F10E70018620A /* TurnModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnModelController.swift; sourceTree = "<group>"; };
+		8528CEE12A402B0C0018620A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		85DB785B2A3684FE00D8A2A1 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		85DB785D2A36850B00D8A2A1 /* RoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundModel.swift; sourceTree = "<group>"; };
 		85DB785F2A36851300D8A2A1 /* TurnModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnModel.swift; sourceTree = "<group>"; };
@@ -102,11 +114,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8528CEE02A402AEB0018620A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8528CEE12A402B0C0018620A /* CardView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		85DB78632A36852300D8A2A1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				85DB785B2A3684FE00D8A2A1 /* GameModel.swift */,
 				85DB785D2A36850B00D8A2A1 /* RoundModel.swift */,
+				8528CED82A3EF9EF0018620A /* PhaseModel.swift */,
 				85DB785F2A36851300D8A2A1 /* TurnModel.swift */,
 				8528CEC62A391F330018620A /* PlayerModel.swift */,
 				85DB78612A36851E00D8A2A1 /* CardModel.swift */,
@@ -123,6 +144,7 @@
 			children = (
 				85DB78672A39071500D8A2A1 /* NewGameViewController.swift */,
 				85DD62DA2A33D42D00A6DA51 /* GameViewController.swift */,
+				8528CED62A3BC66D0018620A /* ScoreViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -130,8 +152,11 @@
 		85DB78652A36854E00D8A2A1 /* ModelControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8528CED02A3AC53F0018620A /* GameModelController.swift */,
 				8528CED42A3B3F950018620A /* DeckModelController.swift */,
+				8528CED02A3AC53F0018620A /* GameModelController.swift */,
+				8528CEDA2A3F10D20018620A /* RoundModelController.swift */,
+				8528CEDC2A3F10E00018620A /* PhaseModelController.swift */,
+				8528CEDE2A3F10E70018620A /* TurnModelController.swift */,
 			);
 			name = ModelControllers;
 			sourceTree = "<group>";
@@ -176,6 +201,7 @@
 				85DB78662A36856100D8A2A1 /* Resources */,
 				85DB78632A36852300D8A2A1 /* Models */,
 				85DB78652A36854E00D8A2A1 /* ModelControllers */,
+				8528CEE02A402AEB0018620A /* Views */,
 				85DB78642A36853000D8A2A1 /* ViewControllers */,
 			);
 			path = RussianHearts;
@@ -331,19 +357,25 @@
 			files = (
 				8528CED52A3B3F950018620A /* DeckModelController.swift in Sources */,
 				8528CEC92A391F580018620A /* NumberCard.swift in Sources */,
+				8528CEDF2A3F10E70018620A /* TurnModelController.swift in Sources */,
 				8528CED32A3B3F360018620A /* DeckModel.swift in Sources */,
 				85DD62DB2A33D42D00A6DA51 /* GameViewController.swift in Sources */,
 				85DB78682A39071500D8A2A1 /* NewGameViewController.swift in Sources */,
 				8528CED12A3AC53F0018620A /* GameModelController.swift in Sources */,
 				8528CECB2A391F5F0018620A /* SpecialCard.swift in Sources */,
+				8528CEDD2A3F10E00018620A /* PhaseModelController.swift in Sources */,
 				85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */,
 				8528CEC72A391F330018620A /* PlayerModel.swift in Sources */,
+				8528CEDB2A3F10D20018620A /* RoundModelController.swift in Sources */,
 				85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */,
 				85DB78622A36851E00D8A2A1 /* CardModel.swift in Sources */,
+				8528CED92A3EF9EF0018620A /* PhaseModel.swift in Sources */,
 				8528CECF2A3998B10018620A /* Assets.swift in Sources */,
 				85DD62D72A33D42D00A6DA51 /* AppDelegate.swift in Sources */,
+				8528CED72A3BC66D0018620A /* ScoreViewController.swift in Sources */,
 				8528CECD2A39212F0018620A /* BidModel.swift in Sources */,
 				85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */,
+				8528CEE22A402B0C0018620A /* CardView.swift in Sources */,
 				85DD62D92A33D42D00A6DA51 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

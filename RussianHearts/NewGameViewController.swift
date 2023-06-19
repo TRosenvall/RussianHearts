@@ -120,29 +120,31 @@ class NewGameViewController: UIViewController {
             return
         }
 
-        var players: [Player] = []
+        var players: [PlayerModel] = []
         if player1Name != "" {
-            players.append(Player(name: player1Name))
+            players.append(PlayerModel(name: player1Name, id: 1))
         }
         if player2Name != "" {
-            players.append(Player(name: player2Name))
+            players.append(PlayerModel(name: player2Name, id: 2))
         }
         if player3Name != "" {
-            players.append(Player(name: player3Name))
+            players.append(PlayerModel(name: player3Name, id: 3))
         }
         if player4Name != "" {
-            players.append(Player(name: player4Name))
+            players.append(PlayerModel(name: player4Name, id: 4))
         }
         if player5Name != "" {
-            players.append(Player(name: player5Name))
+            players.append(PlayerModel(name: player5Name, id: 5))
         }
         if player6Name != "" {
-            players.append(Player(name: player6Name))
+            players.append(PlayerModel(name: player6Name, id: 6))
         }
 
         Game.newGame(with: players)
 
-        let controller = GameViewController()
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let controller: GameViewController = storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
+        controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true)
     }
 
@@ -179,7 +181,6 @@ class NewGameViewController: UIViewController {
             playersCount += 1
         }
 
-        print(playersCount)
         if playersCount < 2 {
             startGameButton.isEnabled = false
         } else {
