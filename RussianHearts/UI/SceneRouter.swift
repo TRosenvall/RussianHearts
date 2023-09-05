@@ -63,4 +63,12 @@ class SceneRouter: SceneWireframe {
         currentViewController?.dismiss(animated: animated)
         currentViewController = parentViewController
     }
+
+    func routeToGameModule() {
+        guard let delegate,
+              let module: (any GameView) = manager.retrieveModule(delegate: delegate)
+        else { return }
+        module.modalPresentationStyle = .fullScreen
+        presentModule(module, animated: true)
+    }
 }

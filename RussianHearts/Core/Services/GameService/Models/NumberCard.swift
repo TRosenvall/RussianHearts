@@ -52,6 +52,7 @@ class NumberCard: Card {
     enum CodingKeys: CodingKey {
         case value
         case suit
+        case id
     }
 
     required init(from decoder: Decoder) throws {

@@ -158,7 +158,15 @@ class NewGameViewController: UIViewController, NewGameView, PlayerSelectorDelega
     }
 
     @objc func startGameButtonTapped(sender: UIButton!) {
-        print("Start Game Button Tapped")
+        var playerValues: [Int: String] = [:]
+        for playerSelector in playerSelectors {
+            let key = playerSelector.tag + 1
+            let value = playerSelector.playerNameTextField.text
+            if let value, value != "" {
+                playerValues.updateValue(value, forKey: key)
+            }
+        }
+        presenter?.startNewGame(with: playerValues)
     }
 
     // MARK: - Conformance: PlayerSelectorDelegate

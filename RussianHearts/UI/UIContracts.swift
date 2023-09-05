@@ -12,7 +12,8 @@ import UIKit
 protocol SceneCoordinating:
     LaunchDelegate,
     MainMenuDelegate,
-    NewGameDelegate
+    NewGameDelegate,
+    GameDelegate
 {
     /// Start the app and route to the first module
     func start()
@@ -34,5 +35,9 @@ protocol SceneWireframe {
     /// Route to new game module
     func routeToNewGameModule()
 
+    /// Remove one view controller from the stack.
     func dismiss(animated: Bool)
+
+    // Route to the main game module.
+    func routeToGameModule()
 }

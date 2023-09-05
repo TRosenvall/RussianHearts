@@ -30,7 +30,7 @@ class PhaseModel: Equatable, Codable {
             turns.append(turn)
         }
 
-        self.activeTurn = turns.first!
+        self.activeTurn = turns[0]
         self.id = id
     }
 

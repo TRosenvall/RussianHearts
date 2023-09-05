@@ -39,5 +39,11 @@ class SceneCoordinator: SceneCoordinating {
         router.dismiss(animated: animated)
     }
 
+    func routeToGameModule() {
+        router.routeToGameModule()
+    }
+
+    // MARK: - Conformance: GameDelegate
+
     // MARK: - Helpers
 }

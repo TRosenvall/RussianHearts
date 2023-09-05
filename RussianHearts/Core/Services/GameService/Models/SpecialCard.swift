@@ -48,7 +48,7 @@ class SpecialCardName {
         case defaultNaming
     }
 
-    private var activeNamingScheme: NamingSchemes = .defaultNaming
+    private var activeNamingScheme: NamingSchemes = .standardNaming
 
     func updateNamingScheme(to scheme: NamingSchemes) {
         activeNamingScheme = scheme

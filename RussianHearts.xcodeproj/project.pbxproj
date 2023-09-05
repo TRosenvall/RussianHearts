@@ -17,10 +17,8 @@
 		8528CED72A3BC66D0018620A /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED62A3BC66D0018620A /* ScoreboardViewController.swift */; };
 		8528CED92A3EF9EF0018620A /* PhaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CED82A3EF9EF0018620A /* PhaseModel.swift */; };
 		8528CEE22A402B0C0018620A /* NumberCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEE12A402B0C0018620A /* NumberCardView.swift */; };
-		8528CEE42A46AE9E0018620A /* NumberGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEE32A46AE9E0018620A /* NumberGradientView.swift */; };
 		8528CEE82A4828DD0018620A /* Rothenburg Decorative.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8528CEE72A4828D00018620A /* Rothenburg Decorative.ttf */; };
 		8528CEEC2A4BA2BE0018620A /* SpecialCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEEB2A4BA2BE0018620A /* SpecialCardView.swift */; };
-		8528CEEE2A4BADA60018620A /* ViewDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8528CEED2A4BADA60018620A /* ViewDeckViewController.swift */; };
 		85882F2C2A8B65F20092CAB5 /* UIContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85882F2B2A8B65F20092CAB5 /* UIContracts.swift */; };
 		85882F2E2A8B6B940092CAB5 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85882F2D2A8B6B940092CAB5 /* SceneCoordinator.swift */; };
 		85882F322A8B6BD60092CAB5 /* LaunchContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85882F312A8B6BD60092CAB5 /* LaunchContracts.swift */; };
@@ -35,6 +33,13 @@
 		85882F442A8E0B4E0092CAB5 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85882F432A8E0B4E0092CAB5 /* LaunchRouter.swift */; };
 		85CA27592A5B4C33003F1CD5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA27582A5B4C33003F1CD5 /* Constants.swift */; };
 		85D00EEB2A9E27A40037B2ED /* PlayerSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EEA2A9E27A40037B2ED /* PlayerSelector.swift */; };
+		85D00EED2AA2FF630037B2ED /* GameContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EEC2AA2FF630037B2ED /* GameContracts.swift */; };
+		85D00EEF2AA2FF800037B2ED /* GameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EEE2AA2FF800037B2ED /* GameBuilder.swift */; };
+		85D00EF12AA2FF8D0037B2ED /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EF02AA2FF8D0037B2ED /* GamePresenter.swift */; };
+		85D00EF32AA2FF960037B2ED /* GameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EF22AA2FF960037B2ED /* GameInteractor.swift */; };
+		85D00EF52AA2FFA50037B2ED /* GameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EF42AA2FFA50037B2ED /* GameRouter.swift */; };
+		85D00EF72AA3D08B0037B2ED /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EF62AA3D08B0037B2ED /* CardView.swift */; };
+		85D00EF92AA3E2050037B2ED /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D00EF82AA3E2050037B2ED /* HandView.swift */; };
 		85DB785C2A3684FE00D8A2A1 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785B2A3684FE00D8A2A1 /* GameModel.swift */; };
 		85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785D2A36850B00D8A2A1 /* RoundModel.swift */; };
 		85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB785F2A36851300D8A2A1 /* TurnModel.swift */; };
@@ -101,10 +106,8 @@
 		8528CED62A3BC66D0018620A /* ScoreboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
 		8528CED82A3EF9EF0018620A /* PhaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseModel.swift; sourceTree = "<group>"; };
 		8528CEE12A402B0C0018620A /* NumberCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCardView.swift; sourceTree = "<group>"; };
-		8528CEE32A46AE9E0018620A /* NumberGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberGradientView.swift; sourceTree = "<group>"; };
 		8528CEE72A4828D00018620A /* Rothenburg Decorative.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rothenburg Decorative.ttf"; sourceTree = "<group>"; };
 		8528CEEB2A4BA2BE0018620A /* SpecialCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialCardView.swift; sourceTree = "<group>"; };
-		8528CEED2A4BADA60018620A /* ViewDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDeckViewController.swift; sourceTree = "<group>"; };
 		85882F2B2A8B65F20092CAB5 /* UIContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContracts.swift; sourceTree = "<group>"; };
 		85882F2D2A8B6B940092CAB5 /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		85882F312A8B6BD60092CAB5 /* LaunchContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchContracts.swift; sourceTree = "<group>"; };
@@ -119,6 +122,13 @@
 		85882F432A8E0B4E0092CAB5 /* LaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
 		85CA27582A5B4C33003F1CD5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		85D00EEA2A9E27A40037B2ED /* PlayerSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelector.swift; sourceTree = "<group>"; };
+		85D00EEC2AA2FF630037B2ED /* GameContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContracts.swift; sourceTree = "<group>"; };
+		85D00EEE2AA2FF800037B2ED /* GameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBuilder.swift; sourceTree = "<group>"; };
+		85D00EF02AA2FF8D0037B2ED /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
+		85D00EF22AA2FF960037B2ED /* GameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInteractor.swift; sourceTree = "<group>"; };
+		85D00EF42AA2FFA50037B2ED /* GameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRouter.swift; sourceTree = "<group>"; };
+		85D00EF62AA3D08B0037B2ED /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		85D00EF82AA3E2050037B2ED /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
 		85DB785B2A3684FE00D8A2A1 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		85DB785D2A36850B00D8A2A1 /* RoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundModel.swift; sourceTree = "<group>"; };
 		85DB785F2A36851300D8A2A1 /* TurnModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnModel.swift; sourceTree = "<group>"; };
@@ -280,7 +290,6 @@
 		85E24B392A8F891100157E70 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				85E24B5F2A97A78E00157E70 /* Deprecated */,
 				85882F332A8B6BEC0092CAB5 /* ModuleContracts.swift */,
 				85882F372A8B6E7F0092CAB5 /* ModuleManager.swift */,
 				85882F392A8B6E8D0092CAB5 /* ModuleFactory.swift */,
@@ -392,7 +401,12 @@
 			isa = PBXGroup;
 			children = (
 				85E24B512A8F8EF700157E70 /* Views */,
+				85D00EEC2AA2FF630037B2ED /* GameContracts.swift */,
+				85D00EEE2AA2FF800037B2ED /* GameBuilder.swift */,
 				85DD62DA2A33D42D00A6DA51 /* GameViewController.swift */,
+				85D00EF02AA2FF8D0037B2ED /* GamePresenter.swift */,
+				85D00EF22AA2FF960037B2ED /* GameInteractor.swift */,
+				85D00EF42AA2FFA50037B2ED /* GameRouter.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -415,19 +429,12 @@
 		85E24B512A8F8EF700157E70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				85D00EF62AA3D08B0037B2ED /* CardView.swift */,
 				8528CEE12A402B0C0018620A /* NumberCardView.swift */,
-				8528CEE32A46AE9E0018620A /* NumberGradientView.swift */,
 				8528CEEB2A4BA2BE0018620A /* SpecialCardView.swift */,
+				85D00EF82AA3E2050037B2ED /* HandView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		85E24B5F2A97A78E00157E70 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				8528CEED2A4BADA60018620A /* ViewDeckViewController.swift */,
-			);
-			path = Deprecated;
 			sourceTree = "<group>";
 		};
 		85E24B782A9D357500157E70 /* Rules */ = {
@@ -578,23 +585,25 @@
 				85E24B542A90F6C400157E70 /* CodingErrors.swift in Sources */,
 				85E24B3E2A8F8ACD00157E70 /* ServiceFactory.swift in Sources */,
 				8528CED52A3B3F950018620A /* DeckModelController.swift in Sources */,
-				8528CEE42A46AE9E0018620A /* NumberGradientView.swift in Sources */,
 				8528CEC92A391F580018620A /* NumberCard.swift in Sources */,
 				8528CED32A3B3F360018620A /* DeckModel.swift in Sources */,
 				85E24B732A9C079300157E70 /* NewGamePresenter.swift in Sources */,
 				85882F422A8E0B400092CAB5 /* LaunchInteractor.swift in Sources */,
 				85DD62DB2A33D42D00A6DA51 /* GameViewController.swift in Sources */,
+				85D00EF12AA2FF8D0037B2ED /* GamePresenter.swift in Sources */,
 				85E24B632A97A7AE00157E70 /* MainMenuBuilder.swift in Sources */,
 				85DB78682A39071500D8A2A1 /* NewGameViewController.swift in Sources */,
 				85882F402A8E0B310092CAB5 /* LaunchViewController.swift in Sources */,
 				85CA27592A5B4C33003F1CD5 /* Constants.swift in Sources */,
 				8528CECB2A391F5F0018620A /* SpecialCard.swift in Sources */,
+				85D00EF32AA2FF960037B2ED /* GameInteractor.swift in Sources */,
 				85E24B6D2A9B7B8200157E70 /* GameService.swift in Sources */,
 				85882F362A8B6E5D0092CAB5 /* SceneRouter.swift in Sources */,
 				85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */,
 				85E24B692A97A7D500157E70 /* MainMenuInteractor.swift in Sources */,
 				8528CEC72A391F330018620A /* PlayerModel.swift in Sources */,
 				85E24B3C2A8F8AC200157E70 /* ServiceManager.swift in Sources */,
+				85D00EF92AA3E2050037B2ED /* HandView.swift in Sources */,
 				85882F382A8B6E7F0092CAB5 /* ModuleManager.swift in Sources */,
 				85E24B672A97A7C700157E70 /* MainMenuPresenter.swift in Sources */,
 				85E24B5E2A97A60B00157E70 /* GameEntity.swift in Sources */,
@@ -613,6 +622,8 @@
 				8528CECF2A3998B10018620A /* Assets.swift in Sources */,
 				85882F2E2A8B6B940092CAB5 /* SceneCoordinator.swift in Sources */,
 				85DD62D72A33D42D00A6DA51 /* AppDelegate.swift in Sources */,
+				85D00EED2AA2FF630037B2ED /* GameContracts.swift in Sources */,
+				85D00EF72AA3D08B0037B2ED /* CardView.swift in Sources */,
 				85E24B582A955D3700157E70 /* SceneErrors.swift in Sources */,
 				8528CED72A3BC66D0018620A /* ScoreboardViewController.swift in Sources */,
 				85E24B612A97A7A300157E70 /* MainMenuContracts.swift in Sources */,
@@ -628,11 +639,12 @@
 				85DD62D92A33D42D00A6DA51 /* SceneDelegate.swift in Sources */,
 				85E24B6B2A97A7DD00157E70 /* MainMenuRouter.swift in Sources */,
 				85E24B6F2A9C076800157E70 /* NewGameContracts.swift in Sources */,
-				8528CEEE2A4BADA60018620A /* ViewDeckViewController.swift in Sources */,
 				85E24B652A97A7BD00157E70 /* MainMenuViewController.swift in Sources */,
 				85882F3E2A8E0B1F0092CAB5 /* LaunchPresenter.swift in Sources */,
 				85882F342A8B6BEC0092CAB5 /* ModuleContracts.swift in Sources */,
 				85882F442A8E0B4E0092CAB5 /* LaunchRouter.swift in Sources */,
+				85D00EF52AA2FFA50037B2ED /* GameRouter.swift in Sources */,
+				85D00EEF2AA2FF800037B2ED /* GameBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

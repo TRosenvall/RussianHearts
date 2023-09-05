@@ -24,6 +24,8 @@ class ModuleFactory: ModuleWorks {
             return MainMenuBuilder().build(delegate: delegate) as? T
         case "\((any NewGameView).self)":
             return NewGameBuilder().build(delegate: delegate) as? T
+        case "\((any GameView).self)":
+            return GameBuilder().build(delegate: delegate) as? T
         default:
             fatalError("Couldn't resolve module")
         }

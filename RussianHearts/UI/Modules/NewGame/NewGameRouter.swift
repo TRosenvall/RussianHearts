@@ -22,5 +22,9 @@ class NewGameRouter: NewGameWireframe {
         delegate.routeBack(animated: true)
     }
 
+    func routeToGameModule() {
+        delegate.routeToGameModule()
+    }
+
     // MARK: - Helpers
 }

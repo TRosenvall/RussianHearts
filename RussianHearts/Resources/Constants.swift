@@ -13,6 +13,4 @@ class Constants {
     static let shared = Constants()
 
     let appShortName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
-
-    let cardAspectRatio: Double = 62.0/88.0
 }

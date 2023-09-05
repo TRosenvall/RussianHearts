@@ -1,12 +1,171 @@
-////
-////  GameViewController.swift
-////  RussianHearts
-////
-////  Created by Timothy Rosenvall on 6/9/23.
-////
 //
-//import UIKit
+//  GameViewController.swift
+//  RussianHearts
 //
+//  Created by Timothy Rosenvall on 6/9/23.
+//
+
+import UIKit
+
+class GameViewController: UIViewController, GameView {
+
+    // MARK: - Properties
+    var id: UUID = UUID()
+    var presenter: GamePresenting?
+    var moduleColor: UIColor = .systemPurple
+
+    // MARK: - Views
+    // Views
+    lazy var backgroundBorderView: UIView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        
+        return view
+    }()
+
+    lazy var backgroundColorView: UIView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        backgroundBorderView.addSubview(view)
+        
+        return view
+    }()
+
+    lazy var navBarView: UIView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        
+        return view
+    }()
+
+    // Labels
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        navBarView.addSubview(label)
+
+        return label
+    }()
+
+    // Buttons
+    lazy var backButton: UIButton = {
+        let button = UIButton(type: .system)
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        navBarView.addSubview(button)
+
+        button.addTarget(self,
+                         action: #selector(backButtonTapped),
+                         for: .touchUpInside)
+        return button
+    }()
+
+    // CustomViews
+    lazy var handView: HandView = {
+        let view = HandView()
+        view.moduleColor = moduleColor
+    
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+
+        return view
+    }()
+
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+    }
+
+    // MARK: - Actions
+    @objc func backButtonTapped() {
+        
+    }
+
+    // MARK: - Conformance: GameView
+
+    // MARK: - Helper
+    func setupViews() {
+        // Constants
+        let spacer: CGFloat = 22
+        let borderWidth: CGFloat = 3
+        let cornerRadius: CGFloat = self.view.frame.width/7
+        
+        // View
+        self.view.backgroundColor = .white
+        
+        // Background Color View
+        backgroundBorderView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        backgroundBorderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        backgroundBorderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        backgroundBorderView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        // Figured these numbers out by guess and check, these should probably be formalized.
+        backgroundBorderView.layer.borderColor = moduleColor.cgColor
+        backgroundBorderView.layer.borderWidth = borderWidth
+        backgroundBorderView.layer.cornerRadius = cornerRadius
+        
+        // Background Color View
+        backgroundColorView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true
+        backgroundColorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
+        backgroundColorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 10).isActive = true
+        backgroundColorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
+        backgroundColorView.backgroundColor = moduleColor
+        backgroundColorView.alpha = 0.001
+        
+        // Nav Bar View
+        navBarView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        navBarView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        navBarView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        navBarView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        // Back Button
+        backButton.topAnchor.constraint(equalTo: navBarView.topAnchor).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: navBarView.leadingAnchor).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 3*spacer).isActive = true
+        backButton.bottomAnchor.constraint(equalTo: navBarView.bottomAnchor).isActive = true
+        backButton.setImage(UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysTemplate),
+                            for: .normal)
+        backButton.tintColor = moduleColor
+        
+        // Title Label
+        titleLabel.topAnchor.constraint(equalTo: navBarView.topAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: navBarView.centerXAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: navBarView.bottomAnchor).isActive = true
+        titleLabel.text = "Game"
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = moduleColor
+
+        // Hand View
+        handView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        handView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        handView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        // 0.175 is completely arbitrary.
+        handView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.175).isActive = true
+        handView.clipsToBounds = false
+        handView.player = presenter!.getPlayer()
+    }
+
+}
+
+//let numberCard = NumberCard(value: .eight, suit: .swords)
+//let cardView = NumberCardView(card: numberCard)
+//cardView.isUpsideDown = true
+//cardView.translatesAutoresizingMaskIntoConstraints = false
+//self.view.addSubview(cardView)
+//cardView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 150).isActive = true
+//cardView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.33).isActive = true
+//cardView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+//cardView.widthAnchor.constraint(equalTo: cardView.heightAnchor,
+//                                multiplier: cardView.cardRatio).isActive = true
+//cardView.cornerRadius = 22
+
 //class GameViewController: UIViewController {
 //
 //    // MARK: - Outlets

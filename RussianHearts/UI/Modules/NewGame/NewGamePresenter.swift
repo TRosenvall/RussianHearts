@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NewGamePresenter: NewGamePresenting {
+class NewGamePresenter: NewGamePresenting, NewGameOutput {
 
     // MARK: - Properties
     var view: (any NewGameView)?
@@ -19,6 +19,15 @@ class NewGamePresenter: NewGamePresenting {
     // MARK: - Conformance: NewGamePresenting
     func backButtonTapped() {
         router?.backButtonTapped()
+    }
+
+    func startNewGame(with playerValues: [Int? : String?]) {
+        interactor?.startNewGame(with: playerValues)
+    }
+
+    // MARK: - Conformance: NewGameOutput
+    func routeToGameModule() {
+        router?.routeToGameModule()
     }
 
     // MARK: - Helpers

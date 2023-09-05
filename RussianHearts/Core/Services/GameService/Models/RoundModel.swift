@@ -12,6 +12,17 @@ class RoundModel: Equatable, Codable {
     struct BidsByPlayer: Codable {
         var bid: Bid
         var player: PlayerModel
+
+        init(bid: Bid, player: PlayerModel) {
+            self.bid = bid
+            self.player = player
+        }
+
+        init(from decoder: Decoder) throws {
+            let container: KeyedDecodingContainer<RoundModel.BidsByPlayer.CodingKeys> = try decoder.container(keyedBy: RoundModel.BidsByPlayer.CodingKeys.self)
+            self.bid = try container.decode(Bid.self, forKey: RoundModel.BidsByPlayer.CodingKeys.bid)
+            self.player = try container.decode(PlayerModel.self, forKey: RoundModel.BidsByPlayer.CodingKeys.player)
+        }
     }
 
     // MARK: - Properties

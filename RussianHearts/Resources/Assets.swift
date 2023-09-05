@@ -19,7 +19,7 @@ class Assets {
     }
 
     static func image(for specialCardName: String) -> UIImage {
-        return UIImage(named: specialCardName)!
+        return UIImage(named: specialCardName) ?? UIImage()
     }
 
     static func secondaryImage(for specialCardType: SpecialCardType) -> UIImage? {
