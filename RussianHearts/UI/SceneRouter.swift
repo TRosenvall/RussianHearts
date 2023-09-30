@@ -23,9 +23,12 @@ class SceneRouter: SceneWireframe {
 
     // MARK: - Conformance: SceneWireframe
     func routeToLaunchModule() {
-        guard let delegate else { return }
-        let module: (any LaunchView)? = manager.retrieveModule(delegate: delegate)
-        mainWindow.rootViewController = module
+        guard let delegate,
+              let module: (any LaunchView) = manager.retrieveModule(delegate: delegate)
+        else { return }
+        let navigationController = UINavigationController(rootViewController: module)
+        navigationController.isNavigationBarHidden = true
+        mainWindow.rootViewController = navigationController
         mainWindow.makeKeyAndVisible()
         currentViewController = mainWindow.rootViewController
     }
@@ -48,27 +51,47 @@ class SceneRouter: SceneWireframe {
         presentModule(module, animated: true)
     }
 
-    func dismiss(animated: Bool) {
-        dismissModule(animated: animated)
-    }
-
-    // MARK: - Helper
-    func presentModule(_ module: any ModuleView, animated: Bool) {
-        currentViewController?.present(module, animated: animated)
-        currentViewController = module
-    }
-
-    func dismissModule(animated: Bool) {
-        let parentViewController = currentViewController?.presentingViewController
-        currentViewController?.dismiss(animated: animated)
-        currentViewController = parentViewController
-    }
-
     func routeToGameModule() {
         guard let delegate,
               let module: (any GameView) = manager.retrieveModule(delegate: delegate)
         else { return }
         module.modalPresentationStyle = .fullScreen
         presentModule(module, animated: true)
+    }
+
+    func routeBackToMainMenu() {
+        currentViewController?.navigationController?.popToRootViewController(animated: false)
+        currentViewController = mainWindow.rootViewController
+        routeToMainMenu()
+    }
+
+    func routeToHighScores() {
+        guard let delegate,
+              let module: (any HighscoresView) = manager.retrieveModule(delegate: delegate)
+        else { return }
+        module.modalPresentationStyle = .fullScreen
+        presentModule(module, animated: true)
+    }
+
+    func dismiss(animated: Bool) {
+        dismissModule(animated: animated)
+    }
+
+    // MARK: - Helper
+    func presentModule(_ module: any ModuleView, animated: Bool) {
+        if currentViewController is UINavigationController {
+            (currentViewController as? UINavigationController)?.pushViewController(module, animated: animated)
+        } else {
+            currentViewController?.navigationController?.pushViewController(module, animated: animated)
+        }
+        currentViewController = module
+    }
+
+    func dismissModule(animated: Bool) {
+        guard let module = currentViewController as? (any ModuleView) else { return }
+        let parentViewController = currentViewController?.presentingViewController
+        manager.dismiss(module: module)
+        currentViewController?.navigationController?.popViewController(animated: animated)
+        currentViewController = parentViewController
     }
 }

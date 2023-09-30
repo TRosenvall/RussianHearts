@@ -5,7 +5,7 @@
 //  Created by Timothy Rosenvall on 9/1/23.
 //
 
-import Foundation
+import UIKit
 
 protocol GameView: ModuleView {
     var presenter: GamePresenting? { get set }
@@ -17,13 +17,25 @@ protocol GamePresenting: ModulePresenting {
     var interactor: GameInput? { get set }
 
     func getPlayer() -> PlayerModel
+
+    func getPlayers() -> [PlayerModel]
+
+    func endTurn(cardPlayed: Card?) -> EndTurnType
+
+    func routeToMainMenu()
+
+    func routeToHighScores()
 }
 
 // Called on by presenter to do peices of work
 protocol GameInput: ModuleInput {
     var output: GameOutput? { get set }
-
+    
     func getActivePlayer() -> PlayerModel
+    
+    func getAllPlayers() -> [PlayerModel]
+    
+    func endTurn(cardPlayed: Card?) -> EndTurnType
 }
 
 // Determines what to do with final interactor results
@@ -32,7 +44,15 @@ protocol GameOutput: ModuleOutput {}
 // Determines where to reach out to and how to call delegate functions
 protocol GameWireframe: ModuleWireframe {
     var delegate: GameDelegate { get set }
+
+    func routeToMainMenu()
+
+    func routeToHighScores()
 }
 
 // Determines how to call on required dependencies for routing
-protocol GameDelegate: ModuleDelegate {}
+protocol GameDelegate: ModuleDelegate {
+    func routeToMainMenu()
+
+    func routeToHighScores()
+}

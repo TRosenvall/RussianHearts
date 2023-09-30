@@ -7,288 +7,209 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2240320E-7A63-4DD1-BF2A-4A93389FFD4E"
+            uuid = "82C55BCB-AAFF-479F-A339-C18631C34534"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ScoreViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "viewWillDisappear(_:)"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2AB1E2F3-D21C-4246-B57A-D7AC0513B0A9"
+            uuid = "D358A19A-31E2-4481-9C7B-22047E31AC04"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9B0E9BC0-79AB-4AB1-8738-38F3C026EBF8"
+            uuid = "6AB3AC8F-514D-487E-B3C9-A3329451438B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EA5C1C7F-0EBC-47E6-A0BA-DAA7CB9BA459"
+            uuid = "32147734-EC01-4EE7-A1EC-B35754397A8C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "44852AA9-E2D8-40E3-8548-51E671B5AAB9"
+            uuid = "FAB5E2E3-DABD-4B61-AD10-965143F9196D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "97BECE04-A1F6-43CD-8897-D2E2C3535973"
+            uuid = "B835F4B2-BD05-4211-A9B1-B8B01984D324"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A6DB7890-1F1F-4F9D-A134-D19BE6C9CEE6"
+            uuid = "2B89BA19-2399-472E-86D8-2C3CC7D313EB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "nextButtonTapped()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A6DB7890-1F1F-4F9D-A134-D19BE6C9CEE6 - 46158f19b76a9b78"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in RussianHearts.ViewDeckViewController.nextButtonTapped() -&gt; ()"
-                  moduleName = "RussianHearts"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/ViewDeckViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "243">
-               </Location>
-               <Location
-                  uuid = "A6DB7890-1F1F-4F9D-A134-D19BE6C9CEE6 - 46158f19b76a9b78"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in RussianHearts.ViewDeckViewController.nextButtonTapped() -&gt; ()"
-                  moduleName = "RussianHearts"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/ViewDeckViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "636">
-               </Location>
-               <Location
-                  uuid = "A6DB7890-1F1F-4F9D-A134-D19BE6C9CEE6 - 46158f19b76a9b78"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in RussianHearts.ViewDeckViewController.nextButtonTapped() -&gt; ()"
-                  moduleName = "RussianHearts"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/ViewDeckViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "739">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8AD082DA-67E4-4D77-B677-B03748B93211"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "47D0FF20-AF94-4222-BF20-AE616D076BA3"
+            uuid = "8624B44B-F35A-4DBA-8CA9-D21F51D9ABD4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "76920DA6-041B-4E0C-8CF4-126DFFE15A5F"
+            uuid = "85CF8270-C81D-452C-84B8-2B4F19B76354"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D56F45ED-00D5-424A-82F6-6A6B3C28EFC5"
+            uuid = "37B53C39-3576-4CC4-A1D5-D9124A398601"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1B376DE0-8C89-4B5F-855C-F08734B3FD43"
+            uuid = "2530FE0E-70EA-4581-95A5-120EEE216EB3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/ViewDeckViewController.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "biddingSet()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1B376DE0-8C89-4B5F-855C-F08734B3FD43 - 46158f19b76a9a17"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in RussianHearts.ViewDeckViewController.nextButtonTapped() -&gt; ()"
-                  moduleName = "RussianHearts"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/ViewDeckViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "1040">
-               </Location>
-               <Location
-                  uuid = "1B376DE0-8C89-4B5F-855C-F08734B3FD43 - 46158f19b76a9a17"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in RussianHearts.ViewDeckViewController.nextButtonTapped() -&gt; ()"
-                  moduleName = "RussianHearts"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/ViewDeckViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "1058">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "96F75687-F7B0-4C40-9D8E-F6D00D174867"
+            uuid = "7543616B-0BAE-4603-BB0A-88C8C512493F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/Views/NumberCardView.swift"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "isUpsideDown"
-            landmarkType = "24">
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "biddingSet()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB184715-4A4A-40CD-AD10-3D5896CE9A52"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "biddingSet()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

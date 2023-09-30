@@ -120,10 +120,10 @@ class SpecialCardView: CardView {
         backgroundBorderView.layer.cornerRadius = cornerRadius
 
         // Background Color View
-        backgroundColorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        backgroundColorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        backgroundColorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10).isActive = true
-        backgroundColorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 10).isActive = true
+        backgroundColorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        backgroundColorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+        backgroundColorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+        backgroundColorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         backgroundColorView.backgroundColor = cardColor
         backgroundColorView.alpha = 0.05
 

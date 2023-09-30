@@ -26,10 +26,10 @@ enum CardValues: Int, CaseIterable, Codable {
 
 // Raw value is the card tint color
 enum CardSuit: String, CaseIterable, Codable {
-    case sickles = "Sickle"
-    case swords = "Sword"
-    case crosses = "Cross"
-    case crowns = "Crown"
+    case purple = "Purple"
+    case red = "Red"
+    case brown = "Brown"
+    case blue = "Blue"
 }
 
 class NumberCard: Card {

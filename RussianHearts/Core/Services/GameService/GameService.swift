@@ -102,34 +102,43 @@ class GameService: Service {
         deck.newRound(in: &activeGame!)
     }
 
-    func nextRound(in game: inout GameModel) {
+    func nextRound(in game: inout GameModel) -> EndTurnType {
         let currRound = game.activeRound
         if currRound != game.rounds.last {
             let index = game.rounds.firstIndex(of: currRound)
             game.activeRound = game.rounds[index! + 1]
             deck.newRound(in: &game)
+            return .roundEnd
         } else {
             game.endOfGame = true
+            return .gameEnd
         }
     }
 
-    func nextPhase(in game: inout GameModel) {
+    func moveCardFromHandToPlayAreaFromPlayer(card: Card, playerHand stack: inout [Card]) {
+        deck.newTurn(card: card, stack: &stack)
+    }
+
+    func nextPhase(in game: inout GameModel) -> EndTurnType {
+        deck.newPhase()
         let currPhase = game.activeRound.activePhase
         if currPhase != game.activeRound.phases.last {
             let index = game.activeRound.phases.firstIndex(of: currPhase)
             game.activeRound.activePhase = game.activeRound.phases[index! + 1]
+            return .phaseEnd
         } else {
-            nextRound(in: &game)
+            return nextRound(in: &game)
         }
     }
 
-    func nextTurn(in game: inout GameModel) {
+    func nextTurn(in game: inout GameModel) -> EndTurnType {
         let currTurn = game.activeRound.activePhase.activeTurn
         if currTurn != game.activeRound.activePhase.turns.last {
             let index = game.activeRound.activePhase.turns.firstIndex(of: currTurn)
             game.activeRound.activePhase.activeTurn = game.activeRound.activePhase.turns[index! + 1]
+            return .turnEnd
         } else {
-            nextPhase(in: &game)
+            return nextPhase(in: &game)
         }
     }
 

@@ -25,10 +25,10 @@ class Assets {
     static func secondaryImage(for specialCardType: SpecialCardType) -> UIImage? {
         var suit: CardSuit? = nil
         switch specialCardType {
-        case SpecialCardType.lowCard: suit = .sickles
-        case SpecialCardType.highCard: suit = .swords
-        case SpecialCardType.lowJoker: suit = .crosses
-        case SpecialCardType.highJoker: suit = .crowns
+        case SpecialCardType.lowCard: suit = .purple
+        case SpecialCardType.highCard: suit = .red
+        case SpecialCardType.lowJoker: suit = .brown
+        case SpecialCardType.highJoker: suit = .blue
         }
 
         return Assets.image(from: suit!)

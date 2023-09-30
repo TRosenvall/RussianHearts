@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol HandViewDelegate {
+    func playAreaTapped()
+
+    func getActivePlayer() -> PlayerModel?
+}
+
 class HandView: UIView, CardViewDelegate {
 
     // MARK: - Properties
+    var delegate: HandViewDelegate?
     private var _player: PlayerModel? = nil
     var player: PlayerModel? {
         get {
@@ -36,13 +43,33 @@ class HandView: UIView, CardViewDelegate {
     var downConstraints: [Int: NSLayoutConstraint] = [:]
     var upConstraints: [Int: NSLayoutConstraint] = [:]
 
+    var topConstraints: [Int: NSLayoutConstraint] = [:]
+    var defaultLeadingConstraints: [Int: NSLayoutConstraint] = [:]
+    var placeholderLeadingConstraints: [Int: NSLayoutConstraint] = [:]
+
+    var isSelected: Bool {
+        for cardView in cardViews where cardView.selectedState == .selected {
+            return true
+        }
+        return false
+    }
+
     // MARK: - Views
     // Views
-    lazy var backgroundBorderView: UIView = {
+    lazy var actualHolderView: UIView = {
         let view = UIView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
+        
+        return view
+    }()
+
+    lazy var backgroundBorderView: UIView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        actualHolderView.addSubview(view)
         
         return view
     }()
@@ -54,6 +81,19 @@ class HandView: UIView, CardViewDelegate {
         backgroundBorderView.addSubview(view)
         
         return view
+    }()
+
+    // Buttons
+    lazy var actualHolderViewButton: UIButton = {
+        let button = UIButton()
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(button)
+
+        button.addTarget(self,
+                         action: #selector(actualHolderViewButtonTapped),
+                         for: .touchUpInside)
+        return button
     }()
 
     // MARK: - Lifecycle
@@ -69,13 +109,30 @@ class HandView: UIView, CardViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Actions
+
+    @objc func actualHolderViewButtonTapped() {
+        delegate?.playAreaTapped()
+    }
+
     // MARK: - Conformance: CardViewDelegate
     func tapped(_ cardView: CardView) {
-        for otherCardView in cardViews {
-            otherCardView.state = .notTapped
+        if !isSelected {
+            let currentState = cardView.tappedState
+            
+            for otherCardView in cardViews {
+                otherCardView.tappedState = .notTapped
+            }
+            
+            switch currentState {
+            case .tapped: cardView.tappedState = .notTapped
+            case .notTapped: cardView.tappedState = .tapped
+            }
+            
+            for otherCardView in cardViews {
+                updateTapped(otherCardView)
+            }
         }
-        cardView.state = .tapped
-        update(cardView)
     }
 
     // MARK: - Helpers
@@ -83,24 +140,47 @@ class HandView: UIView, CardViewDelegate {
         let borderWidth: CGFloat = 3
 
         // View
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
+
+        // Actual Holder View
+        actualHolderView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        actualHolderView.heightAnchor.constraint(equalTo: self.heightAnchor,
+                                                 multiplier: 3/5).isActive = true
+        actualHolderView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        actualHolderView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        actualHolderView.backgroundColor = .white
 
         // Background Color View
-        backgroundBorderView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        backgroundBorderView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        backgroundBorderView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-        backgroundBorderView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        backgroundBorderView.topAnchor.constraint(equalTo: actualHolderView.topAnchor,
+                                                  constant: 0).isActive = true
+        backgroundBorderView.leadingAnchor.constraint(equalTo: actualHolderView.leadingAnchor,
+                                                      constant: 0).isActive = true
+        backgroundBorderView.trailingAnchor.constraint(equalTo: actualHolderView.trailingAnchor,
+                                                       constant: 0).isActive = true
+        backgroundBorderView.bottomAnchor.constraint(equalTo: actualHolderView.bottomAnchor,
+                                                     constant: 0).isActive = true
         // Figured these numbers out by guess and check, these should probably be formalized.
         backgroundBorderView.layer.borderColor = moduleColor.cgColor
         backgroundBorderView.layer.borderWidth = borderWidth
 
         // Background Color View
-        backgroundColorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        backgroundColorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        backgroundColorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10).isActive = true
-        backgroundColorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 10).isActive = true
+        backgroundColorView.topAnchor.constraint(equalTo: backgroundBorderView.topAnchor,
+                                                 constant: 10).isActive = true
+        backgroundColorView.leadingAnchor.constraint(equalTo: backgroundBorderView.leadingAnchor,
+                                                     constant: 10).isActive = true
+        backgroundColorView.trailingAnchor.constraint(equalTo: backgroundBorderView.trailingAnchor,
+                                                      constant: 10).isActive = true
+        backgroundColorView.bottomAnchor.constraint(equalTo: backgroundBorderView.bottomAnchor,
+                                                    constant: 10).isActive = true
         backgroundColorView.backgroundColor = moduleColor
         backgroundColorView.alpha = 0.001
+
+        // Actual Holder View Button
+        actualHolderViewButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        actualHolderViewButton.bottomAnchor.constraint(equalTo: backgroundBorderView.topAnchor).isActive = true
+        actualHolderViewButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        actualHolderViewButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        actualHolderViewButton.backgroundColor = .clear
     }
 
     func setupHandView() {
@@ -119,7 +199,7 @@ class HandView: UIView, CardViewDelegate {
 
             cardView.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(cardView)
-            cardView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+            cardView.heightAnchor.constraint(equalTo: actualHolderView.heightAnchor).isActive = true
             cardView.widthAnchor.constraint(equalTo: cardView.heightAnchor,
                                             multiplier: cardView.cardRatio).isActive = true
 
@@ -155,11 +235,13 @@ class HandView: UIView, CardViewDelegate {
             cardView.layer.cornerRadius = cardWidth/7
             cardView.isUpsideDown = false
 
-            cardView.leadingAnchor.constraint(equalTo: self.centerXAnchor, constant: trueOffset).isActive = true
+            let defaultLeadingConstraint = cardView.leadingAnchor.constraint(equalTo: self.centerXAnchor, constant: trueOffset)
+            defaultLeadingConstraints.updateValue(defaultLeadingConstraint, forKey: cardView.tag)
+            defaultLeadingConstraint.isActive = true
 
             let cardHeight = cardView.frame.height
 
-            let downConstraint = cardView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            let downConstraint = cardView.bottomAnchor.constraint(equalTo: actualHolderView.bottomAnchor)
             downConstraints.updateValue(downConstraint, forKey: cardView.tag)
             downConstraint.isActive = true
             let upConstraint = cardView.bottomAnchor.constraint(equalTo: self.bottomAnchor,
@@ -171,20 +253,47 @@ class HandView: UIView, CardViewDelegate {
         }
     }
 
-    func update(_ cardView: CardView) {
-        for otherCardViews in cardViews {
-            let upConstraint = upConstraints[otherCardViews.tag]
+    func updateTapped(_ cardView: CardView) {
+        switch cardView.tappedState {
+        case .tapped:
+            let downConstraint = downConstraints[cardView.tag]
+            downConstraint?.isActive = false
+            
+            let upConstraint = upConstraints[cardView.tag]
+            upConstraint?.isActive = true
+        case .notTapped:
+            let upConstraint = upConstraints[cardView.tag]
             upConstraint?.isActive = false
-
-            let downConstraint = downConstraints[otherCardViews.tag]
+            
+            let downConstraint = downConstraints[cardView.tag]
             downConstraint?.isActive = true
         }
+        layoutIfNeeded()
+    }
 
-        let downConstraint = downConstraints[cardView.tag]
-        downConstraint?.isActive = false
+    func updateSelected(_ cardView: CardView) {
+        switch cardView.selectedState {
+        case .selected:
+            let placeholderLeadingConstraint = placeholderLeadingConstraints[cardView.tag]
+            let placeholderTopConstraint = topConstraints[cardView.tag]
+            placeholderLeadingConstraint?.isActive = true
+            placeholderTopConstraint?.isActive = true
 
-        let upConstraint = upConstraints[cardView.tag]
-        upConstraint?.isActive = true
+            let defaultLeadingConstraint = defaultLeadingConstraints[cardView.tag]
+            let upConstraint = upConstraints[cardView.tag]
+            defaultLeadingConstraint?.isActive = false
+            upConstraint?.isActive = false
+        case .notSelected:
+            let placeholderLeadingConstraint = placeholderLeadingConstraints[cardView.tag]
+            let placeholderTopConstraint = topConstraints[cardView.tag]
+            placeholderLeadingConstraint?.isActive = false
+            placeholderTopConstraint?.isActive = false
+
+            let defaultLeadingConstraint = defaultLeadingConstraints[cardView.tag]
+            let upConstraint = upConstraints[cardView.tag]
+            defaultLeadingConstraint?.isActive = true
+            upConstraint?.isActive = true
+        }
         layoutIfNeeded()
     }
 
@@ -205,5 +314,37 @@ class HandView: UIView, CardViewDelegate {
             }
         }
         layoutIfNeeded()
+    }
+
+    func getTappedCard() -> CardView? {
+        for cardView in cardViews where cardView.tappedState == .tapped {
+            return cardView
+        }
+        return nil
+    }
+
+    func getAdditionalCardConstraints(forPlaceholderView placeholderView: UIView) {
+        var topConstraints: [Int: NSLayoutConstraint] = [:]
+        var leadingConstraints: [Int: NSLayoutConstraint] = [:]
+        for cardView in cardViews {
+            let topConstraint = cardView.topAnchor.constraint(equalTo: placeholderView.topAnchor)
+            let leadingConstraint = cardView.leadingAnchor.constraint(equalTo: placeholderView.leadingAnchor)
+            topConstraints.updateValue(topConstraint, forKey: cardView.tag)
+            leadingConstraints.updateValue(leadingConstraint, forKey: cardView.tag)
+        }
+        guard let player,
+              let activePlayer = delegate?.getActivePlayer()
+        else { return }
+        if player == activePlayer {
+            self.topConstraints = topConstraints
+            self.placeholderLeadingConstraints = leadingConstraints
+        }
+    }
+
+    func getSelectedCard() -> CardView? {
+        for cardView in cardViews where cardView.selectedState == .selected {
+            return cardView
+        }
+        return nil
     }
 }

@@ -18,4 +18,11 @@ class GameRouter: GameWireframe {
     }
 
     // MARK: - Conformance: GameWireframe
+    func routeToMainMenu() {
+        delegate.routeToMainMenu()
+    }
+
+    func routeToHighScores() {
+        delegate.routeToHighScores()
+    }
 }

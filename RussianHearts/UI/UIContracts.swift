@@ -13,7 +13,8 @@ protocol SceneCoordinating:
     LaunchDelegate,
     MainMenuDelegate,
     NewGameDelegate,
-    GameDelegate
+    GameDelegate,
+    HighscoresDelegate
 {
     /// Start the app and route to the first module
     func start()
@@ -40,4 +41,8 @@ protocol SceneWireframe {
 
     // Route to the main game module.
     func routeToGameModule()
+
+    func routeBackToMainMenu()
+
+    func routeToHighScores()
 }

@@ -32,4 +32,20 @@ class GameInteractor: GameInput {
         }
         return activePlayer
     }
+
+    func getAllPlayers() -> [PlayerModel] {
+        guard let players = gameService.activeGame?.players
+        else {
+            fatalError("No Players Found")
+        }
+        return players
+    }
+
+    func endTurn(cardPlayed: Card?) -> EndTurnType {
+        if let cardPlayed {
+            gameService.moveCardFromHandToPlayAreaFromPlayer(card: cardPlayed,
+                                                             playerHand: &getActivePlayer().cards)
+        }
+        return gameService.nextTurn(in: &(gameService.activeGame)!)
+    }
 }

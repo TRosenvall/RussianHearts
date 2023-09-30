@@ -26,6 +26,8 @@ class ModuleFactory: ModuleWorks {
             return NewGameBuilder().build(delegate: delegate) as? T
         case "\((any GameView).self)":
             return GameBuilder().build(delegate: delegate) as? T
+        case "\((any HighscoresView).self)":
+            return HighscoresBuilder().build(delegate: delegate) as? T
         default:
             fatalError("Couldn't resolve module")
         }

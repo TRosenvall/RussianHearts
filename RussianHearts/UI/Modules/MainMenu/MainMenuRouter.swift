@@ -21,4 +21,8 @@ class MainMenuRouter: MainMenuWireframe {
     func routeToNewGameModule() {
         delegate?.routeToNewGameModule()
     }
+
+    func routeToHighscoresModule() {
+        delegate?.routeToHighscoresModule()
+    }
 }

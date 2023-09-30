@@ -25,4 +25,28 @@ class GamePresenter: GamePresenting {
         }
         return interactor.getActivePlayer()
     }
+
+    func getPlayers() -> [PlayerModel] {
+        guard let interactor
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+        return interactor.getAllPlayers()
+    }
+
+    func endTurn(cardPlayed: Card?) -> EndTurnType {
+        guard let interactor
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+        return interactor.endTurn(cardPlayed: cardPlayed)
+    }
+
+    func routeToMainMenu() {
+        router?.routeToMainMenu()
+    }
+
+    func routeToHighScores() {
+        router?.routeToHighScores()
+    }
 }

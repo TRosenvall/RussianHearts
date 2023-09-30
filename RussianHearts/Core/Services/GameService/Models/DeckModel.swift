@@ -11,10 +11,13 @@ class DeckModel {
     var cards: [Card]
     var trump: CardSuit?
     var discardPile: [Card]
+    var cardsInPlay: [Card]
 
     init(cards: [Card],
-         discardPile: [Card] = []) {
+         discardPile: [Card] = [],
+         cardsInPlay: [Card] = []) {
         self.cards = cards
         self.discardPile = discardPile
+        self.cardsInPlay = cardsInPlay
     }
 }

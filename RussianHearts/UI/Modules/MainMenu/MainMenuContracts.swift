@@ -51,8 +51,12 @@ protocol MainMenuWireframe: ModuleWireframe {
     var delegate: MainMenuDelegate? { get set }
 
     func routeToNewGameModule()
+
+    func routeToHighscoresModule()
 }
 
 protocol MainMenuDelegate: ModuleDelegate {
     func routeToNewGameModule()
+
+    func routeToHighscoresModule()
 }

@@ -11,9 +11,14 @@ protocol CardViewDelegate {
     func tapped(_ cardView: CardView)
 }
 
-enum CardState {
+enum CardTappedState {
     case tapped
     case notTapped
+}
+
+enum CardSelectedState {
+    case selected
+    case notSelected
 }
 
 class CardView: UIView {
@@ -33,5 +38,6 @@ class CardView: UIView {
         }
     }
 
-    var state: CardState = .notTapped
+    var tappedState: CardTappedState = .notTapped
+    var selectedState: CardSelectedState = .notSelected
 }

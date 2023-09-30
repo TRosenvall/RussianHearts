@@ -33,7 +33,7 @@ class MainMenuPresenter: MainMenuPresenting, MainMenuOutput {
     }
     
     func routeToHighScoreModule() {
-        // TODO
+        router?.routeToHighscoresModule()
     }
     
     func routeToRulesModule() {

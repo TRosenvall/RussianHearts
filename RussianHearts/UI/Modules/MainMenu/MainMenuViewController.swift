@@ -150,7 +150,7 @@ class MainMenuViewController: UIViewController, MainMenuView {
     }
 
     @objc func highScoresButtonTapped(sender: UIButton!) {
-        print("High Scores Button Tapped")
+        presenter?.routeToHighScoreModule()
     }
 
     @objc func rulesButtonTapped(sender: UIButton!) {

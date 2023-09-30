@@ -34,6 +34,10 @@ class SceneCoordinator: SceneCoordinating {
         router.routeToNewGameModule()
     }
 
+    func routeToHighscoresModule() {
+        router.routeToHighScores()
+    }
+
     // MARK: - Conformance: NewGameDelegate
     func routeBack(animated: Bool) {
         router.dismiss(animated: animated)
@@ -44,6 +48,13 @@ class SceneCoordinator: SceneCoordinating {
     }
 
     // MARK: - Conformance: GameDelegate
+    func routeToMainMenu() {
+        router.routeBackToMainMenu()
+    }
+
+    func routeToHighScores() {
+        router.routeToHighScores()
+    }
 
     // MARK: - Helpers
 }

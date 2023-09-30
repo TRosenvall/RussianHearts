@@ -49,6 +49,12 @@ class DeckModelController {
             }
         }
 
+        for card in deck.cardsInPlay {
+            moveCardFromOneStackIntoAnother(card: card,
+                                            stack1: &self.deck.cardsInPlay,
+                                            stack2: &self.deck.cards)
+        }
+
         // Shuffle the deck
         self.deck.cards.shuffle()
 
@@ -98,6 +104,20 @@ class DeckModelController {
         if let index {
             stack1.remove(at: index)
             stack2.append(card)
+        }
+    }
+
+    func newTurn(card: Card, stack: inout [Card]) {
+        moveCardFromOneStackIntoAnother(card: card,
+                                        stack1: &stack,
+                                        stack2: &self.deck.cardsInPlay)
+    }
+
+    func newPhase() {
+        for card in self.deck.cardsInPlay {
+            moveCardFromOneStackIntoAnother(card: card,
+                                            stack1: &self.deck.cardsInPlay,
+                                            stack2: &self.deck.discardPile)
         }
     }
 
