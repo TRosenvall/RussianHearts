@@ -135,6 +135,10 @@ class GameViewController:
         gameAlertView.newAlert(for: endTurnType)
     }
 
+    func getPlayedCards() -> [Card] {
+        return presenter!.getPlayedCards()
+    }
+
     // MARK: - Conformance: GameView
 
     // MARK: - Conformance: GameAlertViewDelegate

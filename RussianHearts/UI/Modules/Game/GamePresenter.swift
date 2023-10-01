@@ -49,4 +49,8 @@ class GamePresenter: GamePresenting {
     func routeToHighScores() {
         router?.routeToHighScores()
     }
+
+    func getPlayedCards() -> [Card] {
+        return interactor!.getPlayedCards()
+    }
 }

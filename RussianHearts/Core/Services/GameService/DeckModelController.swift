@@ -152,4 +152,8 @@ class DeckModelController {
         }
         return numberCard
     }
+
+    func getCardsInPlay() -> [Card] {
+        return deck.cardsInPlay
+    }
 }

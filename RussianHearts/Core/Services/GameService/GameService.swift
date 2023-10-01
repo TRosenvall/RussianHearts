@@ -79,6 +79,8 @@ class GameService: Service {
 
     var deck: DeckModelController
 
+    var playerThatWonLastRound: PlayerModel?
+
     // MARK: - Lifecycle
     init(entityManager: EntityManaging = EntityManager.shared,
          deck: DeckModelController = DeckModelController()) {
@@ -120,6 +122,7 @@ class GameService: Service {
     }
 
     func nextPhase(in game: inout GameModel) -> EndTurnType {
+        scorePhase()
         deck.newPhase()
         let currPhase = game.activeRound.activePhase
         if currPhase != game.activeRound.phases.last {
@@ -148,5 +151,46 @@ class GameService: Service {
             return true
         }
         return false
+    }
+
+    func scorePhase() {
+        let cardsPlayed = deck.getCardsInPlay()
+        guard let players = activeGame?.players else { return }
+
+        for card in cardsPlayed {
+            for player in players where card.playedByPlayerWithId == player.id {
+                print("=====")
+                print("Player: \(player.name)")
+                if let card = card as? NumberCard {
+                    print("Card Value: \(card.value)")
+                    print("Card Suit: \(card.suit)")
+                }
+                if let card = card as? SpecialCard {
+                    print("Card Suit: \(card.type)")
+                }
+                print("")
+            }
+        }
+
+        let trump: CardSuit = deck.getTrump().suit
+        var winningCard: Card?
+
+        for card in cardsPlayed {
+            if winningCard == nil {
+                winningCard = card
+            }
+        }
+
+        for player in players where player.id == winningCard?.playedByPlayerWithId {
+            self.playerThatWonLastRound = player
+        }
+
+        getNextPhaseOrder()
+    }
+
+    func getNextPhaseOrder() {
+        let players = self.activeGame?.players.sorted(using: $0.id < $1.id)
+        
+        
     }
 }

@@ -22,6 +22,8 @@ protocol GamePresenting: ModulePresenting {
 
     func endTurn(cardPlayed: Card?) -> EndTurnType
 
+    func getPlayedCards() -> [Card]
+
     func routeToMainMenu()
 
     func routeToHighScores()
@@ -36,6 +38,8 @@ protocol GameInput: ModuleInput {
     func getAllPlayers() -> [PlayerModel]
     
     func endTurn(cardPlayed: Card?) -> EndTurnType
+
+    func getPlayedCards() -> [Card]
 }
 
 // Determines what to do with final interactor results

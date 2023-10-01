@@ -12,6 +12,8 @@ protocol PlayAreaViewDelegate {
 
     func getPlayers() -> [PlayerModel]
 
+    func getPlayedCards() -> [Card]
+
     func endTurn(cardPlayed: Card)
 }
 
@@ -153,9 +155,11 @@ class PlayAreaView: UIView, HandViewDelegate {
 
     @objc func endTurnButtonTapped() {
         if let card = (handView.getTappedCard() as? NumberCardView)?.card {
+            card.playedByPlayerWithId = activePlayer?.id
             delegate?.endTurn(cardPlayed: card)
         }
         if let card = (handView.getTappedCard() as? SpecialCardView)?.card {
+            card.playedByPlayerWithId = activePlayer?.id
             delegate?.endTurn(cardPlayed: card)
         }
     }
@@ -311,6 +315,32 @@ class PlayAreaView: UIView, HandViewDelegate {
 
         for cardPlaceholderView in cardPlaceholderViews where cardPlaceholderView.tag == activePlayer?.id {
             handView.getAdditionalCardConstraints(forPlaceholderView: cardPlaceholderView)
+        }
+
+        layoutIfNeeded()
+        let playedCards = delegate.getPlayedCards()
+        for cardPlaceholderView in cardPlaceholderViews {
+            for card in playedCards where card.playedByPlayerWithId == cardPlaceholderView.tag {
+                var cardView: CardView?
+                if let card = card as? NumberCard {
+                    cardView = NumberCardView(card: card)
+                }
+                if let card = card as? SpecialCard {
+                    cardView = SpecialCardView(card: card)
+                }
+                if let cardView {
+                    cardView.translatesAutoresizingMaskIntoConstraints = false
+                    self.addSubview(cardView)
+                    cardView.topAnchor.constraint(equalTo: cardPlaceholderView.topAnchor).isActive = true
+                    cardView.leadingAnchor.constraint(equalTo: cardPlaceholderView.leadingAnchor).isActive = true
+                    cardView.trailingAnchor.constraint(equalTo: cardPlaceholderView.trailingAnchor).isActive = true
+                    cardView.bottomAnchor.constraint(equalTo: cardPlaceholderView.bottomAnchor).isActive = true
+                    cardView.layer.cornerRadius = cardWidth/7
+                }
+                layoutIfNeeded()
+                cardView?.isUpsideDown = false
+                layoutIfNeeded()
+            }
         }
     }
 }

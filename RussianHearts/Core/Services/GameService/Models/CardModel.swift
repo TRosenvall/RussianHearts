@@ -11,6 +11,7 @@ class Card: Codable, Equatable {
 
     // MARK: - Properties
     var id: String = UUID().uuidString
+    var playedByPlayerWithId: Int?
 
     // MARK: - Lifecycle
     init() {}

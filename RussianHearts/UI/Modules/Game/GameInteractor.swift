@@ -46,6 +46,17 @@ class GameInteractor: GameInput {
             gameService.moveCardFromHandToPlayAreaFromPlayer(card: cardPlayed,
                                                              playerHand: &getActivePlayer().cards)
         }
-        return gameService.nextTurn(in: &(gameService.activeGame)!)
+        let endTurnType = gameService.nextTurn(in: &(gameService.activeGame)!)
+        if endTurnType == .roundEnd {
+            let cardsInPlay = getPlayedCards()
+            for card in cardsInPlay {
+                card.playedByPlayerWithId = nil
+            }
+        }
+        return endTurnType
+    }
+
+    func getPlayedCards() -> [Card] {
+        return gameService.deck.getCardsInPlay()
     }
 }
