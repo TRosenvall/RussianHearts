@@ -189,7 +189,7 @@ class GameService: Service {
     }
 
     func getNextPhaseOrder() {
-        let players = self.activeGame?.players.sorted(using: $0.id < $1.id)
+        let players = self.activeGame?.players.sorted { $0.id < $1.id }
         
         
     }
