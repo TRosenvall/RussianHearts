@@ -23,6 +23,7 @@ class NumberCardView: CardView {
         case .red: return .red
         }
     }
+    private var isDisabled: Bool = false
 
     var cornerRadius: CGFloat {
         get {
@@ -67,6 +68,14 @@ class NumberCardView: CardView {
         view.translatesAutoresizingMaskIntoConstraints = false
         backgroundBorderView.addSubview(view)
         
+        return view
+    }()
+
+    lazy var disabledView: UIView = {
+        let view = UIView()
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
         return view
     }()
 
@@ -152,6 +161,22 @@ class NumberCardView: CardView {
         cardTappedButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         cardTappedButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         cardTappedButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+
+    func addDisabledView() {
+        isDisabled = true
+        self.addSubview(disabledView)
+        disabledView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        disabledView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        disabledView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        disabledView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        disabledView.backgroundColor = .darkGray
+        disabledView.alpha = 0.66
+    }
+
+    func removeDisabledView() {
+        isDisabled = false
+        disabledView.removeFromSuperview()
     }
 }
 

@@ -8,10 +8,10 @@
 import Foundation
 
 class GameService: Service {
-
+    
     // MARK: - Properties
     let entityManager: EntityManaging
-
+    
     var games: [GameModel] {
         get {
             do {
@@ -44,10 +44,12 @@ class GameService: Service {
             }
         }
     }
-
+    
     var foundGame: Bool {
         return !games.isEmpty
     }
+
+    var playerIdForFirstPlayerThisPhase: Int? = 0
 
     private var _activeGame: GameModel?
     var activeGame: GameModel? {
@@ -76,8 +78,22 @@ class GameService: Service {
             self._activeGame = newValue
         }
     }
-
+    
     var deck: DeckModelController
+    var cardsPlayed: [Card] {
+        deck.getCardsInPlay()
+    }
+    var filteredNumberCards: [Card] {
+        cardsPlayed.filter { $0 is NumberCard }
+    }
+
+    var numberCards: [NumberCard] {
+        filteredNumberCards.map { $0 as! NumberCard}
+    }
+
+    var firstCardSuit: CardSuit? {
+        numberCards.first?.suit
+    }
 
     var playerThatWonLastRound: PlayerModel?
 
@@ -154,7 +170,6 @@ class GameService: Service {
     }
 
     func scorePhase() {
-        let cardsPlayed = deck.getCardsInPlay()
         guard let players = activeGame?.players else { return }
 
         for card in cardsPlayed {
@@ -172,12 +187,131 @@ class GameService: Service {
             }
         }
 
-        let trump: CardSuit = deck.getTrump().suit
+        let trump: CardSuit = deck.getTrump()
+
         var winningCard: Card?
 
-        for card in cardsPlayed {
-            if winningCard == nil {
-                winningCard = card
+        let filteredSpecialCards: [Card] = cardsPlayed.filter { $0 is SpecialCard }
+        let specialCards: [SpecialCard] = filteredSpecialCards.map { $0 as! SpecialCard }
+
+        var hasHighJoker: Bool = false
+        var hasLowJoker: Bool = false
+        var hasHighCard: Bool = false
+        var hasLowCard: Bool = false
+
+        for card in specialCards {
+            if card.type == .highJoker {
+                hasHighJoker = true
+            } else if card.type == .lowJoker {
+                hasLowJoker = true
+            } else if card.type == .highCard {
+                hasHighCard = true
+            } else if card.type == .lowCard {
+                hasLowCard = true
+            }
+        }
+
+        print("=======")
+        print("Has High Joker: \(hasHighJoker)")
+        print("Has Low Joker: \(hasLowJoker)")
+        print("Has High Card: \(hasHighCard)")
+        print("Has Low Card: \(hasLowCard)")
+        print("")
+
+        if (hasLowCard && hasHighCard) || (!hasLowCard && !hasHighCard) {
+            // Get a winning card
+            for card in cardsPlayed {
+                if winningCard == nil {
+                    winningCard = card
+                }
+            }
+
+            // Make the winning card the first color card
+            for card in cardsPlayed {
+                if let card = card as? NumberCard,
+                   let currWinning = winningCard as? NumberCard {
+                    if card.suit == firstCardSuit && currWinning.suit != firstCardSuit {
+                        winningCard = card
+                    }
+                }
+            }
+
+            // Make the winning card the highest first color card
+            for card in cardsPlayed {
+                if let card = card as? NumberCard,
+                   let currWinning = winningCard as? NumberCard {
+                    if card.suit == firstCardSuit && card.value.rawValue > currWinning.value.rawValue  {
+                        winningCard = card
+                    }
+                }
+            }
+
+            // Make the winning card the trump card
+            for card in cardsPlayed {
+                if let card = card as? NumberCard,
+                   let currWinning = winningCard as? NumberCard {
+                    if card.suit == trump && currWinning.suit != trump {
+                        winningCard = card
+                    }
+                }
+            }
+
+            // Make the winning card the highest trump card
+            for card in cardsPlayed {
+                if let card = card as? NumberCard,
+                   let currWinning = winningCard as? NumberCard {
+                    if card.suit == trump && card.value.rawValue > currWinning.value.rawValue  {
+                        winningCard = card
+                    }
+                }
+            }
+
+            if hasLowJoker {
+                for specialCard in specialCards where specialCard.type == .lowJoker {
+                    winningCard = specialCard
+                }
+            }
+
+            if hasHighJoker {
+                for specialCard in specialCards where specialCard.type == .highJoker {
+                    winningCard = specialCard
+                }
+            }
+        }
+
+        if hasHighCard {
+            // Make the winning card the highest value
+            for card in cardsPlayed {
+                if let card = card as? NumberCard,
+                   let currWinning = winningCard as? NumberCard {
+                    if card.value.rawValue > currWinning.value.rawValue {
+                        winningCard = card
+                    }
+                }
+            }
+
+            if hasLowJoker {
+                for specialCard in specialCards where specialCard.type == .lowJoker {
+                    winningCard = specialCard
+                }
+            }
+
+            if hasHighJoker {
+                for specialCard in specialCards where specialCard.type == .highJoker {
+                    winningCard = specialCard
+                }
+            }
+        }
+
+        if hasLowCard {
+            // Make the winning card the highest value
+            for card in cardsPlayed {
+                if let card = card as? NumberCard,
+                   let currWinning = winningCard as? NumberCard {
+                    if card.value.rawValue < currWinning.value.rawValue {
+                        winningCard = card
+                    }
+                }
             }
         }
 
@@ -185,12 +319,33 @@ class GameService: Service {
             self.playerThatWonLastRound = player
         }
 
-        getNextPhaseOrder()
+        let winningCardsPlayerId = winningCard?.playedByPlayerWithId
+        print("=========")
+        print("Round won by:")
+        for player in players where player.id == winningCardsPlayerId {
+            print(player.name)
+        }
+        print("")
+        print("--=-=--")
+
+        getNextPhaseOrder(winningCard: winningCard)
     }
 
-    func getNextPhaseOrder() {
-        let players = self.activeGame?.players.sorted { $0.id < $1.id }
-        
-        
+    func getNextPhaseOrder(winningCard: Card?) {
+        var players = self.activeGame?.players.sorted { $0.id < $1.id }
+
+        if let winningCard {
+            while players?[0].id != winningCard.playedByPlayerWithId {
+                guard let removedPlayer = players?.remove(at: 0) else { fatalError("Can't initialize game without players.") }
+                players?.append(removedPlayer)
+            }
+        }
+
+        playerIdForFirstPlayerThisPhase = players?[0].id
+        print("Starting player name: \(players?[0].name)")
+    }
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
+        return playerIdForFirstPlayerThisPhase
     }
 }

@@ -185,6 +185,14 @@ class GameViewController:
         }
     }
 
+    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
+        return presenter?.getPlayerIdForFirstPlayerThisPhase()
+    }
+
+    func getTrump() -> CardSuit? {
+        return presenter?.getTrump()
+    }
+
     // MARK: - Helpers
     func setupViews() {
         // Constants

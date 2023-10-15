@@ -15,6 +15,10 @@ protocol PlayAreaViewDelegate {
     func getPlayedCards() -> [Card]
 
     func endTurn(cardPlayed: Card)
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int?
+
+    func getTrump() -> CardSuit?
 }
 
 // This view will be the full size of the containing view controller
@@ -171,6 +175,26 @@ class PlayAreaView: UIView, HandViewDelegate {
 
     func getActivePlayer() -> PlayerModel? {
         return delegate?.getPlayer()
+    }
+
+    func getPlayedCards() -> [Card] {
+        guard let playedCards = delegate?.getPlayedCards()
+        else {
+            return []
+        }
+        return playedCards
+    }
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
+        return delegate?.getPlayerIdForFirstPlayerThisPhase()
+    }
+
+    func getPlayers() -> [PlayerModel]? {
+        return delegate?.getPlayers()
+    }
+
+    func getTrump() -> CardSuit? {
+        return delegate?.getTrump()
     }
 
     // MARK: - Helpers

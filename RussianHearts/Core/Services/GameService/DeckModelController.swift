@@ -62,7 +62,9 @@ class DeckModelController {
         dealCards(to: &game.players, on: &game.activeRound)
 
         // Get the trump card for the round
-        game.activeRound.trump = getTrump()
+        game.activeRound.trump = getNewTrump()
+        print("==")
+        print("Trump: \(game.activeRound.trump)")
     }
 
     func moveCardFromTopIntoDeck() {
@@ -139,7 +141,12 @@ class DeckModelController {
         }
     }
 
-    func getTrump() -> NumberCard {
+    func getTrump() -> CardSuit {
+
+        if let trump = deck.trump {
+            return trump
+        }
+
         var numberCard: NumberCard!
         for card in self.deck.cards {
             let specialCard = card as? SpecialCard
@@ -150,7 +157,14 @@ class DeckModelController {
                 break
             }
         }
-        return numberCard
+
+        deck.trump = numberCard.suit
+        return numberCard.suit
+    }
+
+    func getNewTrump() -> CardSuit {
+        deck.trump = nil
+        return getTrump()
     }
 
     func getCardsInPlay() -> [Card] {

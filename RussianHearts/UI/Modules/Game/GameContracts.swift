@@ -27,6 +27,10 @@ protocol GamePresenting: ModulePresenting {
     func routeToMainMenu()
 
     func routeToHighScores()
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int?
+
+    func getTrump() -> CardSuit?
 }
 
 // Called on by presenter to do peices of work
@@ -40,6 +44,10 @@ protocol GameInput: ModuleInput {
     func endTurn(cardPlayed: Card?) -> EndTurnType
 
     func getPlayedCards() -> [Card]
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int?
+
+    func getTrump() -> CardSuit?
 }
 
 // Determines what to do with final interactor results

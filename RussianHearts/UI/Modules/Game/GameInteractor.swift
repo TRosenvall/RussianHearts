@@ -59,4 +59,12 @@ class GameInteractor: GameInput {
     func getPlayedCards() -> [Card] {
         return gameService.deck.getCardsInPlay()
     }
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
+        return gameService.getPlayerIdForFirstPlayerThisPhase()
+    }
+
+    func getTrump() -> CardSuit? {
+        return gameService.deck.getTrump()
+    }
 }

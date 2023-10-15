@@ -53,4 +53,12 @@ class GamePresenter: GamePresenting {
     func getPlayedCards() -> [Card] {
         return interactor!.getPlayedCards()
     }
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
+        return interactor?.getPlayerIdForFirstPlayerThisPhase()
+    }
+
+    func getTrump() -> CardSuit? {
+        return interactor?.getTrump()
+    }
 }

@@ -29,7 +29,7 @@ class RoundModel: Equatable, Codable {
     var roundName: String
     var numberOfCardsToPlay: Int
     var bidsByPlayer: [BidsByPlayer]
-    var trump: Card?
+    var trump: CardSuit?
     var phases: [PhaseModel] = []
     var activePhase: PhaseModel
 
@@ -79,7 +79,7 @@ class RoundModel: Equatable, Codable {
         self.roundName = try values.decode(String.self, forKey: .roundName)
         self.numberOfCardsToPlay = try values.decode(Int.self, forKey: .numberOfCardsToPlay)
         self.bidsByPlayer = try values.decode([BidsByPlayer].self, forKey: .bidsByPlayer)
-        self.trump = try values.decode(Card?.self, forKey: .trump)
+        self.trump = try values.decode(CardSuit?.self, forKey: .trump)
         self.phases = try values.decode([PhaseModel].self, forKey: .phases)
         self.activePhase = try values.decode(PhaseModel.self, forKey: .activePhase)
     }
