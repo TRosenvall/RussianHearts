@@ -116,6 +116,7 @@ class PlayerSelector: UIView, UITextFieldDelegate {
         textfield.tag = tag
         textfield.placeholder = placeholderText
         textfield.delegate = self
+        textfield.textColor = .black
 
         return textfield
     }()

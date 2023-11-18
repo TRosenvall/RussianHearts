@@ -11,14 +11,18 @@ class HighscoresPresenter: HighscoresPresenting, HighscoresOutput {
 
     // MARK: - Properties
     var view: (any HighscoresView)?
-    var router: HighscoresWireframe?
     var interactor: HighscoresInput?
 
+    var delegate: HighscoresDelegate
+
     // MARK: - Lifecycle
+    init(delegate: HighscoresDelegate) {
+        self.delegate = delegate
+    }
 
     // MARK: - Conformance: HighscoresPresenting
     func backButtonTapped() {
-        router?.routeToMainMenu()
+        delegate.routeToMainMenu()
     }
 
     // MARK: - Helpers

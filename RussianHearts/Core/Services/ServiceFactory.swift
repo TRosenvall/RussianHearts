@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ServiceFactory: ServiceWorks {
+class ServiceFactoryImpl: ServiceFactory {
 
     // MARK: - Properties
 

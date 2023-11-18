@@ -13,7 +13,6 @@ protocol HighscoresView: ModuleView {
 
 protocol HighscoresPresenting: ModulePresenting {
     var view: (any HighscoresView)? { get set }
-    var router: HighscoresWireframe? { get set }
     var interactor: HighscoresInput? { get set }
 
     func backButtonTapped()
@@ -25,13 +24,8 @@ protocol HighscoresInput: ModuleInput {
 }
 
 // Determines what to do with final interactor results
-protocol HighscoresOutput: ModuleOutput {}
-
-// Determines where to reach out to and how to call delegate functions
-protocol HighscoresWireframe: ModuleWireframe {
+protocol HighscoresOutput: ModuleOutput {
     var delegate: HighscoresDelegate { get set }
-
-    func routeToMainMenu()
 }
 
 // Determines how to call on required dependencies for routing

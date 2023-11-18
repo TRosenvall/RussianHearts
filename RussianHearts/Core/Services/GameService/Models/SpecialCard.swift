@@ -75,14 +75,12 @@ class SpecialCard: Card {
 
     // MARK: Properties
     var type: SpecialCardType
-    var image: UIImage
     var name: String
 
     // MARK: - Lifecycle
     init(type: SpecialCardType) {
         self.type = type
         self.name = SpecialCardName().rawValue(forType: type)
-        self.image = Assets.image(for: self.name)
         super.init()
     }
 
@@ -96,7 +94,6 @@ class SpecialCard: Card {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try values.decode(SpecialCardType.self, forKey: .type)
         self.name = try values.decode(String.self, forKey: .name)
-        self.image = Assets.image(for: self.name)
         try super.init(from: decoder)
     }
 }

@@ -12,12 +12,12 @@ class ServiceManager: ServiceManaging {
     // MARK: - Properties
     static var shared: ServiceManaging = ServiceManager()
 
-    var factory: ServiceWorks
+    var factory: ServiceFactory
 
     var activeServices: [Service]
 
     // MARK: - Lifecycle
-    init(factory: ServiceWorks = ServiceFactory(),
+    init(factory: ServiceFactory = ServiceFactoryImpl(),
          activeServices: [Service] = []) {
         self.factory = factory
         self.activeServices = activeServices

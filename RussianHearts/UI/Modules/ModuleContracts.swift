@@ -11,7 +11,7 @@ import UIKit
 protocol ModuleManaging {
 
     /// The factory used in resolving modules
-    var factory: ModuleWorks { get set }
+    var factory: ModuleFactory { get set }
 
     /// Already resolved modules get stored here until dismissed
     var resolvedModules: [any ModuleView] { get set }
@@ -24,7 +24,7 @@ protocol ModuleManaging {
 }
 
 /// Holds all dependencies required for building new modules. Instantiates builders as needed
-protocol ModuleWorks {
+protocol ModuleFactory {
 
     /// Builds and returns a module of a given type
     func buildModule<T>(delegate: SceneCoordinating) -> T?
@@ -56,9 +56,6 @@ protocol ModuleInput {}
 
 /// Handles the results of the business logic
 protocol ModuleOutput {}
-
-/// Facilitates the scene coordinator with it's purpose using the delegate
-protocol ModuleWireframe {}
 
 /// Handles how the modules is dismissed.
 protocol ModuleDelegate {}

@@ -16,12 +16,12 @@ protocol ServiceManaging {
     var activeServices: [Service] { get set }
 
     // The factory through which additional services are resolved
-    var factory: ServiceWorks { get set }
+    var factory: ServiceFactory { get set }
 
     func retrieveService<T>() -> T?
 }
 
-protocol ServiceWorks {
+protocol ServiceFactory {
 
     func buildService<T>() -> T?
 }

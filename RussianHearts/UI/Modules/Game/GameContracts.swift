@@ -13,7 +13,6 @@ protocol GameView: ModuleView {
 
 protocol GamePresenting: ModulePresenting {
     var view: (any GameView)? { get set }
-    var router: GameWireframe? { get set }
     var interactor: GameInput? { get set }
 
     func getPlayer() -> PlayerModel
@@ -51,15 +50,8 @@ protocol GameInput: ModuleInput {
 }
 
 // Determines what to do with final interactor results
-protocol GameOutput: ModuleOutput {}
-
-// Determines where to reach out to and how to call delegate functions
-protocol GameWireframe: ModuleWireframe {
+protocol GameOutput: ModuleOutput {
     var delegate: GameDelegate { get set }
-
-    func routeToMainMenu()
-
-    func routeToHighScores()
 }
 
 // Determines how to call on required dependencies for routing

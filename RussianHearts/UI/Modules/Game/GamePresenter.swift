@@ -11,11 +11,14 @@ class GamePresenter: GamePresenting {
 
     // MARK: - Properties
     var view: (any GameView)?
-    var router: GameWireframe?
     var interactor: GameInput?
 
+    var delegate: GameDelegate
+
     // MARK: - Lifecycle
-    init() {}
+    init(delegate: GameDelegate) {
+        self.delegate = delegate
+    }
 
     // MARK: - Conformance: GamePresenting
     func getPlayer() -> PlayerModel {
@@ -43,11 +46,11 @@ class GamePresenter: GamePresenting {
     }
 
     func routeToMainMenu() {
-        router?.routeToMainMenu()
+        delegate.routeToMainMenu()
     }
 
     func routeToHighScores() {
-        router?.routeToHighScores()
+        delegate.routeToHighScores()
     }
 
     func getPlayedCards() -> [Card] {

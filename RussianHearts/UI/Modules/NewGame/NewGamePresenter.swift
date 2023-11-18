@@ -11,14 +11,18 @@ class NewGamePresenter: NewGamePresenting, NewGameOutput {
 
     // MARK: - Properties
     var view: (any NewGameView)?
-    var router: NewGameWireframe?
     var interactor: NewGameInput?
 
+    var delegate: NewGameDelegate
+
     // MARK: - Lifecycle
+    init(delegate: NewGameDelegate) {
+        self.delegate = delegate
+    }
 
     // MARK: - Conformance: NewGamePresenting
     func backButtonTapped() {
-        router?.backButtonTapped()
+        delegate.routeBack(animated: true)
     }
 
     func startNewGame(with playerValues: [Int? : String?]) {
@@ -27,7 +31,7 @@ class NewGamePresenter: NewGamePresenting, NewGameOutput {
 
     // MARK: - Conformance: NewGameOutput
     func routeToGameModule() {
-        router?.routeToGameModule()
+        delegate.routeToGameModule()
     }
 
     // MARK: - Helpers

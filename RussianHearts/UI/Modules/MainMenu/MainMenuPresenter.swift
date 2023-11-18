@@ -11,8 +11,9 @@ class MainMenuPresenter: MainMenuPresenting, MainMenuOutput {
 
     // MARK: - Properties
     var view: (any MainMenuView)?
-    var router: MainMenuWireframe?
     var interactor: MainMenuInput?
+
+    var delegate: MainMenuDelegate?
 
     var shouldEnableContinueButton: Bool {
         if let interactor {
@@ -22,10 +23,13 @@ class MainMenuPresenter: MainMenuPresenting, MainMenuOutput {
     }
 
     // MARK: - Lifecycle
+    init(delegate: MainMenuDelegate) {
+        self.delegate = delegate
+    }
 
     // MARK: - Conformance: MainMenuPresenting
     func routeToNewGameModule() {
-        router?.routeToNewGameModule()
+        delegate?.routeToNewGameModule()
     }
     
     func routeToGameModule() {
@@ -33,7 +37,7 @@ class MainMenuPresenter: MainMenuPresenting, MainMenuOutput {
     }
     
     func routeToHighScoreModule() {
-        router?.routeToHighscoresModule()
+        delegate?.routeToHighscoresModule()
     }
     
     func routeToRulesModule() {

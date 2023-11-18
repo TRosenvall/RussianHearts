@@ -17,14 +17,12 @@ class NewGameBuilder {
     // MARK: - Helper Functions
     func build(delegate: SceneCoordinating) -> any NewGameView {
         let view: any NewGameView = NewGameViewController()
-        var presenter: NewGamePresenting = NewGamePresenter()
+        var presenter: NewGamePresenting = NewGamePresenter(delegate: delegate)
         var interactor: NewGameInput = NewGameInteractor()
-        let router: NewGameWireframe = NewGameRouter(delegate: delegate)
 
         view.presenter = presenter
         presenter.view = view
-        presenter.interactor = interactor
-        presenter.router = router
+        presenter.interactor = interactor                  
         interactor.output = presenter as? NewGameOutput
 
         return view

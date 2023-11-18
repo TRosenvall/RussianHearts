@@ -1,5 +1,5 @@
 //
-//  ModuleFactory.swift
+//  ModuleFactoryImpl.swift
 //  RussianHearts
 //
 //  Created by Timothy Rosenvall on 8/15/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ModuleFactory: ModuleWorks {
+class ModuleFactoryImpl: ModuleFactory {
 
     // MARK: - Properties
 

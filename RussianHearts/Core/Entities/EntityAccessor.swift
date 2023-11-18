@@ -20,7 +20,7 @@ class EntityAccessor: EntityAccessing {
     // MARK: - Conformance: EntityAccessing
     func retrieveData(forId id: String) throws -> Data? {
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let appURL = appSupportURL.appendingPathComponent(C.appShortName)
+        let appURL = appSupportURL.appendingPathComponent(Constants.appShortName)
         let fileURL = appURL.appendingPathComponent("\(id).json")
         let data = try Data(contentsOf: fileURL)
         return data
@@ -31,7 +31,7 @@ class EntityAccessor: EntityAccessing {
         try fileManager.createDirectory(at: appSupportURL,
                                         withIntermediateDirectories: true)
 
-        let appURL = appSupportURL.appendingPathComponent(C.appShortName)
+        let appURL = appSupportURL.appendingPathComponent(Constants.appShortName)
         try FileManager.default.createDirectory(at: appURL,
                                                 withIntermediateDirectories: true)
 
@@ -45,7 +45,7 @@ class EntityAccessor: EntityAccessing {
         try fileManager.createDirectory(at: appSupportURL,
                                         withIntermediateDirectories: true)
 
-        let appURL = appSupportURL.appendingPathComponent(C.appShortName)
+        let appURL = appSupportURL.appendingPathComponent(Constants.appShortName)
         try FileManager.default.createDirectory(at: appURL,
                                                 withIntermediateDirectories: true)
 

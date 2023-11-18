@@ -7,10 +7,6 @@
 
 import Foundation
 
-let C = Constants.shared
-class Constants {
-
-    static let shared = Constants()
-
-    let appShortName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
+struct Constants {
+    static let appShortName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
 }

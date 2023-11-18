@@ -11,11 +11,14 @@ class LaunchPresenter: LaunchPresenting, LaunchOutput {
 
     // MARK: - Properties
     var view: (any LaunchView)?
-    var router: LaunchWireframe?
     var interactor: LaunchInput?
 
+    var delegate: LaunchDelegate
+
     // MARK: - Lifecycle
-    init() {}
+    init(delegate: LaunchDelegate) {
+        self.delegate = delegate
+    }
 
     // MARK: - Conformance: LaunchPresenting
     func launchApp() {
@@ -32,6 +35,6 @@ class LaunchPresenter: LaunchPresenting, LaunchOutput {
     // MARK: - Conformance: LaunchOutput
     func routeToMainApplication() {
         (view as? LaunchViewController)?.activityIndicator.stopAnimating()
-        router?.routeToMainApplication()
+        delegate.routeToMainApplication()
     }
 }

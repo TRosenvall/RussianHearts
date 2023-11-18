@@ -149,10 +149,18 @@ class NewGameViewController: UIViewController, NewGameView, PlayerSelectorDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissFirstResponder))
+        view.addGestureRecognizer(tapGesture)
+
         setupViews()
     }
 
     // MARK: - Actions
+    @objc func dismissFirstResponder() {
+        view.endEditing(true)
+    }
+    
     @objc func backButtonTapped(sender: UIButton!) {
         presenter?.backButtonTapped()
     }

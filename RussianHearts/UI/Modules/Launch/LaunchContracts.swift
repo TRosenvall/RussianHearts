@@ -13,7 +13,6 @@ protocol LaunchView: ModuleView {
 
 protocol LaunchPresenting: ModulePresenting {
     var view: (any LaunchView)? { get set }
-    var router: LaunchWireframe? { get set }
     var interactor: LaunchInput? { get set }
 
     func launchApp()
@@ -28,13 +27,7 @@ protocol LaunchInput: ModuleInput {
 
 // Determines what to do with final interactor results
 protocol LaunchOutput: ModuleOutput {
-    func routeToMainApplication()
-}
-
-// Determines where to reach out to and how to call delegate functions
-protocol LaunchWireframe: ModuleWireframe {
     var delegate: LaunchDelegate { get set }
-
     func routeToMainApplication()
 }
 

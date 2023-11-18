@@ -13,7 +13,6 @@ protocol MainMenuView: ModuleView {
 
 protocol MainMenuPresenting: ModulePresenting {
     var view: (any MainMenuView)? { get set }
-    var router: MainMenuWireframe? { get set }
     var interactor: MainMenuInput? { get set }
 
     var shouldEnableContinueButton: Bool { get }
@@ -44,15 +43,7 @@ protocol MainMenuInput: ModuleInput {
 }
 
 protocol MainMenuOutput: ModuleOutput {
-    
-}
-
-protocol MainMenuWireframe: ModuleWireframe {
     var delegate: MainMenuDelegate? { get set }
-
-    func routeToNewGameModule()
-
-    func routeToHighscoresModule()
 }
 
 protocol MainMenuDelegate: ModuleDelegate {

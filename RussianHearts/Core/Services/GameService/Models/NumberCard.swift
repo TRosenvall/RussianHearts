@@ -37,14 +37,12 @@ class NumberCard: Card {
     // MARK: - Properties
     var value: CardValues
     var suit: CardSuit
-    var image: UIImage
 
     // MARK: - Lifecycle
     init(value: CardValues,
          suit: CardSuit) {
         self.value = value
         self.suit = suit
-        self.image = Assets.image(from: suit)
         super.init()
     }
 
@@ -59,7 +57,6 @@ class NumberCard: Card {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.value = try values.decode(CardValues.self, forKey: .value)
         self.suit = try values.decode(CardSuit.self, forKey: .suit)
-        self.image = Assets.image(from: suit)
         try super.init(from: decoder)
     }
 }

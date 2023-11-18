@@ -10,13 +10,13 @@ import Foundation
 class ModuleManager: ModuleManaging {
 
     // MARK: - Properties
-    var factory: ModuleWorks
+    var factory: ModuleFactory
     
     var resolvedModules: [any ModuleView]
 
     // MARK: - Lifecycle
     init() {
-        self.factory = ModuleFactory()
+        self.factory = ModuleFactoryImpl()
         self.resolvedModules = []
     }
 

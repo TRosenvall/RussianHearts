@@ -13,7 +13,6 @@ protocol NewGameView: ModuleView {
 
 protocol NewGamePresenting: ModulePresenting {
     var view: (any NewGameView)? { get set }
-    var router: NewGameWireframe? { get set }
     var interactor: NewGameInput? { get set }
 
     func backButtonTapped()
@@ -30,15 +29,7 @@ protocol NewGameInput: ModuleInput {
 
 // Determines what to do with final interactor results
 protocol NewGameOutput: ModuleOutput {
-    func routeToGameModule()
-}
-
-// Determines where to reach out to and how to call delegate functions
-protocol NewGameWireframe: ModuleWireframe {
     var delegate: NewGameDelegate { get set }
-
-    func backButtonTapped()
-
     func routeToGameModule()
 }
 
