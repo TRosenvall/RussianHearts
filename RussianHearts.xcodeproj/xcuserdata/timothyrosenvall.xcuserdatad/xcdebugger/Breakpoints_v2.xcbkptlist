@@ -7,214 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "82C55BCB-AAFF-479F-A339-C18631C34534"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D358A19A-31E2-4481-9C7B-22047E31AC04"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6AB3AC8F-514D-487E-B3C9-A3329451438B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "32147734-EC01-4EE7-A1EC-B35754397A8C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FAB5E2E3-DABD-4B61-AD10-965143F9196D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B835F4B2-BD05-4211-A9B1-B8B01984D324"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2B89BA19-2399-472E-86D8-2C3CC7D313EB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8624B44B-F35A-4DBA-8CA9-D21F51D9ABD4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "85CF8270-C81D-452C-84B8-2B4F19B76354"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "37B53C39-3576-4CC4-A1D5-D9124A398601"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2530FE0E-70EA-4581-95A5-120EEE216EB3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7543616B-0BAE-4603-BB0A-88C8C512493F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DB184715-4A4A-40CD-AD10-3D5896CE9A52"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RussianHearts/UI/Modules/Game/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "biddingSet()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A6F0E7D5-56E1-4169-83AD-C663CB5B7106"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -228,14 +20,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A6F0E7D5-56E1-4169-83AD-C663CB5B7106 - eb20e3edb9c15ed0"
+                  uuid = "A6F0E7D5-56E1-4169-83AD-C663CB5B7106 - 9a67dff05c61b1b8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "370"
@@ -243,14 +35,14 @@
                   offsetFromSymbolStart = "1539">
                </Location>
                <Location
-                  uuid = "A6F0E7D5-56E1-4169-83AD-C663CB5B7106 - 6164a47281a8c6e2"
+                  uuid = "A6F0E7D5-56E1-4169-83AD-C663CB5B7106 - 1023986f6408298a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (RussianHearts.Card) -&gt; Swift.Bool in RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "370"
@@ -276,14 +68,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "329582A7-A2C6-4F69-AD77-92060D0C6835 - eb20e3edb9c15135"
+                  uuid = "329582A7-A2C6-4F69-AD77-92060D0C6835 - 9a67dff05c61b01d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "375"
@@ -291,14 +83,14 @@
                   offsetFromSymbolStart = "1853">
                </Location>
                <Location
-                  uuid = "329582A7-A2C6-4F69-AD77-92060D0C6835 - eb20e3edb9c15135"
+                  uuid = "329582A7-A2C6-4F69-AD77-92060D0C6835 - 9a67dff05c61b01d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "375"
@@ -372,14 +164,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D81F8713-D649-42AF-8F40-CF7BA26C3E73 - eb20e3edb9c151d8"
+                  uuid = "D81F8713-D649-42AF-8F40-CF7BA26C3E73 - 9a67dff05c61b0a0"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "378"
@@ -387,14 +179,14 @@
                   offsetFromSymbolStart = "2076">
                </Location>
                <Location
-                  uuid = "D81F8713-D649-42AF-8F40-CF7BA26C3E73 - a99c523007613f88"
+                  uuid = "D81F8713-D649-42AF-8F40-CF7BA26C3E73 - d8db6e2de2c1deb0"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 (RussianHearts.Card) -&gt; Swift.Bool in RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "379"
@@ -436,14 +228,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "206CB646-C807-457C-90E4-6B4E996F203F - eb20e3edb9c1507f"
+                  uuid = "206CB646-C807-457C-90E4-6B4E996F203F - 9a67dff05c61b347"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "381"
@@ -451,14 +243,14 @@
                   offsetFromSymbolStart = "2551">
                </Location>
                <Location
-                  uuid = "206CB646-C807-457C-90E4-6B4E996F203F - e78f06abeda37e8"
+                  uuid = "206CB646-C807-457C-90E4-6B4E996F203F - 7f3fcc775b7ad490"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #3 (RussianHearts.Card) -&gt; Swift.Optional&lt;RussianHearts.CardSuit&gt; in RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "382"
@@ -484,14 +276,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "59E48BFC-9C4E-4F4D-8308-5FBCE500617A - eb20e3edb9c1507f"
+                  uuid = "59E48BFC-9C4E-4F4D-8308-5FBCE500617A - 9a67dff05c61b347"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "381"
@@ -499,14 +291,14 @@
                   offsetFromSymbolStart = "2551">
                </Location>
                <Location
-                  uuid = "59E48BFC-9C4E-4F4D-8308-5FBCE500617A - e78f06abeda37e8"
+                  uuid = "59E48BFC-9C4E-4F4D-8308-5FBCE500617A - 7f3fcc775b7ad490"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #3 (RussianHearts.Card) -&gt; Swift.Optional&lt;RussianHearts.CardSuit&gt; in RussianHearts.HandView.updateShouldBeDisabled(for: RussianHearts.CardView, cardsInHand: Swift.Array&lt;RussianHearts.Card&gt;) -&gt; ()"
                   moduleName = "RussianHearts"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/timothyrosenvall/Desktop/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/UI/Modules/Game/Views/HandView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "382"

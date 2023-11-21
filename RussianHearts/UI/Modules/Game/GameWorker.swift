@@ -7,10 +7,24 @@
 
 import Foundation
 
-class GameInteractor: GameInput {
+// Called on by presenter to do peices of work
+protocol GameWorker: ModuleWorker {
+    func getActivePlayer() -> PlayerModel
+    
+    func getAllPlayers() -> [PlayerModel]
+    
+    func endTurn(cardPlayed: Card?) -> EndTurnType
+
+    func getPlayedCards() -> [Card]
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int?
+
+    func getTrump() -> CardSuit?
+}
+
+class GameWorkerImpl: GameWorker {
 
     // MARK: - Properties
-    var output: GameOutput?
     var serviceManager: ServiceManaging
     var gameService: GameService
 

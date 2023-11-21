@@ -78,7 +78,7 @@ class SceneRouter: SceneWireframe {
     }
 
     // MARK: - Helper
-    func presentModule(_ module: any ModuleView, animated: Bool) {
+    func presentModule(_ module: any ModuleController, animated: Bool) {
         if currentViewController is UINavigationController {
             (currentViewController as? UINavigationController)?.pushViewController(module, animated: animated)
         } else {
@@ -88,7 +88,7 @@ class SceneRouter: SceneWireframe {
     }
 
     func dismissModule(animated: Bool) {
-        guard let module = currentViewController as? (any ModuleView) else { return }
+        guard let module = currentViewController as? (any ModuleController) else { return }
         let parentViewController = currentViewController?.presentingViewController
         manager.dismiss(module: module)
         currentViewController?.navigationController?.popViewController(animated: animated)

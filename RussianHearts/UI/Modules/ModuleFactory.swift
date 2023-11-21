@@ -1,11 +1,19 @@
 //
-//  ModuleFactoryImpl.swift
+//  ModuleFactory.swift
 //  RussianHearts
 //
 //  Created by Timothy Rosenvall on 8/15/23.
 //
 
 import Foundation
+
+/// Holds all dependencies required for building new modules. Instantiates builders as needed
+protocol ModuleFactory {
+
+    /// Builds and returns a module of a given type
+    func buildModule<T>(delegate: SceneCoordinating) -> T?
+
+}
 
 class ModuleFactoryImpl: ModuleFactory {
 

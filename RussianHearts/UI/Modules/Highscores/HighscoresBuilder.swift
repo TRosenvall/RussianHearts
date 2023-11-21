@@ -17,13 +17,10 @@ class HighscoresBuilder {
     // MARK: - Helper Functions
     func build(delegate: SceneCoordinating) -> any HighscoresView {
         let view: any HighscoresView = HighscoresViewController()
-        var presenter: HighscoresPresenting = HighscoresPresenter(delegate: delegate)
-        var interactor: HighscoresInput = HighscoresInteractor()
+        var worker: any HighscoresWorker = HighscoresWorkerImpl()
 
-        view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        interactor.output = presenter as? HighscoresOutput
+        view.worker = worker
+        view.delegate = delegate
 
         return view
     }

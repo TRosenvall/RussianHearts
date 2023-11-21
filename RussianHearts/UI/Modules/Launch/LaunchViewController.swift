@@ -7,40 +7,68 @@
 
 import UIKit
 
-class LaunchViewController: UIViewController, LaunchView {
+// Determines how to call on required dependencies for routing
+protocol LaunchDelegate: ModuleDelegate {
+    func routeToMainApplication()
+}
 
+protocol LaunchView: ModuleController {
+    var worker: LaunchWorker? { get set }
+    var delegate: LaunchDelegate? { get set }
+
+    func launchApp()
+}
+
+class LaunchViewController:
+    UIViewController,
+    LaunchView,
+    LaunchMainViewDelegate
+{
     // MARK: - Properties
-    var id: UUID = UUID()
-    var presenter: LaunchPresenting?
+    var module: Module = Module.Launch
+    var worker: LaunchWorker?
+
+    weak var delegate: LaunchDelegate?
 
     // MARK: - Views
-    lazy var activityIndicator = UIActivityIndicatorView()
+    lazy var mainView: LaunchMainView = {
+        let view = LaunchMainView()
+        view.delegate = self
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+
+        view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+
+        return view
+    }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        mainView.setupViews()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter?.launchApp()
+        launchApp()
     }
 
     // MARK: - Conformance: LaunchView
+    func launchApp() {
+//        Task { @MainActor in 
+//            do {
+//                try await worker?.loadData(from: .local)
+//            } catch {
+//                fatalError("Data Not Loaded")
+//            }
+//        }
+        mainView.stopAnimatingActivityIndicator()
+        delegate?.routeToMainApplication()
+    }
 
     // MARK: - Helper
-    func setupViews() {
-        // View
-        self.view.backgroundColor = .white
-
-        // Activity Indicator
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(activityIndicator)
-        activityIndicator.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        activityIndicator.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        activityIndicator.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        activityIndicator.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        activityIndicator.startAnimating()
-    }
 }

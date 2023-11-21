@@ -17,13 +17,10 @@ class MainMenuBuilder {
     // MARK: - Helper Functions
     func build(delegate: SceneCoordinating) -> any MainMenuView {
         let view: any MainMenuView = MainMenuViewController()
-        var presenter: MainMenuPresenting = MainMenuPresenter(delegate: delegate)
-        var interactor: MainMenuInput = MainMenuInteractor()
+        var worker: MainMenuWorker = MainMenuWorkerImpl()
 
-        view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        interactor.output = presenter as? MainMenuOutput
+        view.worker = worker
+        view.delegate = delegate
 
         return view
     }

@@ -29,7 +29,7 @@ class EntityManager: EntityManaging {
 
     // MARK: - Conformance: EntityManaging
 
-    func retrieveEntities() throws {
+    func retrieveEntities() async throws {
         for entity in EntityTypes.allCases {
             switch entity {
             case .Game: let _: GameEntity? = try retrieveEntity()

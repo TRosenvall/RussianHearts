@@ -17,7 +17,7 @@ protocol EntityManaging {
     var entityAccessor: EntityAccessing { get }
 
     /// Iterates through all entity types and loads them into memory
-    func retrieveEntities() throws
+    func retrieveEntities() async throws
 
     /// Retrieves a specific piece of data based on entity type
     func retrieveEntity<T: Entity>() throws -> T?

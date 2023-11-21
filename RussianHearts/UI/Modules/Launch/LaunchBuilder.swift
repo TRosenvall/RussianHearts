@@ -17,13 +17,10 @@ class LaunchBuilder {
     // MARK: - Helper Functions
     func build(delegate: SceneCoordinating) -> any LaunchView {
         let view: any LaunchView = LaunchViewController()
-        var presenter: LaunchPresenting = LaunchPresenter(delegate: delegate)
-        var interactor: LaunchInput = LaunchInteractor()
+        var worker: any LaunchWorker = LaunchWorkerImpl()
 
-        view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        interactor.output = presenter as? LaunchOutput
+        view.worker = worker
+        view.delegate = delegate
 
         return view
     }

@@ -1,5 +1,5 @@
 //
-//  HighscoresInteractor.swift
+//  HighscoresWorker.swift
 //  RussianHearts
 //
 //  Created by Timothy Rosenvall on 9/19/23.
@@ -7,10 +7,12 @@
 
 import Foundation
 
-class HighscoresInteractor: HighscoresInput {
+// Called on by presenter to do peices of work
+protocol HighscoresWorker: ModuleWorker {}
+
+class HighscoresWorkerImpl: HighscoresWorker {
 
     // MARK: - Properties
-    var output: HighscoresOutput?
     var serviceManager: ServiceManaging
 
     // MARK: - Lifecycle
@@ -18,7 +20,7 @@ class HighscoresInteractor: HighscoresInput {
         self.serviceManager = serviceManager
     }
 
-    // MARK: - Conformance: HighscoresInput
+    // MARK: - Conformance: ModuleWorker
 
     // MARK: - Helpers
 }

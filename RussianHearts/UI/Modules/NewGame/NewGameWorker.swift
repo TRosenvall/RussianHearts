@@ -1,5 +1,5 @@
 //
-//  NewGameInteractor.swift
+//  NewGameWorker.swift
 //  RussianHearts
 //
 //  Created by Timothy Rosenvall on 8/27/23.
@@ -7,10 +7,14 @@
 
 import Foundation
 
-class NewGameInteractor: NewGameInput {
+// Called on by presenter to do peices of work
+protocol NewGameWorker: ModuleWorker {
+    func startNewGame(with playerValues: [Int?: String?]) async
+}
+
+class NewGameWorkerImpl: NewGameWorker {
 
     // MARK: - Properties
-    var output: NewGameOutput?
     var serviceManager: ServiceManaging
 
     // MARK: - Lifecycle
@@ -19,7 +23,7 @@ class NewGameInteractor: NewGameInput {
     }
 
     // MARK: - Conformance: NewGameInput
-    func startNewGame(with playerValues: [Int?: String?]) {
+    func startNewGame(with playerValues: [Int?: String?]) async {
         guard let gameService: GameService = serviceManager.retrieveService()
         else {
             print("Nonfatal Error")
@@ -42,7 +46,6 @@ class NewGameInteractor: NewGameInput {
         }
 
         gameService.newGame(with: players)
-        output?.routeToGameModule()
     }
 
     // MARK: - Helpers
