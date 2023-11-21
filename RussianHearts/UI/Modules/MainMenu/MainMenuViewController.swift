@@ -11,6 +11,12 @@ protocol MainMenuDelegate: ModuleDelegate {
     func routeToNewGameModule()
 
     func routeToHighscoresModule()
+
+    func routeToRules()
+
+    func routeToFriends()
+
+    func routeToSettings()
 }
 
 protocol MainMenuView: ModuleController {
@@ -18,24 +24,6 @@ protocol MainMenuView: ModuleController {
     var delegate: MainMenuDelegate? { get set }
 
     var shouldEnableContinueButton: Bool { get }
-
-    /// Routes to the new game module
-    func routeToNewGameModule()
-
-    /// Routes to the game module with a saved game
-    func routeToGameModule()
-
-    /// Routes to the high score module
-    func routeToHighScoreModule()
-
-    /// Routes to the rules modules
-    func routeToRulesModule()
-
-    /// Routes to the friend module
-    func routeToFriendModule()
-
-    /// Routes to the settings module
-    func routeToSettingsModule()
 }
 
 class MainMenuViewController:
@@ -94,15 +82,15 @@ class MainMenuViewController:
     }
     
     func routeToRulesModule() {
-        // TODO
+        delegate?.routeToRules()
     }
     
-    func routeToFriendModule() {
-        // TODO
+    func routeToFriendsModule() {
+        delegate?.routeToFriends()
     }
     
     func routeToSettingsModule() {
-        // TODO
+        delegate?.routeToSettings()
     }
 
     // MARK: - Conformance: LaunchView

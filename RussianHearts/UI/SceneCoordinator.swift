@@ -56,5 +56,17 @@ class SceneCoordinator: SceneCoordinating {
         router.routeToHighScores()
     }
 
+    func routeToRules() {
+        router.routeToRules()
+    }
+
+    func routeToFriends() {
+        router.routeToFriends()
+    }
+
+    func routeToSettings() {
+        router.routeToSettings()
+    }
+
     // MARK: - Helpers
 }

@@ -11,7 +11,7 @@ class SceneRouter: SceneWireframe {
 
     // MARK: - Properties
     let mainWindow: UIWindow
-    var currentViewController: UIViewController?
+    var navController: UINavigationController?
     let manager: ModuleManaging
     var delegate: SceneCoordinating?
 
@@ -26,11 +26,10 @@ class SceneRouter: SceneWireframe {
         guard let delegate,
               let module: (any LaunchView) = manager.retrieveModule(delegate: delegate)
         else { return }
-        let navigationController = UINavigationController(rootViewController: module)
-        navigationController.isNavigationBarHidden = true
-        mainWindow.rootViewController = navigationController
+        navController = UINavigationController(rootViewController: module)
+        navController?.isNavigationBarHidden = true
+        mainWindow.rootViewController = navController
         mainWindow.makeKeyAndVisible()
-        currentViewController = mainWindow.rootViewController
     }
 
     func routeToMainMenu() {
@@ -60,8 +59,7 @@ class SceneRouter: SceneWireframe {
     }
 
     func routeBackToMainMenu() {
-        currentViewController?.navigationController?.popToRootViewController(animated: false)
-        currentViewController = mainWindow.rootViewController
+        navController?.popToRootViewController(animated: false)
         routeToMainMenu()
     }
 
@@ -73,25 +71,43 @@ class SceneRouter: SceneWireframe {
         presentModule(module, animated: true)
     }
 
+    func routeToRules() {
+        guard let delegate,
+              let module: (any RulesView) = manager.retrieveModule(delegate: delegate)
+        else { return }
+        module.modalPresentationStyle = .fullScreen
+        presentModule(module, animated: true)
+    }
+
+    func routeToFriends() {
+        guard let delegate,
+              let module: (any FriendsView) = manager.retrieveModule(delegate: delegate)
+        else { return }
+        module.modalPresentationStyle = .fullScreen
+        presentModule(module, animated: true)
+    }
+
+    func routeToSettings() {
+        guard let delegate,
+              let module: (any SettingsView) = manager.retrieveModule(delegate: delegate)
+        else { return }
+        module.modalPresentationStyle = .fullScreen
+        presentModule(module, animated: true)
+    }
+
     func dismiss(animated: Bool) {
         dismissModule(animated: animated)
     }
 
     // MARK: - Helper
     func presentModule(_ module: any ModuleController, animated: Bool) {
-        if currentViewController is UINavigationController {
-            (currentViewController as? UINavigationController)?.pushViewController(module, animated: animated)
-        } else {
-            currentViewController?.navigationController?.pushViewController(module, animated: animated)
-        }
-        currentViewController = module
+        navController?.pushViewController(module, animated: animated)
     }
 
     func dismissModule(animated: Bool) {
-        guard let module = currentViewController as? (any ModuleController) else { return }
-        let parentViewController = currentViewController?.presentingViewController
+        let viewController = navController?.popViewController(animated: animated)
+        guard let module = viewController as? (any ModuleController)
+        else { return }
         manager.dismiss(module: module)
-        currentViewController?.navigationController?.popViewController(animated: animated)
-        currentViewController = parentViewController
     }
 }

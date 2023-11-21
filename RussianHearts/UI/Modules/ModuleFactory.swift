@@ -36,6 +36,12 @@ class ModuleFactoryImpl: ModuleFactory {
             return GameBuilder().build(delegate: delegate) as? T
         case "\((any HighscoresView).self)":
             return HighscoresBuilder().build(delegate: delegate) as? T
+        case "\((any RulesView).self)":
+            return RulesBuilder().build(delegate: delegate) as? T
+        case "\((any FriendsView).self)":
+            return FriendsBuilder().build(delegate: delegate) as? T
+        case "\((any SettingsView).self)":
+            return SettingsBuilder().build(delegate: delegate) as? T
         default:
             fatalError("Couldn't resolve module")
         }

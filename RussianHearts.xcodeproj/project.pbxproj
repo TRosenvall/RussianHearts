@@ -61,6 +61,18 @@
 		85DD62F82A33D43F00A6DA51 /* RussianHeartsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62F72A33D43F00A6DA51 /* RussianHeartsUITests.swift */; };
 		85DD62FA2A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD62F92A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift */; };
 		85E1812F2B0C0D1000292733 /* HighscoresMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1812E2B0C0D1000292733 /* HighscoresMainView.swift */; };
+		85E181312B0CC89C00292733 /* RulesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181302B0CC89C00292733 /* RulesBuilder.swift */; };
+		85E181332B0CC8A800292733 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181322B0CC8A800292733 /* RulesViewController.swift */; };
+		85E181352B0CC8B000292733 /* RulesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181342B0CC8B000292733 /* RulesWorker.swift */; };
+		85E181382B0CC8C800292733 /* RulesMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181372B0CC8C800292733 /* RulesMainView.swift */; };
+		85E1813A2B0CCBA300292733 /* FriendsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181392B0CCBA300292733 /* FriendsBuilder.swift */; };
+		85E1813C2B0CCBAE00292733 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1813B2B0CCBAE00292733 /* FriendsViewController.swift */; };
+		85E1813E2B0CCBBB00292733 /* FriendsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1813D2B0CCBBB00292733 /* FriendsWorker.swift */; };
+		85E181412B0CCBCE00292733 /* FriendsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181402B0CCBCE00292733 /* FriendsMainView.swift */; };
+		85E181442B0D6F9800292733 /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181432B0D6F9800292733 /* SettingsMainView.swift */; };
+		85E181462B0D6FA200292733 /* SettingsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181452B0D6FA200292733 /* SettingsBuilder.swift */; };
+		85E181482B0D6FAE00292733 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181472B0D6FAE00292733 /* SettingsViewController.swift */; };
+		85E1814A2B0D6FB700292733 /* SettingsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181492B0D6FB700292733 /* SettingsWorker.swift */; };
 		85E24B3C2A8F8AC200157E70 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E24B3B2A8F8AC200157E70 /* ServiceManager.swift */; };
 		85E24B3E2A8F8ACD00157E70 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E24B3D2A8F8ACD00157E70 /* ServiceFactory.swift */; };
 		85E24B422A8F8B2200157E70 /* EntitiyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E24B412A8F8B2200157E70 /* EntitiyManager.swift */; };
@@ -154,6 +166,18 @@
 		85DD62F72A33D43F00A6DA51 /* RussianHeartsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianHeartsUITests.swift; sourceTree = "<group>"; };
 		85DD62F92A33D43F00A6DA51 /* RussianHeartsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianHeartsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		85E1812E2B0C0D1000292733 /* HighscoresMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoresMainView.swift; sourceTree = "<group>"; };
+		85E181302B0CC89C00292733 /* RulesBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesBuilder.swift; sourceTree = "<group>"; };
+		85E181322B0CC8A800292733 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		85E181342B0CC8B000292733 /* RulesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesWorker.swift; sourceTree = "<group>"; };
+		85E181372B0CC8C800292733 /* RulesMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesMainView.swift; sourceTree = "<group>"; };
+		85E181392B0CCBA300292733 /* FriendsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsBuilder.swift; sourceTree = "<group>"; };
+		85E1813B2B0CCBAE00292733 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		85E1813D2B0CCBBB00292733 /* FriendsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsWorker.swift; sourceTree = "<group>"; };
+		85E181402B0CCBCE00292733 /* FriendsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsMainView.swift; sourceTree = "<group>"; };
+		85E181432B0D6F9800292733 /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
+		85E181452B0D6FA200292733 /* SettingsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBuilder.swift; sourceTree = "<group>"; };
+		85E181472B0D6FAE00292733 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		85E181492B0D6FB700292733 /* SettingsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWorker.swift; sourceTree = "<group>"; };
 		85E24B3B2A8F8AC200157E70 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		85E24B3D2A8F8ACD00157E70 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
 		85E24B412A8F8B2200157E70 /* EntitiyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiyManager.swift; sourceTree = "<group>"; };
@@ -272,6 +296,30 @@
 			isa = PBXGroup;
 			children = (
 				85E1812E2B0C0D1000292733 /* HighscoresMainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		85E181362B0CC8BA00292733 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				85E181372B0CC8C800292733 /* RulesMainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		85E1813F2B0CCBC000292733 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				85E181402B0CCBCE00292733 /* FriendsMainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		85E181422B0D6F8C00292733 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				85E181432B0D6F9800292733 /* SettingsMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -438,6 +486,10 @@
 		85E24B502A8F8ECC00157E70 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				85E1813F2B0CCBC000292733 /* Views */,
+				85E181392B0CCBA300292733 /* FriendsBuilder.swift */,
+				85E1813B2B0CCBAE00292733 /* FriendsViewController.swift */,
+				85E1813D2B0CCBBB00292733 /* FriendsWorker.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -464,6 +516,10 @@
 		85E24B782A9D357500157E70 /* Rules */ = {
 			isa = PBXGroup;
 			children = (
+				85E181362B0CC8BA00292733 /* Views */,
+				85E181302B0CC89C00292733 /* RulesBuilder.swift */,
+				85E181322B0CC8A800292733 /* RulesViewController.swift */,
+				85E181342B0CC8B000292733 /* RulesWorker.swift */,
 			);
 			path = Rules;
 			sourceTree = "<group>";
@@ -471,6 +527,10 @@
 		85E24B792A9D35E300157E70 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				85E181422B0D6F8C00292733 /* Views */,
+				85E181452B0D6FA200292733 /* SettingsBuilder.swift */,
+				85E181472B0D6FAE00292733 /* SettingsViewController.swift */,
+				85E181492B0D6FB700292733 /* SettingsWorker.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -608,19 +668,24 @@
 				85E1812F2B0C0D1000292733 /* HighscoresMainView.swift in Sources */,
 				853C68652B08FAD000C475BA /* LaunchWorker.swift in Sources */,
 				85D8C1F12AAE813B00697506 /* GameNamespace.swift in Sources */,
+				85E1813A2B0CCBA300292733 /* FriendsBuilder.swift in Sources */,
 				85E24B3E2A8F8ACD00157E70 /* ServiceFactory.swift in Sources */,
 				8528CED52A3B3F950018620A /* DeckModelController.swift in Sources */,
 				8528CEC92A391F580018620A /* NumberCard.swift in Sources */,
 				8528CED32A3B3F360018620A /* DeckModel.swift in Sources */,
+				85E181482B0D6FAE00292733 /* SettingsViewController.swift in Sources */,
 				85DD62DB2A33D42D00A6DA51 /* GameViewController.swift in Sources */,
+				85E181312B0CC89C00292733 /* RulesBuilder.swift in Sources */,
 				85E24B632A97A7AE00157E70 /* MainMenuBuilder.swift in Sources */,
 				85DB78682A39071500D8A2A1 /* NewGameViewController.swift in Sources */,
 				85882F402A8E0B310092CAB5 /* LaunchViewController.swift in Sources */,
 				85CA27592A5B4C33003F1CD5 /* Constants.swift in Sources */,
+				85E181382B0CC8C800292733 /* RulesMainView.swift in Sources */,
 				8528CECB2A391F5F0018620A /* SpecialCard.swift in Sources */,
 				85D00EF32AA2FF960037B2ED /* GameWorker.swift in Sources */,
 				85E24B6D2A9B7B8200157E70 /* GameService.swift in Sources */,
 				8541F2EB2AAFD29200208757 /* GameOverView.swift in Sources */,
+				85E181412B0CCBCE00292733 /* FriendsMainView.swift in Sources */,
 				85882F362A8B6E5D0092CAB5 /* SceneRouter.swift in Sources */,
 				85DB785E2A36850B00D8A2A1 /* RoundModel.swift in Sources */,
 				85E24B692A97A7D500157E70 /* MainMenuWorker.swift in Sources */,
@@ -642,11 +707,14 @@
 				85DB78622A36851E00D8A2A1 /* CardModel.swift in Sources */,
 				853C68672B0905F800C475BA /* MainMenuMainView.swift in Sources */,
 				85C93FF42AB974DE0034EBA4 /* HighscoresViewController.swift in Sources */,
+				85E181352B0CC8B000292733 /* RulesWorker.swift in Sources */,
 				85E24B422A8F8B2200157E70 /* EntitiyManager.swift in Sources */,
 				85E24B482A8F8B4A00157E70 /* ServiceContracts.swift in Sources */,
 				85C93FF22AB974CB0034EBA4 /* HighscoresBuilder.swift in Sources */,
+				85E1814A2B0D6FB700292733 /* SettingsWorker.swift in Sources */,
 				8528CED92A3EF9EF0018620A /* PhaseModel.swift in Sources */,
 				8528CECF2A3998B10018620A /* Assets.swift in Sources */,
+				85E1813C2B0CCBAE00292733 /* FriendsViewController.swift in Sources */,
 				85882F2E2A8B6B940092CAB5 /* SceneCoordinator.swift in Sources */,
 				85D00EFD2AAD31810037B2ED /* GameAlertView.swift in Sources */,
 				85DD62D72A33D42D00A6DA51 /* AppDelegate.swift in Sources */,
@@ -655,19 +723,23 @@
 				85D00EF72AA3D08B0037B2ED /* CardView.swift in Sources */,
 				85E24B582A955D3700157E70 /* SceneNamespace.swift in Sources */,
 				85E24B462A8F8B3D00157E70 /* EntityContracts.swift in Sources */,
+				85E181462B0D6FA200292733 /* SettingsBuilder.swift in Sources */,
 				85C93FF82AB975090034EBA4 /* HighscoresWorker.swift in Sources */,
 				85D8C1EA2AAE7C8900697506 /* NewTurnView.swift in Sources */,
 				8528CECD2A39212F0018620A /* BidModel.swift in Sources */,
 				853C68632B08F4CC00C475BA /* LaunchMainView.swift in Sources */,
 				85DB78602A36851300D8A2A1 /* TurnModel.swift in Sources */,
+				85E1813E2B0CCBBB00292733 /* FriendsWorker.swift in Sources */,
 				85882F3C2A8E06AE0092CAB5 /* LaunchBuilder.swift in Sources */,
 				8528CEE22A402B0C0018620A /* NumberCardView.swift in Sources */,
 				8528CEEC2A4BA2BE0018620A /* SpecialCardView.swift in Sources */,
 				85D00EEB2A9E27A40037B2ED /* PlayerSelector.swift in Sources */,
 				85DD62D92A33D42D00A6DA51 /* SceneDelegate.swift in Sources */,
 				85D00EFB2AA7EF570037B2ED /* PlayAreaView.swift in Sources */,
+				85E181442B0D6F9800292733 /* SettingsMainView.swift in Sources */,
 				85E24B652A97A7BD00157E70 /* MainMenuViewController.swift in Sources */,
 				85882F342A8B6BEC0092CAB5 /* ModuleContracts.swift in Sources */,
+				85E181332B0CC8A800292733 /* RulesViewController.swift in Sources */,
 				85D00EEF2AA2FF800037B2ED /* GameBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

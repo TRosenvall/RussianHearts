@@ -10,8 +10,23 @@ import UIKit
 protocol MainMenuMainViewDelegate: AnyObject {
     var shouldEnableContinueButton: Bool { get }
 
+    /// Routes to the new game module
     func routeToNewGameModule()
+
+    /// Routes to the game module with a saved game
+    func routeToGameModule()
+
+    /// Routes to the high score module
     func routeToHighScoreModule()
+
+    /// Routes to the rules modules
+    func routeToRulesModule()
+
+    /// Routes to the friend module
+    func routeToFriendsModule()
+
+    /// Routes to the settings module
+    func routeToSettingsModule()
 }
 
 class MainMenuMainView: UIView, MainView {
@@ -169,15 +184,15 @@ class MainMenuMainView: UIView, MainView {
     }
 
     @objc func rulesButtonTapped(sender: UIButton!) {
-        print("Rules Button Tapped")
+        delegate?.routeToRulesModule()
     }
 
     @objc func friendsButtonTapped(sender: UIButton!) {
-        print("Friends Button Tapped")
+        delegate?.routeToFriendsModule()
     }
 
     @objc func settingsButtonTapped(sender: UIButton!) {
-        print("Settings Button Tapped")
+        delegate?.routeToSettingsModule()
     }
 
     // MARK: - Conformance: MainView
