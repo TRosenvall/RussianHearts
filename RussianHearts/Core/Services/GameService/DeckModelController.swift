@@ -170,4 +170,9 @@ class DeckModelController {
     func getCardsInPlay() -> [Card] {
         return deck.cardsInPlay
     }
+
+    func cardIsSuit(for card: NumberCard,
+                    suit: CardSuit) -> Bool {
+        return card.suit == suit
+    }
 }

@@ -16,12 +16,7 @@ class NumberCardView: CardView {
         if isUpsideDown {
             return .darkGray
         }
-        switch card.suit {
-        case .brown: return .brown
-        case .blue: return .blue
-        case .purple: return .purple
-        case .red: return .red
-        }
+        return card.suit.transformToColor()
     }
     private var isDisabled: Bool = false
 

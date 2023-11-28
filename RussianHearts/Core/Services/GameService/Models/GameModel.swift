@@ -29,44 +29,44 @@ class GameModel: Codable {
         self.players = players
         self.endOfGame = false
 
-        guard let player1 = self.players.first
+        guard !self.players.isEmpty
         else {
             fatalError("No Players Passed In")
         }
 
         let round1 = RoundModel(roundName: "Round One",
                                 numberOfCardsToPlay: 7,
-                                players: players)
+                                players: self.players)
 
         rotate(players: &self.players)
         let round2 = RoundModel(roundName: "Round Two",
                                 numberOfCardsToPlay: 5,
-                                players: players)
+                                players: self.players)
 
         rotate(players: &self.players)
         let round3 = RoundModel(roundName: "Round Three",
                                 numberOfCardsToPlay: 3,
-                                players: players)
+                                players: self.players)
 
         rotate(players: &self.players)
         let round4 = RoundModel(roundName: "Round Four",
                                 numberOfCardsToPlay: 1,
-                                players: players)
+                                players: self.players)
 
         rotate(players: &self.players)
         let round5 = RoundModel(roundName: "Round Five",
                                 numberOfCardsToPlay: 2,
-                                players: players)
+                                players: self.players)
 
         rotate(players: &self.players)
         let round6 = RoundModel(roundName: "Round Six",
                                 numberOfCardsToPlay: 4,
-                                players: players)
+                                players: self.players)
 
         rotate(players: &self.players)
         let round7 = RoundModel(roundName: "Round Seven",
                                 numberOfCardsToPlay: 6,
-                                players: players)
+                                players: self.players)
 
         self.rounds = [round1, round2, round3, round4, round5, round6, round7]
         self.activeRound = rounds.first!

@@ -10,15 +10,22 @@ import UIKit
 protocol HandViewDelegate {
     func playAreaTapped()
 
-    func getActivePlayer() -> PlayerModel?
+    func getActivePlayer() -> PlayerModel
 
     func getPlayedCards() -> [Card]
 
-    func getPlayerIdForFirstPlayerThisPhase() -> Int?
+    func getPlayerIdForFirstPlayerThisPhase() -> Int
 
-    func getPlayers() -> [PlayerModel]?
+    func getPlayers() -> [PlayerModel]
 
-    func getTrump() -> CardSuit?
+    func getTrump() -> CardSuit
+
+    func getSuitPlayedFirst() -> CardSuit?
+
+    func playerHasSuitInHand(_ player: PlayerModel,
+                             suit: CardSuit) -> Bool
+
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
 }
 
 class HandView: UIView, CardViewDelegate {
@@ -162,9 +169,9 @@ class HandView: UIView, CardViewDelegate {
         backgroundBorderView.topAnchor.constraint(equalTo: actualHolderView.topAnchor,
                                                   constant: 0).isActive = true
         backgroundBorderView.leadingAnchor.constraint(equalTo: actualHolderView.leadingAnchor,
-                                                      constant: 0).isActive = true
+                                                      constant: -3).isActive = true
         backgroundBorderView.trailingAnchor.constraint(equalTo: actualHolderView.trailingAnchor,
-                                                       constant: 0).isActive = true
+                                                       constant: 3).isActive = true
         backgroundBorderView.bottomAnchor.constraint(equalTo: actualHolderView.bottomAnchor,
                                                      constant: 0).isActive = true
         // Figured these numbers out by guess and check, these should probably be formalized.
@@ -192,6 +199,11 @@ class HandView: UIView, CardViewDelegate {
     }
 
     func setupHandView() {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
         guard let player else { return }
         let totalCards: CGFloat = CGFloat( player.cards.count )
         for i in 0..<Int(totalCards) {
@@ -257,7 +269,20 @@ class HandView: UIView, CardViewDelegate {
             upConstraints.updateValue(upConstraint, forKey: cardView.tag)
             cardViews.append(cardView)
 
-            updateShouldBeDisabled(for: cardView, cardsInHand: player.cards)
+            if let cardView = cardView as? NumberCardView,
+               let suitPlayedFirst = delegate.getSuitPlayedFirst() {
+                let activePlayer: PlayerModel = delegate.getActivePlayer()
+                let trumpSuit: CardSuit = delegate.getTrump()
+                let hasSuitInHand: Bool = delegate.playerHasSuitInHand(activePlayer,
+                                                                       suit: suitPlayedFirst)
+                let cardIsFirstSuit: Bool = delegate.isSuit(for: cardView.card,
+                                                            suit: suitPlayedFirst)
+
+                updateShouldBeDisabled(for: cardView,
+                                       trumpSuit: trumpSuit,
+                                       hasFirstSuit: hasSuitInHand,
+                                       currentCardIsFirstSuit: cardIsFirstSuit)
+            }
 
             layoutIfNeeded()
         }
@@ -358,59 +383,84 @@ class HandView: UIView, CardViewDelegate {
         return nil
     }
 
-    func updateShouldBeDisabled(for card: CardView,
-                                cardsInHand: [Card]) {
-        guard let cardsPlayed = delegate?.getPlayedCards(),
-              let firstPlayerId = delegate?.getPlayerIdForFirstPlayerThisPhase(),
-              let players = delegate?.getPlayers(),
-              let trumpSuit = delegate?.getTrump(),
-              let card = card as? NumberCardView
-        else { return }
-
-        let firstCardPlayed = cardsPlayed.filter { $0.playedByPlayerWithId == firstPlayerId }
-        if firstCardPlayed.count <= 0 {
+    func updateShouldBeDisabled(for card: NumberCardView,
+                                trumpSuit: CardSuit,
+                                hasFirstSuit: Bool,
+                                currentCardIsFirstSuit: Bool) {
+        if card.card.suit == trumpSuit {
+            card.removeDisabledView()
             return
         }
-
-        if let firstCardPlayed = firstCardPlayed[0] as? NumberCard {
-            let firstSuit = firstCardPlayed.suit
-
-            for player in players where player.cards.contains(where: { playerCard in
-                return playerCard.playedByPlayerWithId == card.card.playedByPlayerWithId
-            }) {
-                let suits: [CardSuit?] = player.cards.map { card in
-                    if let card = card as? NumberCard {
-                        return card.suit
-                    }
-                    return nil
-                }
-
-                var hasFirstSuit: Bool = false
-                for suit in suits where suit == firstSuit {
-                    hasFirstSuit = true
-                }
-                var currentCardIsFirstSuit: Bool = false
-                if card.card.suit == firstSuit {
-                    currentCardIsFirstSuit = true
-                }
-
-                if card.card.suit == trumpSuit {
-                    card.removeDisabledView()
-                    return
-                }
-                if hasFirstSuit && currentCardIsFirstSuit {
-                    card.removeDisabledView()
-                    return
-                }
-                if hasFirstSuit && !currentCardIsFirstSuit {
-                    card.addDisabledView()
-                    return
-                }
-                if !hasFirstSuit {
-                    card.removeDisabledView()
-                    return
-                }
-            }
+        if hasFirstSuit && currentCardIsFirstSuit {
+            card.removeDisabledView()
+            return
+        }
+        if hasFirstSuit && !currentCardIsFirstSuit {
+            card.addDisabledView()
+            return
+        }
+        if !hasFirstSuit {
+            card.removeDisabledView()
+            return
         }
     }
+
+//    func updateShouldBeDisabled(for card: CardView,
+//                                cardsInHand: [Card]) {
+//        guard let cardsPlayed = delegate?.getPlayedCards(),
+//              let firstPlayerId = delegate?.getPlayerIdForFirstPlayerThisPhase(),
+//              let players = delegate?.getPlayers(),
+//              let trumpSuit = delegate?.getTrump(),
+//              let card = card as? NumberCardView,
+//              let activePlayer = delegate?.getActivePlayer()
+//        else { return }
+//
+//        let cardsInHand = activePlayer.cards
+//
+//        let firstCardPlayed = cardsPlayed.filter { $0.playedByPlayerWithId == firstPlayerId }
+//        if firstCardPlayed.count <= 0 {
+//            return
+//        }
+//
+//        if let firstCardPlayed = firstCardPlayed[0] as? NumberCard {
+//            let firstSuit = firstCardPlayed.suit
+//
+//            for player in players where player.cards.contains(where: { playerCard in
+//                return playerCard.playedByPlayerWithId == card.card.playedByPlayerWithId
+//            }) {
+//                let suits: [CardSuit?] = player.cards.map { card in
+//                    if let card = card as? NumberCard {
+//                        return card.suit
+//                    }
+//                    return nil
+//                }
+//
+//                var hasFirstSuit: Bool = false
+//                for suit in suits where suit == firstSuit {
+//                    hasFirstSuit = true
+//                }
+//                var currentCardIsFirstSuit: Bool = false
+//                if card.card.suit == firstSuit {
+//                    currentCardIsFirstSuit = true
+//                }
+//
+//                if card.card.suit == trumpSuit {
+//                    card.removeDisabledView()
+//                    return
+//                }
+//                if hasFirstSuit && currentCardIsFirstSuit {
+//                    card.removeDisabledView()
+//                    return
+//                }
+//                if hasFirstSuit && !currentCardIsFirstSuit {
+//                    card.addDisabledView()
+//                    return
+//                }
+//                if !hasFirstSuit {
+//                    card.removeDisabledView()
+//                    return
+//                }
+//            }
+//        }
+//    }
 }

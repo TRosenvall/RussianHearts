@@ -16,13 +16,19 @@ protocol PlayAreaViewDelegate {
 
     func endTurn(cardPlayed: Card)
 
-    func getPlayerIdForFirstPlayerThisPhase() -> Int?
+    func getPlayerIdForFirstPlayerThisPhase() -> Int
 
-    func getTrump() -> CardSuit?
+    func getTrump() -> CardSuit
+
+    func getSuitPlayedFirst() -> CardSuit?
+    
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool
+    
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
 }
 
 // This view will be the full size of the containing view controller
-class PlayAreaView: UIView, HandViewDelegate {
+class PlayAreaView: UIView, HandViewDelegate, PlayerInfoViewDelegate {
 
     // MARK: - Properties
     var delegate: PlayAreaViewDelegate?
@@ -48,9 +54,11 @@ class PlayAreaView: UIView, HandViewDelegate {
 
     // MARK: - Views
     // Views
-    lazy var playerInfoView: UIView = {
-        let view = UIView()
-        
+    lazy var playerInfoView: PlayerInfoView = {
+        let view = PlayerInfoView()
+        view.delegate = self
+        view.activePlayer = getActivePlayer()
+
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         
@@ -113,11 +121,8 @@ class PlayAreaView: UIView, HandViewDelegate {
 
     // MARK: - Lifecycle
     init() {
+        print("Play Area View")
         super.init(frame: CGRect())
-
-        self.translatesAutoresizingMaskIntoConstraints = false
-
-        setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -173,34 +178,83 @@ class PlayAreaView: UIView, HandViewDelegate {
         playAreaButtonTapped()
     }
 
-    func getActivePlayer() -> PlayerModel? {
-        return delegate?.getPlayer()
+    func getActivePlayer() -> PlayerModel {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getPlayer()
     }
 
     func getPlayedCards() -> [Card] {
-        guard let playedCards = delegate?.getPlayedCards()
+        guard let delegate
         else {
-            return []
+            fatalError("Delegate not found, module resolving screwed up")
         }
-        return playedCards
+
+        return delegate.getPlayedCards()
     }
 
-    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
-        return delegate?.getPlayerIdForFirstPlayerThisPhase()
+    func getPlayerIdForFirstPlayerThisPhase() -> Int {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getPlayerIdForFirstPlayerThisPhase()
     }
 
-    func getPlayers() -> [PlayerModel]? {
-        return delegate?.getPlayers()
+    func getPlayers() -> [PlayerModel] {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getPlayers()
     }
 
-    func getTrump() -> CardSuit? {
-        return delegate?.getTrump()
+    func getTrump() -> CardSuit {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getTrump()
+    }
+
+    func getSuitPlayedFirst() -> CardSuit? {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getSuitPlayedFirst()
+    }
+    
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.playerHasSuitInHand(player, suit: suit)
+    }
+    
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.isSuit(for: card, suit: suit)
     }
 
     // MARK: - Helpers
     func setupViews() {
         // View
-        self.backgroundColor = .clear
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .white
 
         // Get the view added, we'll set the constrains down a little.
         let _ = centeringView
@@ -212,13 +266,16 @@ class PlayAreaView: UIView, HandViewDelegate {
         playAreaButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
 
         // Player Info View
+        playerInfoView.setupViews()
         playerInfoView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
                                             constant: 44).isActive = true
-        playerInfoView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        playerInfoView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        playerInfoView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: -2).isActive = true
+        playerInfoView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 2).isActive = true
         playerInfoView.heightAnchor.constraint(equalToConstant: 55).isActive = true
-        playerInfoView.backgroundColor = .red
-        playerInfoView.alpha = 0.5
+        playerInfoView.delegate = self
+        playerInfoView.moduleColor = .white
+        playerInfoView.layer.borderWidth = 2
+        playerInfoView.layer.borderColor = UIColor.black.cgColor
 
         // Bottom View
         // -100 was chosen to help remove the playAreaButton taps below the hand view.

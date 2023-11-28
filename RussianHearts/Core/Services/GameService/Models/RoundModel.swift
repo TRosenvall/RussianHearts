@@ -41,22 +41,41 @@ class RoundModel: Equatable, Codable {
         self.numberOfCardsToPlay = numberOfCardsToPlay
         self.bidsByPlayer = []
 
-        var mutatingPlayers = players
-
         // Setup bidding phase
-        let biddingPhase = PhaseModel(players: mutatingPlayers, id: 0)
+        let biddingPhase = PhaseModel(players: players,
+                                      id: 0,
+                                      firstPlayerId: players.first?.id)
         self.phases.append(biddingPhase)
 
         // Iterate through players and setup phases based on player order.
         for i in 1...numberOfCardsToPlay {
-            let newPhase = PhaseModel(players: mutatingPlayers, id: i)
-            self.phases.append(newPhase)
+            var newPhase: PhaseModel?
+            if i == 1 {
+                newPhase = PhaseModel(players: players,
+                                      id: i,
+                                      firstPlayerId: players.first?.id)
+            } else {
+                newPhase = PhaseModel(players: players, id: i, firstPlayerId: nil)
+            }
 
-            let player1 = mutatingPlayers.remove(at: 0)
-            mutatingPlayers.append(player1)
+            if let newPhase {
+                self.phases.append(newPhase)
+            }
         }
 
-        self.activePhase = phases.first!
+        let firstPhase = phases.compactMap({ phase in
+            if phase.firstPlayerId != nil {
+                return phase
+            }
+            return nil
+        }).first
+
+        guard let firstPhase
+        else {
+            fatalError("Round created without setting up first phase")
+        }
+
+        self.activePhase = firstPhase
     }
 
     // MARK: - Conformance: Equatable

@@ -30,6 +30,15 @@ enum CardSuit: String, CaseIterable, Codable {
     case red = "Red"
     case brown = "Brown"
     case blue = "Blue"
+
+    func transformToColor() -> UIColor {
+        switch self {
+        case .red: return .red
+        case .purple: return .purple
+        case .brown: return .brown
+        case .blue: return .blue
+        }
+    }
 }
 
 class NumberCard: Card {

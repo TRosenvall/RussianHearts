@@ -73,6 +73,7 @@
 		85E181462B0D6FA200292733 /* SettingsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181452B0D6FA200292733 /* SettingsBuilder.swift */; };
 		85E181482B0D6FAE00292733 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181472B0D6FAE00292733 /* SettingsViewController.swift */; };
 		85E1814A2B0D6FB700292733 /* SettingsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E181492B0D6FB700292733 /* SettingsWorker.swift */; };
+		85E1814C2B0DC23200292733 /* PlayerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1814B2B0DC23200292733 /* PlayerInfoView.swift */; };
 		85E24B3C2A8F8AC200157E70 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E24B3B2A8F8AC200157E70 /* ServiceManager.swift */; };
 		85E24B3E2A8F8ACD00157E70 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E24B3D2A8F8ACD00157E70 /* ServiceFactory.swift */; };
 		85E24B422A8F8B2200157E70 /* EntitiyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E24B412A8F8B2200157E70 /* EntitiyManager.swift */; };
@@ -178,6 +179,7 @@
 		85E181452B0D6FA200292733 /* SettingsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBuilder.swift; sourceTree = "<group>"; };
 		85E181472B0D6FAE00292733 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		85E181492B0D6FB700292733 /* SettingsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWorker.swift; sourceTree = "<group>"; };
+		85E1814B2B0DC23200292733 /* PlayerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfoView.swift; sourceTree = "<group>"; };
 		85E24B3B2A8F8AC200157E70 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		85E24B3D2A8F8ACD00157E70 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
 		85E24B412A8F8B2200157E70 /* EntitiyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiyManager.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				8528CEE12A402B0C0018620A /* NumberCardView.swift */,
 				8528CEEB2A4BA2BE0018620A /* SpecialCardView.swift */,
 				85D00EF82AA3E2050037B2ED /* HandView.swift */,
+				85E1814B2B0DC23200292733 /* PlayerInfoView.swift */,
 				85D00EFA2AA7EF570037B2ED /* PlayAreaView.swift */,
 				85D00EFC2AAD31810037B2ED /* GameAlertView.swift */,
 				85D8C1F22AAE85C800697506 /* BackButtonTappedView.swift */,
@@ -669,6 +672,7 @@
 				853C68652B08FAD000C475BA /* LaunchWorker.swift in Sources */,
 				85D8C1F12AAE813B00697506 /* GameNamespace.swift in Sources */,
 				85E1813A2B0CCBA300292733 /* FriendsBuilder.swift in Sources */,
+				85E1814C2B0DC23200292733 /* PlayerInfoView.swift in Sources */,
 				85E24B3E2A8F8ACD00157E70 /* ServiceFactory.swift in Sources */,
 				8528CED52A3B3F950018620A /* DeckModelController.swift in Sources */,
 				8528CEC92A391F580018620A /* NumberCard.swift in Sources */,
@@ -925,7 +929,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JackFeldman.RussianHearts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -959,7 +963,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JackFeldman.RussianHearts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

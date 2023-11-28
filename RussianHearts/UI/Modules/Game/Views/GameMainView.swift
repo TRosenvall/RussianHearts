@@ -8,7 +8,7 @@
 import UIKit
 
 protocol GameMainViewDelegate: AnyObject {
-    func getPlayer() -> PlayerModel
+    func getActivePlayer() -> PlayerModel
 
     func getPlayers() -> [PlayerModel]
 
@@ -20,9 +20,15 @@ protocol GameMainViewDelegate: AnyObject {
 
     func routeToHighScores()
 
-    func getPlayerIdForFirstPlayerThisPhase() -> Int?
+    func getPlayerIdForFirstPlayerThisPhase() -> Int
 
-    func getTrump() -> CardSuit?
+    func getTrump() -> CardSuit
+
+    func getSuitPlayedFirst() -> CardSuit?
+    
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool
+    
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
 }
 
 class GameMainView:
@@ -111,7 +117,9 @@ class GameMainView:
     }()
 
     // MARK: - Lifecycle
-    init(moduleColor: UIColor) {
+    init(delegate: GameMainViewDelegate,
+         moduleColor: UIColor) {
+        self.delegate = delegate
         self.moduleColor = moduleColor
         super.init(frame: CGRect())
 
@@ -131,7 +139,7 @@ class GameMainView:
     // MARK: - Conformance: PlayAreaViewDelegate
     func getPlayer() -> PlayerModel {
         if let delegate {
-            return delegate.getPlayer()
+            return delegate.getActivePlayer()
         }
         return PlayerModel(name: "", id: -1)
     }
@@ -163,20 +171,62 @@ class GameMainView:
         }
         return []
     }
-    
-    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
-        return delegate?.getPlayerIdForFirstPlayerThisPhase()
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getPlayerIdForFirstPlayerThisPhase()
+    }
+
+    func getTrump() -> CardSuit {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getTrump()
+    }
+
+    func getSuitPlayedFirst() -> CardSuit? {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getSuitPlayedFirst()
     }
     
-    func getTrump() -> CardSuit? {
-        return delegate?.getTrump()
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.playerHasSuitInHand(player, suit: suit)
+    }
+    
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.isSuit(for: card, suit: suit)
     }
 
     // MARK: - Conformance: GameAreaViewDelegate
-    func getActivePlayer() -> PlayerModel? {
-        return delegate?.getPlayer()
+    func getActivePlayer() -> PlayerModel {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getActivePlayer()
     }
-    
+
     func makeBlockerViewVisible() {
         blockerView.isHidden = false
     }
@@ -299,14 +349,14 @@ class GameMainView:
         playAreaView?.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         playAreaView?.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         playAreaView?.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        playAreaView?.delegate = self
         playAreaView?.setupHandView()
         playAreaView?.layoutIfNeeded()
     }
 
     func getNewPlayArea() -> PlayAreaView {
         let view = PlayAreaView()
-        
+
+        view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         self.insertSubview(view, aboveSubview: backgroundBorderView)
         

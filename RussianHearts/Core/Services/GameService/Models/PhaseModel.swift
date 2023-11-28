@@ -19,10 +19,32 @@ class PhaseModel: Equatable, Codable {
     var activeTurn: TurnModel
     var cardsPlayedByPlayer: [CardsPlayedByPlayer]
     var id: Int
+    var players: [PlayerModel]
+    var firstPlayerId: Int? {
+        didSet {
+            if let firstPlayerId, firstPlayerId != 0 {
+                turns = []
+
+                while players.first?.id != firstPlayerId {
+                    rotate(players: &players)
+                }
+
+                for player in players {
+                    let turn = TurnModel(activePlayer: player)
+                    turns.append(turn)
+                }
+
+                self.activeTurn = turns[0]
+            }
+        }
+    }
 
     // MARK: - Lifecycle
     init(players: [PlayerModel],
-         id: Int) {
+         id: Int,
+         firstPlayerId: Int?) {
+        self.players = players
+        self.firstPlayerId = firstPlayerId
         self.cardsPlayedByPlayer = []
 
         for player in players {
@@ -45,6 +67,7 @@ class PhaseModel: Equatable, Codable {
         case activeTurn
         case cardsPlayedByPlayer
         case id
+        case players
     }
 
     required init(from decoder: Decoder) throws {
@@ -52,6 +75,7 @@ class PhaseModel: Equatable, Codable {
         self.turns = try values.decode([TurnModel].self, forKey: .turns)
         self.activeTurn = try values.decode(TurnModel.self, forKey: .activeTurn)
         self.cardsPlayedByPlayer = try values.decode([CardsPlayedByPlayer].self, forKey: .cardsPlayedByPlayer)
+        self.players = try values.decode([PlayerModel].self, forKey: .players)
         self.id = try values.decode(Int.self, forKey: .id)
     }
 }

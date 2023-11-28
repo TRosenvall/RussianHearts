@@ -15,7 +15,7 @@ protocol GameDelegate: ModuleDelegate {
 }
 
 protocol GameView: ModuleController {
-    var worker: GameWorker? { get set }
+    var gameService: GameService? { get set }
     var delegate: GameDelegate? { get set }
 }
 
@@ -27,14 +27,14 @@ class GameViewController:
 
     // MARK: - Properties
     var module: Module = Module.Game
-    var worker: GameWorker?
+    var gameService: GameService?
 
     weak var delegate: GameDelegate?
 
     // MARK: - Views
     lazy var mainView: GameMainView = {
-        let view = GameMainView(moduleColor: module.color)
-        view.delegate = self
+        let view = GameMainView(delegate: self,
+                                moduleColor: module.color)
 
         view.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(view)
@@ -48,6 +48,8 @@ class GameViewController:
     }()
 
     // MARK: - Lifecycle
+
+    // Other
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.setupViews()
@@ -61,28 +63,96 @@ class GameViewController:
     // MARK: - Actions
 
     // MARK: - Conformance: GameMainViewDelegate
-    func getPlayer() -> PlayerModel {
-        guard let worker
+    func getActivePlayer() -> PlayerModel {
+        guard let gameService,
+              let activeGame = gameService.activeGame
         else {
             fatalError("Interactor not found, module resolving screwed up")
         }
-        return worker.getActivePlayer()
+        return activeGame.activeRound.activePhase.activeTurn.activePlayer
     }
 
     func getPlayers() -> [PlayerModel] {
-        guard let worker
+        guard let gameService,
+              let activeGame = gameService.activeGame
         else {
             fatalError("Interactor not found, module resolving screwed up")
         }
-        return worker.getAllPlayers()
+        return activeGame.players
     }
 
     func endTurn(cardPlayed: Card?) -> EndTurnType {
-        guard let worker
+        guard let gameService
         else {
             fatalError("Interactor not found, module resolving screwed up")
         }
-        return worker.endTurn(cardPlayed: cardPlayed)
+
+        if let cardPlayed {
+            gameService.moveCardFromHandToPlayAreaFromPlayer(card: cardPlayed,
+                                                             playerHand: &getActivePlayer().cards)
+        }
+        let endTurnType = gameService.nextTurn(in: &(gameService.activeGame)!)
+        if endTurnType == .roundEnd {
+            let cardsInPlay = getPlayedCards()
+            for card in cardsInPlay {
+                card.playedByPlayerWithId = nil
+            }
+        }
+        return endTurnType
+    }
+
+    func getPlayedCards() -> [Card] {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.deck.getCardsInPlay()
+    }
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.getPlayerIdForFirstPlayerThisPhase()
+    }
+
+    func getTrump() -> CardSuit {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.deck.getTrump()
+    }
+
+    func getSuitPlayedFirst() -> CardSuit? {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.getSuitPlayedFirst()
+    }
+    
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.playerHasSuitInHand(player, suit: suit)
+    }
+
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.isSuit(for: card, suit: suit)
     }
 
     func routeToMainMenu() {
@@ -91,18 +161,6 @@ class GameViewController:
 
     func routeToHighScores() {
         delegate?.routeToHighScores()
-    }
-
-    func getPlayedCards() -> [Card] {
-        return worker?.getPlayedCards() ?? []
-    }
-
-    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
-        return worker?.getPlayerIdForFirstPlayerThisPhase()
-    }
-
-    func getTrump() -> CardSuit? {
-        return worker?.getTrump()
     }
 
     // MARK: - Helpers

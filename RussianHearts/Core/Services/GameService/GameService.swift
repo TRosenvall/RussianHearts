@@ -49,7 +49,7 @@ class GameService: Service {
         return !games.isEmpty
     }
 
-    var playerIdForFirstPlayerThisPhase: Int? = 0
+    var playerIdForFirstPlayerThisPhase: Int = 1
 
     private var _activeGame: GameModel?
     var activeGame: GameModel? {
@@ -138,12 +138,13 @@ class GameService: Service {
     }
 
     func nextPhase(in game: inout GameModel) -> EndTurnType {
-        scorePhase()
+        let winningId = scorePhase()
         deck.newPhase()
         let currPhase = game.activeRound.activePhase
         if currPhase != game.activeRound.phases.last {
             let index = game.activeRound.phases.firstIndex(of: currPhase)
             game.activeRound.activePhase = game.activeRound.phases[index! + 1]
+            game.activeRound.activePhase.firstPlayerId = winningId
             return .phaseEnd
         } else {
             return nextRound(in: &game)
@@ -169,8 +170,8 @@ class GameService: Service {
         return false
     }
 
-    func scorePhase() {
-        guard let players = activeGame?.players else { return }
+    func scorePhase() -> Int? {
+        guard let players = activeGame?.players else { return nil }
 
         for card in cardsPlayed {
             for player in players where card.playedByPlayerWithId == player.id {
@@ -192,7 +193,7 @@ class GameService: Service {
         var winningCard: Card?
 
         let filteredSpecialCards: [Card] = cardsPlayed.filter { $0 is SpecialCard }
-        let specialCards: [SpecialCard] = filteredSpecialCards.map { $0 as! SpecialCard }
+        let specialCards: [SpecialCard] = filteredSpecialCards.compactMap { $0 as? SpecialCard }
 
         var hasHighJoker: Bool = false
         var hasLowJoker: Bool = false
@@ -328,24 +329,109 @@ class GameService: Service {
         print("")
         print("--=-=--")
 
-        getNextPhaseOrder(winningCard: winningCard)
+        return getNextPhaseOrder(winningCard: winningCard)
     }
 
-    func getNextPhaseOrder(winningCard: Card?) {
-        var players = self.activeGame?.players.sorted { $0.id < $1.id }
+    func getNextPhaseOrder(winningCard: Card?) -> Int? {
+        // If there is no winning card, phase order shouldn't be updated.
+        guard let winningCard else { return nil }
 
-        if let winningCard {
-            while players?[0].id != winningCard.playedByPlayerWithId {
-                guard let removedPlayer = players?.remove(at: 0) else { fatalError("Can't initialize game without players.") }
-                players?.append(removedPlayer)
+        // Get the players
+        guard var players = self.activeGame?.players
+        else { fatalError("No players found") }
+
+        // Sort players by id from smallest to greatest
+        players = players.sorted { $0.id < $1.id }
+
+        // Rotate the players array till the winning id is the first one.
+        let winningId = winningCard.playedByPlayerWithId
+        while players.first?.id != winningId {
+            rotate(players: &players)
+        }
+
+        // If the first player id matches the winning card, then the player order is now correct
+        guard let winningPlayer = players.first else { return nil }
+
+        playerIdForFirstPlayerThisPhase = winningPlayer.id
+        print("Starting player name: \(winningPlayer.name.description)")
+        return winningPlayer.id
+    }
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int {
+        return playerIdForFirstPlayerThisPhase
+    }
+
+    // New
+    func getLargestPlayerId() -> Int {
+        guard let playersById = activeGame?.players.sorted(by: { $0.id < $1.id }),
+              let lastPlayersId = playersById.last?.id
+        else {
+            fatalError("No active game")
+        }
+
+        return lastPlayersId
+    }
+
+    func getSuitPlayedFirst() -> CardSuit? {
+        // If the first player didn't play a number card, we need to keep checking other players.
+        let lastPlayersId = getLargestPlayerId()
+
+        // Get the cards played, and the person who played first in the phase
+        let cardsPlayed = deck.getCardsInPlay()
+        var currentIdToCheck = getPlayerIdForFirstPlayerThisPhase()
+
+        // We'll use a mod operator to loop player ids once we reach the end.
+        var hasLoopedPlayerIds = false
+        // Break the while loop when we've hit every player
+        while !hasLoopedPlayerIds {
+            // Get the number cards played by the current player we're checking.
+            let cardsPlayedByCurrentlyCheckedPlayer = cardsPlayed.filter { card in
+                return card.playedByPlayerWithId == currentIdToCheck
+            }.map { card in
+                return card as? NumberCard
+            }
+
+            // If there is one, we need to return it's suit.
+            if let foundCard = cardsPlayedByCurrentlyCheckedPlayer.first,
+               let foundSuit = foundCard?.suit {
+                return foundSuit
+            }
+
+            // If there isn't one, we need to check the next players id
+            currentIdToCheck += 1
+
+            /// playerId = 2 lastPlayerId = 5; 2 % 5 = 2
+            /// playerId = 3 lastPlayerId = 5; 3 % 5 = 3
+            /// playerId = 4 lastPlayerId = 5; 4 % 5 = 4
+            /// playerId = 5 lastPlayerId = 5; 5 % 5 = 0
+            /// playerId = 1 lastPlayerId = 5; 1 % 5 = 1
+            /// playerId = 2 lastPlayerId = 5; 2 % 5 = 2
+            /// playerId = 3 lastPlayerId = 5; 3 % 5 = 3
+            // This should properly update the id we're checking.
+            if currentIdToCheck % lastPlayersId != 0 {
+                currentIdToCheck = currentIdToCheck % lastPlayersId
+            }
+
+            // If we're hitting this id again, then we've looped and need to break out of the loop.
+            if currentIdToCheck == getPlayerIdForFirstPlayerThisPhase() {
+                hasLoopedPlayerIds = true
             }
         }
 
-        playerIdForFirstPlayerThisPhase = players?[0].id
-        print("Starting player name: \(players?[0].name)")
+        // No number card has been played yet.
+        return nil
+    }
+    
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+        let numberCards = player.cards.compactMap { card in
+            return card as? NumberCard
+        }
+        let cardSuits = numberCards.map { $0.suit }
+        return cardSuits.contains(suit)
     }
 
-    func getPlayerIdForFirstPlayerThisPhase() -> Int? {
-        return playerIdForFirstPlayerThisPhase
+    func isSuit(for card: NumberCard,
+                suit: CardSuit) -> Bool {
+        deck.cardIsSuit(for: card, suit: suit)
     }
 }

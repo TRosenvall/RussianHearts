@@ -44,8 +44,9 @@ class NewGameWorkerImpl: NewGameWorker {
 
             return players
         }
+        let sortedPlayers = players.sorted { $0.id < $1.id }
 
-        gameService.newGame(with: players)
+        gameService.newGame(with: sortedPlayers)
     }
 
     // MARK: - Helpers

@@ -10,7 +10,7 @@ import UIKit
 protocol GameAlertViewDelegate {
     var blockerView: UIView { get set }
 
-    func getActivePlayer() -> PlayerModel?
+    func getActivePlayer() -> PlayerModel
 
     func makeBlockerViewVisible()
 

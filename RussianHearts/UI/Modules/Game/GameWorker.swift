@@ -20,21 +20,22 @@ protocol GameWorker: ModuleWorker {
     func getPlayerIdForFirstPlayerThisPhase() -> Int?
 
     func getTrump() -> CardSuit?
+
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
 }
 
 class GameWorkerImpl: GameWorker {
 
     // MARK: - Properties
-    var serviceManager: ServiceManaging
     var gameService: GameService
 
     // MARK: - Lifecycle
     init(serviceManager: ServiceManaging = ServiceManager.shared) {
-        self.serviceManager = serviceManager
         guard let gameService: GameService = serviceManager.retrieveService()
         else {
             fatalError("Game Service Not found")
         }
+
         self.gameService = gameService
     }
 
@@ -80,5 +81,9 @@ class GameWorkerImpl: GameWorker {
 
     func getTrump() -> CardSuit? {
         return gameService.deck.getTrump()
+    }
+
+    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool {
+        return gameService.isSuit(for: card, suit: suit)
     }
 }
