@@ -152,7 +152,6 @@ class PlayerInfoView: UIView {
         currentBidLabel.widthAnchor.constraint(equalToConstant: 10).isActive = true
         currentBidLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
         currentBidLabel.text = activePlayer?.activeBid?.value.description
-//        currentBidLabel.text = "7"
         currentBidLabel.textColor = .black
 
         trickLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
@@ -166,7 +165,6 @@ class PlayerInfoView: UIView {
         currentTrickLabel.leadingAnchor.constraint(equalTo: trickLabel.trailingAnchor).isActive = true
         currentTrickLabel.widthAnchor.constraint(equalToConstant: 10).isActive = true
         currentTrickLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
-//        currentTrickLabel.text = "7"
         currentTrickLabel.text = activePlayer?.score.description
         currentTrickLabel.textColor = .black
 

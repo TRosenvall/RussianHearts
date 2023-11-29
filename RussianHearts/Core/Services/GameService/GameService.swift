@@ -121,6 +121,7 @@ class GameService: Service {
     }
 
     func nextRound(in game: inout GameModel) -> EndTurnType {
+        scoreRound()
         let currRound = game.activeRound
         if currRound != game.rounds.last {
             let index = game.rounds.firstIndex(of: currRound)
@@ -353,6 +354,7 @@ class GameService: Service {
         guard let winningPlayer = players.first else { return nil }
 
         playerIdForFirstPlayerThisPhase = winningPlayer.id
+        winningPlayer.score += 1
         print("Starting player name: \(winningPlayer.name.description)")
         return winningPlayer.id
     }
@@ -433,5 +435,21 @@ class GameService: Service {
     func isSuit(for card: NumberCard,
                 suit: CardSuit) -> Bool {
         deck.cardIsSuit(for: card, suit: suit)
+    }
+
+    func scoreRound() {
+        guard let players = activeGame?.players else { return }
+
+        for player in players {
+            let bidValue = player.activeBid?.value
+            let score = player.score
+
+            if bidValue == score {
+                player.scoreTotal += (score + 10)
+            }
+
+            player.activeBid = nil
+            player.score = 0
+        }
     }
 }

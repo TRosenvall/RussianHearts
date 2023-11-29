@@ -12,6 +12,8 @@ protocol GameAlertViewDelegate {
 
     func getActivePlayer() -> PlayerModel
 
+    func getPlayers() -> [PlayerModel]
+
     func makeBlockerViewVisible()
 
     func makeBlockerViewHidden()
@@ -21,6 +23,10 @@ protocol GameAlertViewDelegate {
     func shouldRouteToHighScores()
 
     func biddingSet()
+
+    func getNumberOfCardsForRound() -> Int
+
+    func flipCards()
 }
 
 // This view will be the full size of the containing view controller
@@ -141,6 +147,28 @@ class GameAlertView:
 
         delegate?.makeBlockerViewHidden()
         delegate?.biddingSet()
+    }
+
+    func getPlayers() -> [PlayerModel] {
+        guard let delegate
+        else {
+            fatalError("Delegate not set")
+        }
+
+        return delegate.getPlayers()
+    }
+
+    func getNumberOfCardsForRound() -> Int {
+        guard let delegate
+        else {
+            fatalError("Delegate not set")
+        }
+
+        return delegate.getNumberOfCardsForRound()
+    }
+
+    func flipCards() {
+        delegate?.flipCards()
     }
 
     // MARK: - Conformance: GameOverViewDelegate

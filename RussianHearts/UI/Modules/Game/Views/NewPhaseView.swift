@@ -11,6 +11,8 @@ protocol NewPhaseViewDelegate {
     func getActivePlayer() -> PlayerModel?
 
     func newPhaseContinueButtonTapped()
+
+    func flipCards()
 }
 
 class NewPhaseView: UIView {
@@ -73,6 +75,7 @@ class NewPhaseView: UIView {
     // MARK: - Actions
     @objc func newPhaseContinueButtonTapped() {
         delegate?.newPhaseContinueButtonTapped()
+        delegate?.flipCards()
     }
 
     // MARK: - Helpers

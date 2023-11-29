@@ -29,6 +29,8 @@ protocol GameMainViewDelegate: AnyObject {
     func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool
     
     func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
+
+    func getNumberOfCardsForRound() -> Int
 }
 
 class GameMainView:
@@ -217,6 +219,19 @@ class GameMainView:
         return delegate.isSuit(for: card, suit: suit)
     }
 
+    func getNumberOfCardsForRound() -> Int {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getNumberOfCardsForRound()
+    }
+
+    func flipCards() {
+        playAreaView?.handView.flipCards()
+    }
+
     // MARK: - Conformance: GameAreaViewDelegate
     func getActivePlayer() -> PlayerModel {
         guard let delegate
@@ -337,7 +352,7 @@ class GameMainView:
         gameAlertView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         gameAlertView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         gameAlertView.heightAnchor.constraint(equalTo: self.heightAnchor,
-                                              multiplier: 0.33).isActive = true
+                                              multiplier: 0.4).isActive = true
         gameAlertView.widthAnchor.constraint(equalTo: self.widthAnchor,
                                              multiplier: 0.75).isActive = true
     }
@@ -351,6 +366,7 @@ class GameMainView:
         playAreaView?.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         playAreaView?.setupHandView()
         playAreaView?.layoutIfNeeded()
+        playAreaView?.handView.flipCards()
     }
 
     func getNewPlayArea() -> PlayAreaView {

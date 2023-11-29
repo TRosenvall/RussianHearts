@@ -337,6 +337,17 @@ class HandView: UIView, CardViewDelegate {
         for card in player.cards {
             for view in self.subviews {
                 if let view = view as? NumberCardView {
+
+//                    if view.isDisabled {
+//                        view.wasDisabled = true
+//                        view.isDisabled = false
+//                        view.removeDisabledView()
+//                    } else if view.wasDisabled {
+//                        view.isDisabled = true
+//                        view.wasDisabled = false
+//                        view.addDisabledView()
+//                    }
+
                     if view.card == card {
                         view.isUpsideDown = !view.isUpsideDown
                     }
@@ -404,63 +415,4 @@ class HandView: UIView, CardViewDelegate {
             return
         }
     }
-
-//    func updateShouldBeDisabled(for card: CardView,
-//                                cardsInHand: [Card]) {
-//        guard let cardsPlayed = delegate?.getPlayedCards(),
-//              let firstPlayerId = delegate?.getPlayerIdForFirstPlayerThisPhase(),
-//              let players = delegate?.getPlayers(),
-//              let trumpSuit = delegate?.getTrump(),
-//              let card = card as? NumberCardView,
-//              let activePlayer = delegate?.getActivePlayer()
-//        else { return }
-//
-//        let cardsInHand = activePlayer.cards
-//
-//        let firstCardPlayed = cardsPlayed.filter { $0.playedByPlayerWithId == firstPlayerId }
-//        if firstCardPlayed.count <= 0 {
-//            return
-//        }
-//
-//        if let firstCardPlayed = firstCardPlayed[0] as? NumberCard {
-//            let firstSuit = firstCardPlayed.suit
-//
-//            for player in players where player.cards.contains(where: { playerCard in
-//                return playerCard.playedByPlayerWithId == card.card.playedByPlayerWithId
-//            }) {
-//                let suits: [CardSuit?] = player.cards.map { card in
-//                    if let card = card as? NumberCard {
-//                        return card.suit
-//                    }
-//                    return nil
-//                }
-//
-//                var hasFirstSuit: Bool = false
-//                for suit in suits where suit == firstSuit {
-//                    hasFirstSuit = true
-//                }
-//                var currentCardIsFirstSuit: Bool = false
-//                if card.card.suit == firstSuit {
-//                    currentCardIsFirstSuit = true
-//                }
-//
-//                if card.card.suit == trumpSuit {
-//                    card.removeDisabledView()
-//                    return
-//                }
-//                if hasFirstSuit && currentCardIsFirstSuit {
-//                    card.removeDisabledView()
-//                    return
-//                }
-//                if hasFirstSuit && !currentCardIsFirstSuit {
-//                    card.addDisabledView()
-//                    return
-//                }
-//                if !hasFirstSuit {
-//                    card.removeDisabledView()
-//                    return
-//                }
-//            }
-//        }
-//    }
 }

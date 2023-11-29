@@ -14,6 +14,7 @@ class PlayerModel: Equatable, Codable {
     var name: String
     var activeBid: Bid? = nil
     var score: Int = 0
+    var scoreTotal: Int = 0
     var id: Int
 
     // MARK: - Lifecycle

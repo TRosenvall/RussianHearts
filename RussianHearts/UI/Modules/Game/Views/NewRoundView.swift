@@ -10,7 +10,13 @@ import UIKit
 protocol NewRoundViewDelegate {
     func getActivePlayer() -> PlayerModel?
 
+    func getPlayers() -> [PlayerModel]
+
     func newRoundContinueButtonTapped()
+
+    func getNumberOfCardsForRound() -> Int
+
+    func flipCards()
 }
 
 class NewRoundView: UIView {
@@ -50,6 +56,15 @@ class NewRoundView: UIView {
         return view
     }()
 
+    lazy var scoresUnderlineView: UIView = {
+        let label = UIView()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        newTurnView.addSubview(label)
+
+        return label
+    }()
+
     // Labels
     lazy var bidLabel: UILabel = {
         let label = UILabel()
@@ -68,7 +83,16 @@ class NewRoundView: UIView {
 
         return label
     }()
-    
+
+    lazy var scoresLabel: UILabel = {
+        let label = UILabel()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        newTurnView.addSubview(label)
+
+        return label
+    }()
+
     // Buttons
     lazy var setBidButton: UIButton = {
         let button = UIButton(type: .system)
@@ -147,25 +171,50 @@ class NewRoundView: UIView {
 
     // MARK: - Actions
     @objc func setBidButtonTapped() {
+        print("Button 1")
+
+        guard let bidAmountText = bidAmountLabel.text,
+              let currentBidAmount = Int(bidAmountText)
+        else { fatalError("Bid Failed") }
+
+        delegate?.getActivePlayer()?.activeBid = Bid(value: currentBidAmount)
         delegate?.newRoundContinueButtonTapped()
     }
 
     @objc func newRoundContinueButtonTapped() {
+        print("Button 2")
+        delegate?.flipCards()
         newTurnView.removeFromSuperview()
         setBidView.alpha = 1
         layoutIfNeeded()
     }
 
     @objc func lowerBidAmountButtonTapped() {
-        newTurnView.removeFromSuperview()
-        setBidView.alpha = 1
-        layoutIfNeeded()
+        print("Button 3")
+
+        guard let bidAmountLabelText = bidAmountLabel.text,
+              let amount = Int(bidAmountLabelText)
+        else { return }
+
+        if amount > 0 {
+            let loweredAmount = amount - 1
+            bidAmountLabel.text = loweredAmount.description
+        }
+
     }
 
     @objc func raiseBidAmountButtonTapped() {
-        newTurnView.removeFromSuperview()
-        setBidView.alpha = 1
-        layoutIfNeeded()
+        print("Button 4")
+
+        guard let delegate,
+              let bidAmountLabelText = bidAmountLabel.text,
+              let amount = Int(bidAmountLabelText)
+        else { return }
+
+        if amount < delegate.getNumberOfCardsForRound() {
+            let raisedAmount = amount + 1
+            bidAmountLabel.text = raisedAmount.description
+        }
     }
 
     // MARK: - Helpers
@@ -188,6 +237,78 @@ class NewRoundView: UIView {
         newTurnView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         newTurnView.backgroundColor = .clear
 
+        // Scores Label
+        scoresLabel.centerXAnchor.constraint(equalTo: playerNameLabel.centerXAnchor).isActive = true
+        scoresLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+        scoresLabel.topAnchor.constraint(equalTo: playerNameLabel.bottomAnchor,
+                                         constant: 22).isActive = true
+        scoresLabel.widthAnchor.constraint(equalTo: playerNameLabel.widthAnchor).isActive = true
+        scoresLabel.text = "Scores"
+        scoresLabel.textColor = moduleColor
+        scoresLabel.textAlignment = .center
+
+        // Scores Underline View
+        scoresUnderlineView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        scoresUnderlineView.topAnchor.constraint(equalTo: scoresLabel.bottomAnchor, constant: -1).isActive = true
+        scoresUnderlineView.widthAnchor.constraint(equalTo: scoresLabel.widthAnchor).isActive = true
+        scoresUnderlineView.centerXAnchor.constraint(equalTo: scoresLabel.centerXAnchor).isActive = true
+        scoresUnderlineView.backgroundColor = moduleColor
+
+        var playerNameLabelOffset: CGFloat = 0
+        if let players = delegate?.getPlayers() {
+            for player in players.sorted(by: { $0.id < $1.id }) {
+                // Player Names
+                let playerNameTextLabel = UILabel()
+
+                playerNameTextLabel.translatesAutoresizingMaskIntoConstraints = false
+                newTurnView.addSubview(playerNameTextLabel)
+
+                playerNameTextLabel.leadingAnchor.constraint(
+                    equalTo: scoresUnderlineView.leadingAnchor,
+                    constant: 8
+                ).isActive = true
+                playerNameTextLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+                playerNameTextLabel.trailingAnchor.constraint(
+                    equalTo: playerNameLabel.trailingAnchor,
+                    constant: -77
+                ).isActive = true
+                playerNameTextLabel.topAnchor.constraint(
+                    equalTo: scoresUnderlineView.bottomAnchor,
+                    constant: playerNameLabelOffset
+                ).isActive = true
+                
+                playerNameTextLabel.textColor = moduleColor
+                playerNameTextLabel.text = player.name
+
+                // Player Scores
+                let playerScoreTextLabel = UILabel()
+
+                playerScoreTextLabel.translatesAutoresizingMaskIntoConstraints = false
+                newTurnView.addSubview(playerScoreTextLabel)
+
+                playerScoreTextLabel.leadingAnchor.constraint(
+                    equalTo: playerNameTextLabel.trailingAnchor,
+                    constant: 11
+                ).isActive = true
+                playerScoreTextLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+                playerScoreTextLabel.trailingAnchor.constraint(
+                    equalTo: scoresUnderlineView.trailingAnchor,
+                    constant: -8
+                ).isActive = true
+                playerScoreTextLabel.topAnchor.constraint(
+                    equalTo: scoresUnderlineView.bottomAnchor,
+                    constant: playerNameLabelOffset
+                ).isActive = true
+                
+                playerScoreTextLabel.textColor = moduleColor
+                playerScoreTextLabel.text = player.scoreTotal.description
+                playerScoreTextLabel.textAlignment = .right
+
+                // Post
+                playerNameLabelOffset += 22
+            }
+        }
+
         // Bid Label
         bidLabel.topAnchor.constraint(equalTo: setBidView.topAnchor,
                                              constant: 22).isActive = true
@@ -207,25 +328,35 @@ class NewRoundView: UIView {
         bidAmountLabel.widthAnchor.constraint(equalToConstant: 22).isActive = true
         bidAmountLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
         bidAmountLabel.textAlignment = .center
-        bidAmountLabel.text = "\(0)"
+        bidAmountLabel.text = 0.description
 
         // Lower Bid Amount Button
         lowerBidAmountButton.topAnchor.constraint(equalTo: bidAmountLabel.topAnchor).isActive = true
         lowerBidAmountButton.leadingAnchor.constraint(equalTo: setBidView.leadingAnchor,
-                                                      constant: 22).isActive = true
+                                                      constant: 11).isActive = true
         lowerBidAmountButton.trailingAnchor.constraint(equalTo: bidAmountLabel.leadingAnchor,
-                                                       constant: 8).isActive = true
+                                                       constant: -11).isActive = true
         lowerBidAmountButton.bottomAnchor.constraint(equalTo: bidAmountLabel.bottomAnchor).isActive = true
-        lowerBidAmountButton.setTitle("<", for: .normal)
+        lowerBidAmountButton.setTitle("", for: .normal)
+        lowerBidAmountButton.setImage(
+            UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        lowerBidAmountButton.tintColor = moduleColor
 
         // Raise Bid Amount Button
         raiseBidAmountButton.topAnchor.constraint(equalTo: bidAmountLabel.topAnchor).isActive = true
         raiseBidAmountButton.leadingAnchor.constraint(equalTo: bidAmountLabel.trailingAnchor,
-                                                      constant: 8).isActive = true
+                                                      constant: 11).isActive = true
         raiseBidAmountButton.trailingAnchor.constraint(equalTo: setBidView.trailingAnchor,
-                                                       constant: 22).isActive = true
+                                                       constant: -11).isActive = true
         raiseBidAmountButton.bottomAnchor.constraint(equalTo: bidAmountLabel.bottomAnchor).isActive = true
-        raiseBidAmountButton.setTitle(">", for: .normal)
+        raiseBidAmountButton.setTitle("", for: .normal)
+        raiseBidAmountButton.setImage(
+            UIImage(systemName: "arrow.right")?.withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        raiseBidAmountButton.tintColor = moduleColor
 
         // Set Bid Button
         setBidButton.bottomAnchor.constraint(equalTo: setBidView.bottomAnchor,

@@ -24,7 +24,6 @@ class GameBuilder {
         }
 
         let view: any GameView = GameViewController()
-        let worker: GameWorker = GameWorkerImpl()
 
         view.gameService = gameService
         view.delegate = delegate

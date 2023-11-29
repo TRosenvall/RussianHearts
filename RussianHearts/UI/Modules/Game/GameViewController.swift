@@ -155,6 +155,16 @@ class GameViewController:
         return gameService.isSuit(for: card, suit: suit)
     }
 
+    func getNumberOfCardsForRound() -> Int {
+        guard let gameService,
+              let cardsToPlay = gameService.activeGame?.activeRound.numberOfCardsToPlay
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return cardsToPlay
+    }
+
     func routeToMainMenu() {
         delegate?.routeToMainMenu()
     }
