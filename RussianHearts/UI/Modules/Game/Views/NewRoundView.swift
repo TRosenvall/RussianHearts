@@ -17,6 +17,8 @@ protocol NewRoundViewDelegate {
     func getNumberOfCardsForRound() -> Int
 
     func flipCards()
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int
 }
 
 class NewRoundView: UIView {
@@ -193,14 +195,36 @@ class NewRoundView: UIView {
         print("Button 3")
 
         guard let bidAmountLabelText = bidAmountLabel.text,
-              let amount = Int(bidAmountLabelText)
+              let amount = Int(bidAmountLabelText),
+              let delegate = delegate
         else { return }
+
+        let players = delegate.getPlayers()
+        let totalBidsForRound = delegate.getNumberOfCardsForRound()
+
+        var totalBids = 0
+        for player in players {
+            if let activeBid = player.activeBid {
+                totalBids += activeBid.value
+            }
+        }
+
+        let disallowedBid = totalBidsForRound - totalBids
 
         if amount > 0 {
             let loweredAmount = amount - 1
             bidAmountLabel.text = loweredAmount.description
-        }
 
+            if delegate.getActivePlayer() == getLastPlayer(players: players) {
+                if loweredAmount == disallowedBid {
+                    setBidButton.isEnabled = false
+                    setBidButton.alpha = 0.33
+                } else {
+                    setBidButton.isEnabled = true
+                    setBidButton.alpha = 1
+                }
+            }
+        }
     }
 
     @objc func raiseBidAmountButtonTapped() {
@@ -211,9 +235,33 @@ class NewRoundView: UIView {
               let amount = Int(bidAmountLabelText)
         else { return }
 
+        let players = delegate.getPlayers()
+        let totalBidsForRound = delegate.getNumberOfCardsForRound()
+
+        var totalBids = 0
+        for player in players {
+            if let activeBid = player.activeBid {
+                totalBids += activeBid.value
+            }
+        }
+
+        let disallowedBid = totalBidsForRound - totalBids
+
         if amount < delegate.getNumberOfCardsForRound() {
             let raisedAmount = amount + 1
             bidAmountLabel.text = raisedAmount.description
+
+            let activePlayer = delegate.getActivePlayer()
+            let lastPlayer = getLastPlayer(players: players)
+            if activePlayer == lastPlayer {
+                if raisedAmount == disallowedBid {
+                    setBidButton.isEnabled = false
+                    setBidButton.alpha = 0.33
+                } else {
+                    setBidButton.isEnabled = true
+                    setBidButton.alpha = 1
+                }
+            }
         }
     }
 
@@ -329,6 +377,7 @@ class NewRoundView: UIView {
         bidAmountLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
         bidAmountLabel.textAlignment = .center
         bidAmountLabel.text = 0.description
+        bidAmountLabel.textColor = moduleColor
 
         // Lower Bid Amount Button
         lowerBidAmountButton.topAnchor.constraint(equalTo: bidAmountLabel.topAnchor).isActive = true
@@ -367,6 +416,7 @@ class NewRoundView: UIView {
                                                         constant: -22).isActive = true
         setBidButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         setBidButton.setTitle("Set Bid", for: .normal)
+        setBidButton.setTitle("Total bids cannot equal cards to play", for: .disabled)
         setBidButton.setTitleColor(moduleColor, for: .normal)
         setBidButton.layer.borderColor = moduleColor.cgColor
         setBidButton.layer.borderWidth = 2
@@ -397,5 +447,35 @@ class NewRoundView: UIView {
         newRoundContinueButton.layer.borderColor = moduleColor.cgColor
         newRoundContinueButton.layer.borderWidth = 2
         newRoundContinueButton.layer.cornerRadius = 22
+    }
+
+    func getLastPlayer(players: [PlayerModel]) -> PlayerModel {
+        guard let delegate
+        else {
+            fatalError("Delegate not set")
+        }
+
+        // Get the first id and the total number of players playing
+        let firstId = delegate.getPlayerIdForFirstPlayerThisPhase()
+        let totalPlayers = players.count
+
+        var lastId: Int = 0
+        // If the firstId is greater than 1, then the last player will be 1 less than the current first id.
+        if firstId > 1 {
+            lastId = firstId - 1
+        } else if firstId == 1 {
+        // If the firstId is 1, then the last player to play will have an id of the total amount of players playing
+            lastId = totalPlayers
+        } else {
+            fatalError("Player Ids should always be >= 1")
+        }
+
+        var lastPlayer: PlayerModel? = nil
+        for player in players where player.id == lastId {
+            lastPlayer = player
+        }
+
+        guard let lastPlayer else { fatalError("Last Player Not Found") }
+        return lastPlayer
     }
 }

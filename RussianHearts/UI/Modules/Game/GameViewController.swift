@@ -9,7 +9,7 @@ import UIKit
 
 // Determines how to call on required dependencies for routing
 protocol GameDelegate: ModuleDelegate {
-    func routeToMainMenu()
+    func routeBackToMainMenu(from module: any ModuleController)
 
     func routeToHighScores()
 }
@@ -165,8 +165,59 @@ class GameViewController:
         return cardsToPlay
     }
 
+    func getWinningPlayers() -> [PlayerModel] {
+        var winningPlayers: [PlayerModel] = []
+
+        guard let gameService,
+              let players = gameService.activeGame?.players
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        var winningPlayer: PlayerModel? = nil
+        for player in players {
+            if winningPlayer == nil {
+                winningPlayer = player
+                winningPlayers.append(player)
+            } else if let winningPlayerScore = winningPlayer?.scoreTotal,
+                      winningPlayerScore == player.scoreTotal {
+                winningPlayers.append(player)
+            } else if let winningPlayerScore = winningPlayer?.scoreTotal,
+                      winningPlayerScore < player.scoreTotal {
+                winningPlayer = player
+                winningPlayers = []
+                winningPlayers.append(player)
+            }
+        }
+
+        guard winningPlayers.count != 0 else { fatalError("No winner found") }
+        return winningPlayers
+    }
+
+    func removeGame() {
+        gameService?.activeGame = nil
+    }
+
+    func isPassingPhase() -> Bool {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.isPassingPhase()
+    }
+
+    func passesForward() -> Bool {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.passesForward()
+    }
+
     func routeToMainMenu() {
-        delegate?.routeToMainMenu()
+        delegate?.routeBackToMainMenu(from: self)
     }
 
     func routeToHighScores() {

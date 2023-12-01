@@ -25,6 +25,10 @@ protocol PlayAreaViewDelegate {
     func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool
     
     func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
+
+    func isPassingPhase() -> Bool
+
+    func passesForward() -> Bool
 }
 
 // This view will be the full size of the containing view controller
@@ -250,6 +254,15 @@ class PlayAreaView: UIView, HandViewDelegate, PlayerInfoViewDelegate {
         return delegate.isSuit(for: card, suit: suit)
     }
 
+    func isPassingPhase() -> Bool {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.isPassingPhase()
+    }
+
     // MARK: - Helpers
     func setupViews() {
         // View
@@ -292,7 +305,18 @@ class PlayAreaView: UIView, HandViewDelegate, PlayerInfoViewDelegate {
         endTurnButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                                 constant: -22).isActive = true
         endTurnButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        endTurnButton.setTitle("End Turn", for: .normal)
+        if let delegate {
+            if delegate.isPassingPhase() {
+                endTurnButton.setTitle("Something screwed up", for: .normal)
+                if delegate.passesForward() {
+                    endTurnButton.setTitle("Pass card to next player", for: .normal)
+                } else {
+                    endTurnButton.setTitle("Pass card to last player", for: .normal)
+                }
+            } else {
+                endTurnButton.setTitle("End Turn", for: .normal)
+            }
+        }
         endTurnButton.setTitleColor(moduleColor, for: .normal)
         endTurnButton.layer.borderColor = moduleColor.cgColor
         endTurnButton.layer.borderWidth = 2
@@ -419,7 +443,11 @@ class PlayAreaView: UIView, HandViewDelegate, PlayerInfoViewDelegate {
                     cardView.layer.cornerRadius = cardWidth/7
                 }
                 layoutIfNeeded()
-                cardView?.isUpsideDown = false
+                if delegate.isPassingPhase() {
+                    cardView?.isUpsideDown = true
+                } else {
+                    cardView?.isUpsideDown = false
+                }
                 layoutIfNeeded()
             }
         }

@@ -13,6 +13,8 @@ protocol NewPhaseViewDelegate {
     func newPhaseContinueButtonTapped()
 
     func flipCards()
+
+    func getPlayers() -> [PlayerModel]
 }
 
 class NewPhaseView: UIView {
@@ -33,6 +35,16 @@ class NewPhaseView: UIView {
     }
 
     // MARK: - Views
+    // Views
+    lazy var scoresUnderlineView: UIView = {
+        let label = UIView()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(label)
+
+        return label
+    }()
+
     // Labels
     lazy var playerNameLabel: UILabel = {
         let label = UILabel()
@@ -42,7 +54,16 @@ class NewPhaseView: UIView {
 
         return label
     }()
-    
+
+    lazy var scoresLabel: UILabel = {
+        let label = UILabel()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(label)
+
+        return label
+    }()
+
     // Buttons
     lazy var newPhaseContinueButton: UIButton = {
         let button = UIButton(type: .system)
@@ -94,6 +115,78 @@ class NewPhaseView: UIView {
         playerNameLabel.textColor = moduleColor
         playerNameLabel.text = delegate?.getActivePlayer()?.name
         playerNameLabel.textAlignment = .center
+
+        // Scores Label
+        scoresLabel.centerXAnchor.constraint(equalTo: playerNameLabel.centerXAnchor).isActive = true
+        scoresLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+        scoresLabel.topAnchor.constraint(equalTo: playerNameLabel.bottomAnchor,
+                                         constant: 22).isActive = true
+        scoresLabel.widthAnchor.constraint(equalTo: playerNameLabel.widthAnchor).isActive = true
+        scoresLabel.text = "Scores"
+        scoresLabel.textColor = moduleColor
+        scoresLabel.textAlignment = .center
+
+        // Scores Underline View
+        scoresUnderlineView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        scoresUnderlineView.topAnchor.constraint(equalTo: scoresLabel.bottomAnchor, constant: -1).isActive = true
+        scoresUnderlineView.widthAnchor.constraint(equalTo: scoresLabel.widthAnchor).isActive = true
+        scoresUnderlineView.centerXAnchor.constraint(equalTo: scoresLabel.centerXAnchor).isActive = true
+        scoresUnderlineView.backgroundColor = moduleColor
+
+        var playerNameLabelOffset: CGFloat = 0
+        if let players = delegate?.getPlayers() {
+            for player in players.sorted(by: { $0.id < $1.id }) {
+                // Player Names
+                let playerNameTextLabel = UILabel()
+
+                playerNameTextLabel.translatesAutoresizingMaskIntoConstraints = false
+                self.addSubview(playerNameTextLabel)
+
+                playerNameTextLabel.leadingAnchor.constraint(
+                    equalTo: scoresUnderlineView.leadingAnchor,
+                    constant: 8
+                ).isActive = true
+                playerNameTextLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+                playerNameTextLabel.trailingAnchor.constraint(
+                    equalTo: playerNameLabel.trailingAnchor,
+                    constant: -77
+                ).isActive = true
+                playerNameTextLabel.topAnchor.constraint(
+                    equalTo: scoresUnderlineView.bottomAnchor,
+                    constant: playerNameLabelOffset
+                ).isActive = true
+                
+                playerNameTextLabel.textColor = moduleColor
+                playerNameTextLabel.text = player.name
+
+                // Player Scores
+                let playerScoreTextLabel = UILabel()
+
+                playerScoreTextLabel.translatesAutoresizingMaskIntoConstraints = false
+                self.addSubview(playerScoreTextLabel)
+
+                playerScoreTextLabel.leadingAnchor.constraint(
+                    equalTo: playerNameTextLabel.trailingAnchor,
+                    constant: 11
+                ).isActive = true
+                playerScoreTextLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+                playerScoreTextLabel.trailingAnchor.constraint(
+                    equalTo: scoresUnderlineView.trailingAnchor,
+                    constant: -8
+                ).isActive = true
+                playerScoreTextLabel.topAnchor.constraint(
+                    equalTo: scoresUnderlineView.bottomAnchor,
+                    constant: playerNameLabelOffset
+                ).isActive = true
+                
+                playerScoreTextLabel.textColor = moduleColor
+                playerScoreTextLabel.text = player.scoreTotal.description
+                playerScoreTextLabel.textAlignment = .right
+
+                // Post
+                playerNameLabelOffset += 22
+            }
+        }
 
         // New Turn Continue Button
         newPhaseContinueButton.bottomAnchor.constraint(equalTo: self.bottomAnchor,

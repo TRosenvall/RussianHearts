@@ -48,8 +48,8 @@ class SceneCoordinator: SceneCoordinating {
     }
 
     // MARK: - Conformance: GameDelegate
-    func routeToMainMenu() {
-        router.routeBackToMainMenu()
+    func routeBackToMainMenu(from module: any ModuleController) {
+        router.routeBackToMainMenu(from: module)
     }
 
     func routeToHighScores() {

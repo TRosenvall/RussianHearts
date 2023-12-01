@@ -11,6 +11,8 @@ protocol BackButtonTappedViewDelegate {
     func backButtonTapped()
 
     func cancelButtonTapped()
+
+    func removeGame()
 }
 
 class BackButtonTappedView: UIView {
@@ -84,6 +86,7 @@ class BackButtonTappedView: UIView {
 
     // MARK: - Actions
     @objc func backButtonTapped() {
+        delegate?.removeGame()
         delegate?.backButtonTapped()
     }
 

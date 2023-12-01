@@ -31,6 +31,14 @@ protocol GameMainViewDelegate: AnyObject {
     func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
 
     func getNumberOfCardsForRound() -> Int
+
+    func getWinningPlayers() -> [PlayerModel]
+
+    func removeGame()
+
+    func isPassingPhase() -> Bool
+
+    func passesForward() -> Bool
 }
 
 class GameMainView:
@@ -232,6 +240,33 @@ class GameMainView:
         playAreaView?.handView.flipCards()
     }
 
+    func getWinningPlayers() -> [PlayerModel] {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.getWinningPlayers()
+    }
+
+    func isPassingPhase() -> Bool {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.isPassingPhase()
+    }
+
+    func passesForward() -> Bool {
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        return delegate.passesForward()
+    }
+
     // MARK: - Conformance: GameAreaViewDelegate
     func getActivePlayer() -> PlayerModel {
         guard let delegate
@@ -279,6 +314,10 @@ class GameMainView:
             gameAlertView.newAlert(for: .turnEnd)
             biddingSetCount = 0
         }
+    }
+
+    func removeGame() {
+        delegate?.removeGame()
     }
 
     // MARK: - Conformance: MainView

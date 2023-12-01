@@ -34,9 +34,11 @@ class RoundModel: Equatable, Codable {
     var activePhase: PhaseModel
 
     // MARK: - Lifecycle
+    // passesToTheLeft is an indicator that the round should include a phase for passing a card left or right. If nil, that round shouldn't include a passing phase.
     init(roundName: String,
          numberOfCardsToPlay: Int,
-         players: [PlayerModel]) {
+         players: [PlayerModel],
+         passesForward: Bool? = nil) {
         self.roundName = roundName
         self.numberOfCardsToPlay = numberOfCardsToPlay
         self.bidsByPlayer = []
@@ -46,6 +48,15 @@ class RoundModel: Equatable, Codable {
                                       id: 0,
                                       firstPlayerId: players.first?.id)
         self.phases.append(biddingPhase)
+
+        // Setup card transfer phase
+        if let passesForward {
+            let cardTransferPhase = PhaseModel(players: players, id: -1,
+                                               firstPlayerId: players.first?.id,
+                                               passesForward: passesForward)
+
+            self.phases.append(cardTransferPhase)
+        }
 
         // Iterate through players and setup phases based on player order.
         for i in 1...numberOfCardsToPlay {

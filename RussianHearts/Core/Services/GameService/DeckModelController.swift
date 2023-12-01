@@ -133,11 +133,16 @@ class DeckModelController {
                    on round: inout RoundModel) {
         for _ in 0..<round.numberOfCardsToPlay {
             for player in players {
-                let topCard: Card = self.deck.cards.first!
-                moveCardFromOneStackIntoAnother(card: topCard,
-                                                stack1: &self.deck.cards,
-                                                stack2: &player.cards)
+                if let topCard: Card = self.deck.cards.first {
+                    moveCardFromOneStackIntoAnother(card: topCard,
+                                                    stack1: &self.deck.cards,
+                                                    stack2: &player.cards)
+                }
             }
+        }
+
+        for player in players {
+            organizeHand(for: player)
         }
     }
 
@@ -147,19 +152,13 @@ class DeckModelController {
             return trump
         }
 
-        var numberCard: NumberCard!
-        for card in self.deck.cards {
-            let specialCard = card as? SpecialCard
-            if specialCard != nil {
-                moveCardFromTopIntoDeck()
-            } else {
-                numberCard = card as? NumberCard
-                break
-            }
+        let numberCards: [NumberCard] = self.deck.cards.compactMap { card in
+            return card as? NumberCard
         }
 
-        deck.trump = numberCard.suit
-        return numberCard.suit
+        guard let firstNumberCard = numberCards.first else { fatalError("Deck too small") }
+        deck.trump = firstNumberCard.suit
+        return firstNumberCard.suit
     }
 
     func getNewTrump() -> CardSuit {
@@ -174,5 +173,70 @@ class DeckModelController {
     func cardIsSuit(for card: NumberCard,
                     suit: CardSuit) -> Bool {
         return card.suit == suit
+    }
+
+    func organizeHand(for player: PlayerModel) {
+        var numberCards = player.cards.compactMap { $0 as? NumberCard }
+        var specialCards = player.cards.compactMap { $0 as? SpecialCard }
+        
+        var redCards: [NumberCard] = []
+        var blueCards: [NumberCard] = []
+        var brownCards: [NumberCard] = []
+        var purpleCards: [NumberCard] = []
+        
+        for card in numberCards {
+            if card.suit == .red {
+                redCards.append(card)
+            }
+            if card.suit == .blue {
+                blueCards.append(card)
+            }
+            if card.suit == .brown {
+                brownCards.append(card)
+            }
+            if card.suit == .purple {
+                purpleCards.append(card)
+            }
+        }
+        
+        redCards = redCards.sorted(by: { $0.value.rawValue < $1.value.rawValue })
+        blueCards = blueCards.sorted(by: { $0.value.rawValue < $1.value.rawValue })
+        brownCards = brownCards.sorted(by: { $0.value.rawValue < $1.value.rawValue })
+        purpleCards = purpleCards.sorted(by: { $0.value.rawValue < $1.value.rawValue })
+        
+        numberCards = redCards + blueCards + brownCards + purpleCards
+        
+        var lowCard: SpecialCard?
+        var highCard: SpecialCard?
+        var lowJoker: SpecialCard?
+        var highJoker: SpecialCard?
+        for card in specialCards where card.type == .lowCard {
+            lowCard = card
+        }
+        for card in specialCards where card.type == .highCard {
+            highCard = card
+        }
+        for card in specialCards where card.type == .lowJoker {
+            lowJoker = card
+        }
+        for card in specialCards where card.type == .highJoker {
+            highJoker = card
+        }
+        
+        specialCards = []
+        if let lowCard {
+            specialCards.append(lowCard)
+        }
+        if let highCard {
+            specialCards.append(highCard)
+        }
+        if let lowJoker {
+            specialCards.append(lowJoker)
+        }
+        if let highJoker {
+            specialCards.append(highJoker)
+        }
+
+        player.cards = numberCards + specialCards
     }
 }

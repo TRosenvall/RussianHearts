@@ -9,7 +9,7 @@ import UIKit
 
 // Determines how to call on required dependencies for routing
 protocol HighscoresDelegate: ModuleDelegate {
-    func routeToMainMenu()
+    func routeBackToMainMenu(from module: any ModuleController)
 }
 
 protocol HighscoresView: ModuleController {
@@ -55,7 +55,7 @@ class HighscoresViewController:
 
     // MARK: - Actions
     func backButtonTapped() {
-        delegate?.routeToMainMenu()
+        delegate?.routeBackToMainMenu(from: self)
     }
 
     // MARK: - Helpers

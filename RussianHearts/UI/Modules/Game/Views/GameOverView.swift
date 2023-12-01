@@ -8,7 +8,7 @@
 import UIKit
 
 protocol GameOverViewDelegate {
-    func getWinningPlayer() -> PlayerModel?
+    func getWinningPlayers() -> [PlayerModel]
 
     func routeToHighScores()
 }
@@ -41,7 +41,7 @@ class GameOverView: UIView {
         return label
     }()
 
-    lazy var bidsLabel: UILabel = {
+    lazy var scoreLabel: UILabel = {
         let label = UILabel()
 
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -90,28 +90,36 @@ class GameOverView: UIView {
         self.backgroundColor = .clear
 
         // Winner Name Label
-        winnerNameLabel.topAnchor.constraint(equalTo: self.topAnchor,
-                                             constant: 22).isActive = true
-        winnerNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                 constant: 8).isActive = true
-        winnerNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                  constant: -8).isActive = true
-        winnerNameLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
-        winnerNameLabel.textColor = moduleColor
-        winnerNameLabel.text = "Winner: \(delegate?.getWinningPlayer()?.name ?? "")"
-        winnerNameLabel.textAlignment = .center
+        guard let delegate else { fatalError("Delegate screwed up") }
+        let winningPlayers = delegate.getWinningPlayers()
 
-        // Bids Label
-        bidsLabel.topAnchor.constraint(equalTo: winnerNameLabel.topAnchor,
-                                             constant: 22).isActive = true
-        bidsLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                 constant: 8).isActive = true
-        bidsLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                  constant: -8).isActive = true
-        bidsLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
-        bidsLabel.textColor = moduleColor
-        bidsLabel.text = "Bids: \(delegate?.getWinningPlayer()?.score ?? 0)"
-        bidsLabel.textAlignment = .center
+        for i in 0..<winningPlayers.count {
+            let winningPlayer = winningPlayers[i]
+
+            let multiplier = CGFloat(i + 1)
+            winnerNameLabel.topAnchor.constraint(equalTo: self.topAnchor,
+                                                 constant: 22 * multiplier).isActive = true
+            winnerNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                                     constant: 8).isActive = true
+            winnerNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                                      constant: -8).isActive = true
+            winnerNameLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+            winnerNameLabel.textColor = moduleColor
+            winnerNameLabel.text = "Winner: \(winningPlayer.name)"
+            winnerNameLabel.textAlignment = .center
+            
+            // Bids Label
+            scoreLabel.topAnchor.constraint(equalTo: winnerNameLabel.topAnchor,
+                                           constant: 22 * multiplier).isActive = true
+            scoreLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                               constant: 8).isActive = true
+            scoreLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                                constant: -8).isActive = true
+            scoreLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
+            scoreLabel.textColor = moduleColor
+            scoreLabel.text = "Score: \(winningPlayer.scoreTotal)"
+            scoreLabel.textAlignment = .center
+        }
 
         // New Turn Continue Button
         routeToHighScoresButton.bottomAnchor.constraint(equalTo: self.bottomAnchor,

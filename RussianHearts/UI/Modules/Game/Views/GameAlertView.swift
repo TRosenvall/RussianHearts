@@ -27,6 +27,12 @@ protocol GameAlertViewDelegate {
     func getNumberOfCardsForRound() -> Int
 
     func flipCards()
+
+    func getPlayerIdForFirstPlayerThisPhase() -> Int
+
+    func getWinningPlayers() -> [PlayerModel]
+
+    func removeGame()
 }
 
 // This view will be the full size of the containing view controller
@@ -171,10 +177,26 @@ class GameAlertView:
         delegate?.flipCards()
     }
 
+    func getPlayerIdForFirstPlayerThisPhase() -> Int {
+        guard let delegate
+        else {
+            fatalError("Delegate not set")
+        }
+
+        return delegate.getPlayerIdForFirstPlayerThisPhase()
+    }
+
+    func removeGame() {
+        delegate?.removeGame()
+    }
+
     // MARK: - Conformance: GameOverViewDelegate
-    func getWinningPlayer() -> PlayerModel? {
-        // TODO: - Update this to get the actual winning player based on scores.
-        delegate?.getActivePlayer()
+    func getWinningPlayers() -> [PlayerModel] {
+        guard let delegate else {
+            fatalError("No Delegate Set")
+        }
+
+        return delegate.getWinningPlayers()
     }
 
     func routeToHighScores() {

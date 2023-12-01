@@ -36,17 +36,20 @@ class GameModel: Codable {
 
         let round1 = RoundModel(roundName: "Round One",
                                 numberOfCardsToPlay: 7,
-                                players: self.players)
+                                players: self.players,
+                                passesForward: true)
 
         rotate(players: &self.players)
         let round2 = RoundModel(roundName: "Round Two",
                                 numberOfCardsToPlay: 5,
-                                players: self.players)
+                                players: self.players,
+                                passesForward: true)
 
         rotate(players: &self.players)
         let round3 = RoundModel(roundName: "Round Three",
                                 numberOfCardsToPlay: 3,
-                                players: self.players)
+                                players: self.players,
+                                passesForward: true)
 
         rotate(players: &self.players)
         let round4 = RoundModel(roundName: "Round Four",
@@ -56,17 +59,20 @@ class GameModel: Codable {
         rotate(players: &self.players)
         let round5 = RoundModel(roundName: "Round Five",
                                 numberOfCardsToPlay: 2,
-                                players: self.players)
+                                players: self.players,
+                                passesForward: false)
 
         rotate(players: &self.players)
         let round6 = RoundModel(roundName: "Round Six",
                                 numberOfCardsToPlay: 4,
-                                players: self.players)
+                                players: self.players,
+                                passesForward: false)
 
         rotate(players: &self.players)
         let round7 = RoundModel(roundName: "Round Seven",
                                 numberOfCardsToPlay: 6,
-                                players: self.players)
+                                players: self.players,
+                                passesForward: false)
 
         self.rounds = [round1, round2, round3, round4, round5, round6, round7]
         self.activeRound = rounds.first!

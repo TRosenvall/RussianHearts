@@ -38,14 +38,17 @@ class PhaseModel: Equatable, Codable {
             }
         }
     }
+    var passesForward: Bool?
 
     // MARK: - Lifecycle
     init(players: [PlayerModel],
          id: Int,
-         firstPlayerId: Int?) {
+         firstPlayerId: Int?,
+         passesForward: Bool? = nil) {
         self.players = players
         self.firstPlayerId = firstPlayerId
         self.cardsPlayedByPlayer = []
+        self.passesForward = passesForward
 
         for player in players {
             let turn = TurnModel(activePlayer: player)

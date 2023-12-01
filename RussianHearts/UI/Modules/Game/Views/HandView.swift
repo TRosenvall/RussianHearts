@@ -26,6 +26,8 @@ protocol HandViewDelegate {
                              suit: CardSuit) -> Bool
 
     func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
+
+    func isPassingPhase() -> Bool
 }
 
 class HandView: UIView, CardViewDelegate {
@@ -338,18 +340,16 @@ class HandView: UIView, CardViewDelegate {
             for view in self.subviews {
                 if let view = view as? NumberCardView {
 
-//                    if view.isDisabled {
-//                        view.wasDisabled = true
-//                        view.isDisabled = false
-//                        view.removeDisabledView()
-//                    } else if view.wasDisabled {
-//                        view.isDisabled = true
-//                        view.wasDisabled = false
-//                        view.addDisabledView()
-//                    }
-
                     if view.card == card {
                         view.isUpsideDown = !view.isUpsideDown
+                    }
+
+                    if view.isUpsideDown && view.isDisabled {
+                        view.wasDisabled = true
+                        view.removeDisabledView()
+                    } else if !view.isUpsideDown && view.wasDisabled {
+                        view.wasDisabled = false
+                        view.addDisabledView()
                     }
                 }
                 if let view = view as? SpecialCardView {
@@ -398,21 +398,28 @@ class HandView: UIView, CardViewDelegate {
                                 trumpSuit: CardSuit,
                                 hasFirstSuit: Bool,
                                 currentCardIsFirstSuit: Bool) {
-        if card.card.suit == trumpSuit {
+        guard let delegate else { fatalError("Delegate not setup for handView") }
+
+        if delegate.isPassingPhase() {
             card.removeDisabledView()
             return
-        }
-        if hasFirstSuit && currentCardIsFirstSuit {
-            card.removeDisabledView()
-            return
-        }
-        if hasFirstSuit && !currentCardIsFirstSuit {
-            card.addDisabledView()
-            return
-        }
-        if !hasFirstSuit {
-            card.removeDisabledView()
-            return
+        } else {
+            if card.card.suit == trumpSuit {
+                card.removeDisabledView()
+                return
+            }
+            if hasFirstSuit && currentCardIsFirstSuit {
+                card.removeDisabledView()
+                return
+            }
+            if hasFirstSuit && !currentCardIsFirstSuit {
+                card.addDisabledView()
+                return
+            }
+            if !hasFirstSuit {
+                card.removeDisabledView()
+                return
+            }
         }
     }
 }

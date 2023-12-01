@@ -45,7 +45,7 @@ protocol SceneWireframe {
     // Route to the main game module.
     func routeToGameModule()
 
-    func routeBackToMainMenu()
+    func routeBackToMainMenu(from module: any ModuleController)
 
     func routeToHighScores()
 

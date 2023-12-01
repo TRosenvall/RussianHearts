@@ -139,8 +139,17 @@ class GameService: Service {
     }
 
     func nextPhase(in game: inout GameModel) -> EndTurnType {
-        let winningId = scorePhase()
-        deck.newPhase()
+        var winningId: Int? = nil
+
+        // Handle passing cards forward or backwards at the beginning of the phase.
+        if let passesForward = game.activeRound.activePhase.passesForward {
+            passCards(passesForward: passesForward)
+        } else {
+            // Otherwise, score normally
+            winningId = scorePhase()
+            deck.newPhase()
+        }
+
         let currPhase = game.activeRound.activePhase
         if currPhase != game.activeRound.phases.last {
             let index = game.activeRound.phases.firstIndex(of: currPhase)
@@ -220,13 +229,16 @@ class GameService: Service {
         print("Has Low Card: \(hasLowCard)")
         print("")
 
-        if (hasLowCard && hasHighCard) || (!hasLowCard && !hasHighCard) {
-            // Get a winning card
-            for card in cardsPlayed {
-                if winningCard == nil {
-                    winningCard = card
-                }
+        // Get a winning card
+        for card in cardsPlayed {
+            if winningCard == nil && card is NumberCard {
+                winningCard = card
+            } else if winningCard == nil && card is SpecialCard {
+                winningCard = card
             }
+        }
+
+        if (hasLowCard && hasHighCard) || (!hasLowCard && !hasHighCard) {
 
             // Make the winning card the first color card
             for card in cardsPlayed {
@@ -279,9 +291,7 @@ class GameService: Service {
                     winningCard = specialCard
                 }
             }
-        }
-
-        if hasHighCard {
+        } else if hasHighCard {
             // Make the winning card the highest value
             for card in cardsPlayed {
                 if let card = card as? NumberCard,
@@ -303,16 +313,30 @@ class GameService: Service {
                     winningCard = specialCard
                 }
             }
-        }
+        } else if hasLowCard {
+            // This might be the lowest card
+            if hasHighJoker {
+                for specialCard in specialCards where specialCard.type == .highJoker {
+                    winningCard = specialCard
+                }
+            }
 
-        if hasLowCard {
-            // Make the winning card the highest value
+            if hasLowJoker {
+                for specialCard in specialCards where specialCard.type == .lowJoker {
+                    winningCard = specialCard
+                }
+            }
+
+            // Make the winning card the lowest value
             for card in cardsPlayed {
                 if let card = card as? NumberCard,
                    let currWinning = winningCard as? NumberCard {
                     if card.value.rawValue < currWinning.value.rawValue {
                         winningCard = card
                     }
+                } else if let card = card as? NumberCard,
+                          let _ = winningCard as? SpecialCard {
+                    winningCard = card
                 }
             }
         }
@@ -451,5 +475,58 @@ class GameService: Service {
             player.activeBid = nil
             player.score = 0
         }
+    }
+
+    func passCards(passesForward: Bool) {
+        guard let players = activeGame?.players else { fatalError("No players") }
+
+        for card in cardsPlayed {
+            var currentPlayer: PlayerModel?
+            var sendToPlayer: PlayerModel?
+
+            for player in players where player.id == card.playedByPlayerWithId {
+                currentPlayer = player
+            }
+
+            guard let currentPlayer else { fatalError("No current player") }
+
+            if passesForward {
+                if currentPlayer.id == players.count {
+                    sendToPlayer = players.first
+                } else {
+                    for player in players where player.id == (currentPlayer.id + 1) {
+                        sendToPlayer = player
+                    }
+                }
+            } else {
+                if currentPlayer.id == players.first?.id {
+                    sendToPlayer = players.last
+                } else {
+                    for player in players where player.id == (currentPlayer.id - 1) {
+                        sendToPlayer = player
+                    }
+                }
+            }
+
+            guard let sendToPlayer else { fatalError("No player to send card to") }
+            
+            deck.moveCardFromOneStackIntoAnother(card: card,
+                                                 stack1: &self.deck.deck.cardsInPlay,
+                                                 stack2: &sendToPlayer.cards)
+        }
+    }
+
+    func isPassingPhase() -> Bool {
+        return activeGame?.activeRound.activePhase.passesForward != nil
+    }
+
+    func passesForward() -> Bool {
+        if isPassingPhase() {
+            guard let activeGame,
+                  let passesForward = activeGame.activeRound.activePhase.passesForward
+            else { fatalError("No active game") }
+            return passesForward
+        }
+        return false
     }
 }

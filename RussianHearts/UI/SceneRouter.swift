@@ -58,8 +58,9 @@ class SceneRouter: SceneWireframe {
         presentModule(module, animated: true)
     }
 
-    func routeBackToMainMenu() {
+    func routeBackToMainMenu(from module: any ModuleController) {
         navController?.popToRootViewController(animated: false)
+        manager.dismiss(module: module)
         routeToMainMenu()
     }
 
