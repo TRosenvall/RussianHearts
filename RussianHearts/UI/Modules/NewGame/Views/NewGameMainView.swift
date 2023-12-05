@@ -10,7 +10,7 @@ import UIKit
 protocol NewGameMainViewDelegate: AnyObject {
     func backButtonTapped()
 
-    func startNewGame(with playerValues: [Int? : String?])
+    func startNewGame(with playerValues: [Int? : PlayerOptions?])
 }
 
 class NewGameMainView:
@@ -177,12 +177,14 @@ class NewGameMainView:
     }
 
     @objc func startGameButtonTapped(sender: UIButton!) {
-        var playerValues: [Int: String] = [:]
+        var playerValues: [Int: PlayerOptions] = [:]
         for playerSelector in playerSelectors {
             let key = playerSelector.tag + 1
             let value = playerSelector.playerNameTextField.text
+            let isHuman = playerSelector.isHuman
             if let value, value != "" {
-                playerValues.updateValue(value, forKey: key)
+                let options: PlayerOptions = (name: value, isHuman: isHuman)
+                playerValues.updateValue(options, forKey: key)
             }
         }
         delegate?.startNewGame(with: playerValues)

@@ -9,7 +9,7 @@ import Foundation
 
 // Called on by presenter to do peices of work
 protocol NewGameWorker: ModuleWorker {
-    func startNewGame(with playerValues: [Int?: String?]) async
+    func startNewGame(with playerValues: [Int?: PlayerOptions?]) async
 }
 
 class NewGameWorkerImpl: NewGameWorker {
@@ -23,7 +23,7 @@ class NewGameWorkerImpl: NewGameWorker {
     }
 
     // MARK: - Conformance: NewGameInput
-    func startNewGame(with playerValues: [Int?: String?]) async {
+    func startNewGame(with playerValues: [Int?: PlayerOptions?]) async {
         guard let gameService: GameService = serviceManager.retrieveService()
         else {
             print("Nonfatal Error")
@@ -35,9 +35,13 @@ class NewGameWorkerImpl: NewGameWorker {
             var players: [PlayerModel] = []
 
             for value in playerValues {
-                if let playerValue = value.value,
+                if let playerOptions = value.value,
                    let playerKey = value.key {
-                    let player = PlayerModel(name: playerValue, id: playerKey)
+                    let name = playerOptions.name
+                    let isHuman = playerOptions.isHuman
+                    let player = PlayerModel(name: name,
+                                             id: playerKey,
+                                             isHuman: isHuman)
                     players.append(player)
                 }
             }

@@ -26,9 +26,9 @@ protocol GameMainViewDelegate: AnyObject {
 
     func getSuitPlayedFirst() -> CardSuit?
     
-    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit?) -> Bool
     
-    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
+    func isSuit(for card: NumberCard, suit: CardSuit?) -> Bool
 
     func getNumberOfCardsForRound() -> Int
 
@@ -39,6 +39,8 @@ protocol GameMainViewDelegate: AnyObject {
     func isPassingPhase() -> Bool
 
     func passesForward() -> Bool
+
+    func getEndTurnType() -> EndTurnType
 }
 
 class GameMainView:
@@ -148,10 +150,10 @@ class GameMainView:
 
     // MARK: - Conformance: PlayAreaViewDelegate
     func getPlayer() -> PlayerModel {
-        if let delegate {
-            return delegate.getActivePlayer()
-        }
-        return PlayerModel(name: "", id: -1)
+        guard let delegate
+        else { fatalError( "Delegate improperly configured" ) }
+
+        return delegate.getActivePlayer()
     }
 
     func getPlayers() -> [PlayerModel] {
@@ -172,7 +174,16 @@ class GameMainView:
         setupPlayArea()
         updatePlayArea()
 
-        gameAlertView.newAlert(for: endTurnType)
+        guard let delegate else {
+            fatalError( "Delegate not properly configured" )
+        }
+
+        if delegate.getActivePlayer().isHuman {
+            gameAlertView.newAlert(for: endTurnType)
+        } else {
+            let endTurnType = delegate.getEndTurnType()
+            runComputerActions(isBidding: endTurnType == .roundEnd)
+        }
     }
 
     func getPlayedCards() -> [Card] {
@@ -209,7 +220,7 @@ class GameMainView:
         return delegate.getSuitPlayedFirst()
     }
     
-    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit?) -> Bool {
         guard let delegate
         else {
             fatalError("Delegate not found, module resolving screwed up")
@@ -218,7 +229,7 @@ class GameMainView:
         return delegate.playerHasSuitInHand(player, suit: suit)
     }
     
-    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool {
+    func isSuit(for card: NumberCard, suit: CardSuit?) -> Bool {
         guard let delegate
         else {
             fatalError("Delegate not found, module resolving screwed up")
@@ -307,12 +318,26 @@ class GameMainView:
         setupPlayArea()
         updatePlayArea()
 
+        guard let delegate
+        else { fatalError( "Delegate not configured" ) }
+        let activePlayer = delegate.getActivePlayer()
+
+        // This forces the .roundEnd New Round screen until bidding has finished.
         if biddingSetCount < playersCount - 1 {
-            gameAlertView.newAlert(for: .roundEnd)
+
             biddingSetCount += 1
+            if activePlayer.isHuman {
+                gameAlertView.newAlert(for: .roundEnd)
+            } else {
+                runComputerActions(isBidding: true)
+            }
         } else {
-            gameAlertView.newAlert(for: .turnEnd)
             biddingSetCount = 0
+            if activePlayer.isHuman {
+                gameAlertView.newAlert(for: .turnEnd)
+            } else {
+                runComputerActions()
+            }
         }
     }
 
@@ -433,6 +458,125 @@ class GameMainView:
         self.layoutIfNeeded()
         updatePlayArea()
 
-        gameAlertView.newAlert(for: .roundEnd)
+        guard let delegate
+        else {
+            fatalError( "Delegate not configured" )
+        }
+
+        let isHuman = delegate.getActivePlayer().isHuman
+
+        if isHuman {
+            gameAlertView.newAlert(for: .roundEnd)
+        } else {
+            runComputerActions(isBidding: true)
+        }
+    }
+
+    func runComputerActions(isBidding: Bool = false) {
+        let player = getActivePlayer()
+
+        guard let delegate
+        else {
+            fatalError("Delegate not found, module resolving screwed up")
+        }
+
+        print(isBidding)
+        if isBidding {
+
+            let players = delegate.getPlayers()
+            let totalBidsForRound = delegate.getNumberOfCardsForRound()
+
+            var totalBids = 0
+            for player in players {
+                if let activeBid = player.activeBid {
+                    totalBids += activeBid.value
+                }
+            }
+
+            let disallowedBid = totalBidsForRound - totalBids
+
+            var currentBidAmount: Int? = nil
+            if getActivePlayer() == getLastPlayer(players: players) {
+                currentBidAmount = disallowedBid
+
+                while currentBidAmount == disallowedBid {
+                    currentBidAmount = Int.random(in: 0...getNumberOfCardsForRound() )
+                }
+            } else {
+                currentBidAmount = Int.random(in: 0...getNumberOfCardsForRound())
+            }
+
+            guard let currentBidAmount
+            else {
+                fatalError( "Screwed up the computers bid" )
+            }
+
+            player.activeBid = Bid(value: currentBidAmount)
+            biddingSet()
+            return
+        } else {
+            var chosenCard: Card? = nil
+            while chosenCard == nil {
+                guard let tempCard = player.cards.randomElement()
+                else { fatalError("Player has no cards") }
+
+                if !tempCard.isDisabled {
+                    chosenCard = tempCard
+                }
+
+                chosenCard?.tappedState = .tapped
+            }
+            
+            guard let playAreaView
+            else { fatalError("Play Area View Not configured properly.") }
+            for cardView in playAreaView.handView.cardViews
+            where cardView.tappedState == .tapped {
+                if let cardView = cardView as? NumberCardView {
+                    cardView.tappedState = .notTapped
+                    cardView.cardTappedButtonTapped()
+                }
+                if let cardView = cardView as? SpecialCardView {
+                    cardView.tappedState = .notTapped
+                    cardView.cardTappedButtonTapped()
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                playAreaView.playAreaButtonTapped()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    playAreaView.endTurnButtonTapped()
+                }
+            }
+        }
+    }
+
+    func getLastPlayer(players: [PlayerModel]) -> PlayerModel {
+        guard let delegate
+        else {
+            fatalError("Delegate not set")
+        }
+
+        // Get the first id and the total number of players playing
+        let firstId = delegate.getPlayerIdForFirstPlayerThisPhase()
+        let totalPlayers = players.count
+
+        var lastId: Int = 0
+        // If the firstId is greater than 1, then the last player will be 1 less than the current first id.
+        if firstId > 1 {
+            lastId = firstId - 1
+        } else if firstId == 1 {
+        // If the firstId is 1, then the last player to play will have an id of the total amount of players playing
+            lastId = totalPlayers
+        } else {
+            fatalError("Player Ids should always be >= 1")
+        }
+
+        var lastPlayer: PlayerModel? = nil
+        for player in players where player.id == lastId {
+            lastPlayer = player
+        }
+
+        guard let lastPlayer else { fatalError("Last Player Not Found") }
+        return lastPlayer
     }
 }

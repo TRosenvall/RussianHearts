@@ -23,9 +23,9 @@ protocol HandViewDelegate {
     func getSuitPlayedFirst() -> CardSuit?
 
     func playerHasSuitInHand(_ player: PlayerModel,
-                             suit: CardSuit) -> Bool
+                             suit: CardSuit?) -> Bool
 
-    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
+    func isSuit(for card: NumberCard, suit: CardSuit?) -> Bool
 
     func isPassingPhase() -> Bool
 }
@@ -210,7 +210,7 @@ class HandView: UIView, CardViewDelegate {
         let totalCards: CGFloat = CGFloat( player.cards.count )
         for i in 0..<Int(totalCards) {
             let card = player.cards[i]
-            var cardView = CardView()
+            var cardView: CardView?
 
             if let card = card as? NumberCard {
                 cardView = NumberCardView(card: card)
@@ -218,6 +218,9 @@ class HandView: UIView, CardViewDelegate {
             if let card = card as? SpecialCard {
                 cardView = SpecialCardView(card: card)
             }
+
+            guard let cardView
+            else { fatalError("Card View Failed Setup") }
 
             cardView.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(cardView)
@@ -272,12 +275,13 @@ class HandView: UIView, CardViewDelegate {
             cardViews.append(cardView)
 
             if let cardView = cardView as? NumberCardView,
-               let suitPlayedFirst = delegate.getSuitPlayedFirst() {
+               let card = cardView.card as? NumberCard {
                 let activePlayer: PlayerModel = delegate.getActivePlayer()
                 let trumpSuit: CardSuit = delegate.getTrump()
+                let suitPlayedFirst = delegate.getSuitPlayedFirst()
                 let hasSuitInHand: Bool = delegate.playerHasSuitInHand(activePlayer,
                                                                        suit: suitPlayedFirst)
-                let cardIsFirstSuit: Bool = delegate.isSuit(for: cardView.card,
+                let cardIsFirstSuit: Bool = delegate.isSuit(for: card,
                                                             suit: suitPlayedFirst)
 
                 updateShouldBeDisabled(for: cardView,
@@ -320,6 +324,16 @@ class HandView: UIView, CardViewDelegate {
             let upConstraint = upConstraints[cardView.tag]
             defaultLeadingConstraint?.isActive = false
             upConstraint?.isActive = false
+
+            guard let delegate
+            else { fatalError("Delegate not properly configured") }
+
+            if delegate.isPassingPhase() {
+                cardView.isUpsideDown = true
+            } else {
+                cardView.isUpsideDown = false
+            }
+
         case .notSelected:
             let placeholderLeadingConstraint = placeholderLeadingConstraints[cardView.tag]
             let placeholderTopConstraint = topConstraints[cardView.tag]
@@ -330,7 +344,10 @@ class HandView: UIView, CardViewDelegate {
             let upConstraint = upConstraints[cardView.tag]
             defaultLeadingConstraint?.isActive = true
             upConstraint?.isActive = true
+
+            cardView.isUpsideDown = false
         }
+
         layoutIfNeeded()
     }
 
@@ -404,7 +421,7 @@ class HandView: UIView, CardViewDelegate {
             card.removeDisabledView()
             return
         } else {
-            if card.card.suit == trumpSuit {
+            if card.cardSuit == trumpSuit {
                 card.removeDisabledView()
                 return
             }

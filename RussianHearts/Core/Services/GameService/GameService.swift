@@ -97,6 +97,8 @@ class GameService: Service {
 
     var playerThatWonLastRound: PlayerModel?
 
+    var endTurnType: EndTurnType = .roundEnd
+
     // MARK: - Lifecycle
     init(entityManager: EntityManaging = EntityManager.shared,
          deck: DeckModelController = DeckModelController()) {
@@ -116,6 +118,7 @@ class GameService: Service {
 
     // Create a new game
     func newGame(with players: [PlayerModel]) {
+        deck = DeckModelController()
         activeGame = GameModel(players: players)
         deck.newRound(in: &activeGame!)
     }
@@ -127,10 +130,13 @@ class GameService: Service {
             let index = game.rounds.firstIndex(of: currRound)
             game.activeRound = game.rounds[index! + 1]
             deck.newRound(in: &game)
-            return .roundEnd
+            resetPlayerCardStates(player: game.activeRound.activePhase.activeTurn.activePlayer)
+            self.endTurnType = .roundEnd
+            return self.endTurnType
         } else {
             game.endOfGame = true
-            return .gameEnd
+            self.endTurnType = .gameEnd
+            return self.endTurnType
         }
     }
 
@@ -155,7 +161,9 @@ class GameService: Service {
             let index = game.activeRound.phases.firstIndex(of: currPhase)
             game.activeRound.activePhase = game.activeRound.phases[index! + 1]
             game.activeRound.activePhase.firstPlayerId = winningId
-            return .phaseEnd
+            resetPlayerCardStates(player: game.activeRound.activePhase.activeTurn.activePlayer)
+            self.endTurnType = .phaseEnd
+            return self.endTurnType
         } else {
             return nextRound(in: &game)
         }
@@ -166,7 +174,9 @@ class GameService: Service {
         if currTurn != game.activeRound.activePhase.turns.last {
             let index = game.activeRound.activePhase.turns.firstIndex(of: currTurn)
             game.activeRound.activePhase.activeTurn = game.activeRound.activePhase.turns[index! + 1]
-            return .turnEnd
+            resetPlayerCardStates(player: game.activeRound.activePhase.activeTurn.activePlayer)
+            self.endTurnType = .turnEnd
+            return self.endTurnType
         } else {
             return nextPhase(in: &game)
         }
@@ -236,6 +246,11 @@ class GameService: Service {
             } else if winningCard == nil && card is SpecialCard {
                 winningCard = card
             }
+        }
+
+        // No score should be incremented in the case of only the low card and high cards being played.
+        if cardsPlayed.count == 2 && hasLowCard && hasHighCard {
+            return playerThatWonLastRound?.id
         }
 
         if (hasLowCard && hasHighCard) || (!hasLowCard && !hasHighCard) {
@@ -380,6 +395,7 @@ class GameService: Service {
         playerIdForFirstPlayerThisPhase = winningPlayer.id
         winningPlayer.score += 1
         print("Starting player name: \(winningPlayer.name.description)")
+
         return winningPlayer.id
     }
 
@@ -448,16 +464,19 @@ class GameService: Service {
         return nil
     }
     
-    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit?) -> Bool {
         let numberCards = player.cards.compactMap { card in
             return card as? NumberCard
         }
         let cardSuits = numberCards.map { $0.suit }
-        return cardSuits.contains(suit)
+        if let suit {
+            return cardSuits.contains(suit)
+        }
+        return false
     }
 
     func isSuit(for card: NumberCard,
-                suit: CardSuit) -> Bool {
+                suit: CardSuit?) -> Bool {
         deck.cardIsSuit(for: card, suit: suit)
     }
 
@@ -528,5 +547,17 @@ class GameService: Service {
             return passesForward
         }
         return false
+    }
+
+    func getEndTurnType() -> EndTurnType {
+        return self.endTurnType
+    }
+
+    func resetPlayerCardStates(player: PlayerModel) {
+        // Reset the card states
+        for card in player.cards {
+            card.tappedState = .notTapped
+            card.selectedState = .notSelected
+        }
     }
 }

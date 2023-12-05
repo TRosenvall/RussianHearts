@@ -22,9 +22,9 @@ protocol PlayAreaViewDelegate {
 
     func getSuitPlayedFirst() -> CardSuit?
     
-    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit?) -> Bool
     
-    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool
+    func isSuit(for card: NumberCard, suit: CardSuit?) -> Bool
 
     func isPassingPhase() -> Bool
 
@@ -144,11 +144,11 @@ class PlayAreaView: UIView, HandViewDelegate, PlayerInfoViewDelegate {
 
         if let cardView = cardView as? NumberCardView {
             print("Card Selected")
-            print("Card Suit: \(cardView.card.suit)")
-            print("Card Value: \(cardView.card.value)")
+            print("Card Suit: \(cardView.cardSuit)")
+            print("Card Value: \(cardView.cardValue)")
         } else if let cardView = cardView as? SpecialCardView {
             print("Card Selected")
-            print("Card Name: \(cardView.card.name)")
+            print("Card Name: \(cardView.cardName)")
         }
 
         switch cardView.selectedState {
@@ -236,7 +236,7 @@ class PlayAreaView: UIView, HandViewDelegate, PlayerInfoViewDelegate {
         return delegate.getSuitPlayedFirst()
     }
     
-    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit?) -> Bool {
         guard let delegate
         else {
             fatalError("Delegate not found, module resolving screwed up")
@@ -245,7 +245,7 @@ class PlayAreaView: UIView, HandViewDelegate, PlayerInfoViewDelegate {
         return delegate.playerHasSuitInHand(player, suit: suit)
     }
     
-    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool {
+    func isSuit(for card: NumberCard, suit: CardSuit?) -> Bool {
         guard let delegate
         else {
             fatalError("Delegate not found, module resolving screwed up")

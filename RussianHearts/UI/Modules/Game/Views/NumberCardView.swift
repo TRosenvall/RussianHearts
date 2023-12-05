@@ -10,16 +10,16 @@ import UIKit
 class NumberCardView: CardView {
 
     // MARK: - Properties
-    var card: NumberCard
     let borderWidth: CGFloat = 3
     var wasDisabled: Bool = false
     var cardColor: UIColor {
+        guard let card = card as? NumberCard
+        else { fatalError("Card Type Misaligned") }
         if isUpsideDown {
             return .darkGray
         }
         return card.suit.transformToColor()
     }
-    var isDisabled: Bool = false
 
     var cornerRadius: CGFloat {
         get {
@@ -37,6 +37,9 @@ class NumberCardView: CardView {
             return _isUpsideDown
         }
         set {
+            guard let card = card as? NumberCard
+            else { fatalError("Card Type Misaligned") }
+
             _isUpsideDown = newValue
             if _isUpsideDown {
                 cardText = "Card Back"
@@ -45,6 +48,20 @@ class NumberCardView: CardView {
             }
             setupViews()
         }
+    }
+
+    var cardSuit: CardSuit {
+        guard let card = card as? NumberCard
+        else { fatalError("Card Type Misaligned") }
+
+        return card.suit
+    }
+
+    var cardValue: CardValues {
+        guard let card = card as? NumberCard
+        else { fatalError("Card Type Misaligned") }
+
+        return card.value
     }
 
     // MARK: - Views
@@ -100,8 +117,7 @@ class NumberCardView: CardView {
 
     // MARK: - Lifecycle
     init(card: NumberCard) {
-        self.card = card
-        super.init(frame: CGRect())
+        super.init(card: card)
 
         self.translatesAutoresizingMaskIntoConstraints = false
 

@@ -38,9 +38,9 @@ class ModuleManager: ModuleManaging {
 
     // MARK: - Conformance: ModuleManaging
     func retrieveModule<T>(delegate: SceneCoordinating) -> T? {
-        for module in resolvedModules where module is T {
-            return module as? T
-        }
+//        for module in resolvedModules where module is T {
+//            return module as? T
+//        }
         let module: T? = factory.buildModule(delegate: delegate)
         guard let resolvedModule = module as? any ModuleController
         else { return nil }

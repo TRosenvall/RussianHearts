@@ -156,9 +156,17 @@ class DeckModelController {
             return card as? NumberCard
         }
 
-        guard let firstNumberCard = numberCards.first else { fatalError("Deck too small") }
-        deck.trump = firstNumberCard.suit
-        return firstNumberCard.suit
+        if let firstNumberCard = numberCards.first {
+            deck.trump = firstNumberCard.suit
+            return firstNumberCard.suit
+        } else {
+            for card in deck.discardPile {
+                moveCardFromOneStackIntoAnother(card: card,
+                                                stack1: &deck.discardPile,
+                                                stack2: &deck.cards)
+            }
+            return getTrump()
+        }
     }
 
     func getNewTrump() -> CardSuit {
@@ -171,8 +179,11 @@ class DeckModelController {
     }
 
     func cardIsSuit(for card: NumberCard,
-                    suit: CardSuit) -> Bool {
-        return card.suit == suit
+                    suit: CardSuit?) -> Bool {
+        if let suit {
+            return card.suit == suit
+        }
+        return false
     }
 
     func organizeHand(for player: PlayerModel) {

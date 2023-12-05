@@ -7,6 +7,8 @@
 
 import UIKit
 
+typealias PlayerOptions = (name: String, isHuman: Bool)
+
 // Determines how to call on required dependencies for routing
 protocol NewGameDelegate: ModuleDelegate {
     func routeBack(animated: Bool)
@@ -20,7 +22,7 @@ protocol NewGameView: ModuleController {
 
     func backButtonTapped()
 
-    func startNewGame(with playerValues: [Int?: String?])
+    func startNewGame(with playerValues: [Int?: PlayerOptions?])
 }
 
 // Needs continue button
@@ -67,7 +69,7 @@ class NewGameViewController:
         delegate?.routeBack(animated: true)
     }
     
-    func startNewGame(with playerValues: [Int? : String?]) {
+    func startNewGame(with playerValues: [Int? : PlayerOptions?]) {
         Task { @MainActor in
             await worker?.startNewGame(with: playerValues)
             delegate?.routeToGameModule()

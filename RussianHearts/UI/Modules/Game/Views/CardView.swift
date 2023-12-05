@@ -11,12 +11,12 @@ protocol CardViewDelegate {
     func tapped(_ cardView: CardView)
 }
 
-enum CardTappedState {
+enum CardTappedState: Codable {
     case tapped
     case notTapped
 }
 
-enum CardSelectedState {
+enum CardSelectedState: Codable {
     case selected
     case notSelected
 }
@@ -24,6 +24,7 @@ enum CardSelectedState {
 class CardView: UIView {
 
     // MARK: - Properties
+    var card: Card
     var delegate: CardViewDelegate? = nil
 
     var cardRatio: CGFloat = 62.0/88.0
@@ -38,6 +39,40 @@ class CardView: UIView {
         }
     }
 
-    var tappedState: CardTappedState = .notTapped
-    var selectedState: CardSelectedState = .notSelected
+    var isDisabled: Bool {
+        get {
+            return card.isDisabled
+        }
+        set {
+            card.isDisabled = newValue
+        }
+    }
+
+    var tappedState: CardTappedState {
+        get {
+            return card.tappedState
+        }
+        set {
+            card.tappedState = newValue
+        }
+    }
+                                                                        
+    var selectedState: CardSelectedState {
+        get {
+            return card.selectedState
+        }
+        set {
+            card.selectedState = newValue
+        }
+    }
+
+    // MARK: - Lifecycle
+    init(card: Card) {
+        self.card = card
+        super.init(frame: CGRect())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

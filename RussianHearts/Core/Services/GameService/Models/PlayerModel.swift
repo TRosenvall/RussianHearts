@@ -16,12 +16,15 @@ class PlayerModel: Equatable, Codable {
     var score: Int = 0
     var scoreTotal: Int = 0
     var id: Int
+    var isHuman: Bool
 
     // MARK: - Lifecycle
     init(name: String,
-         id: Int) {
+         id: Int,
+         isHuman: Bool) {
         self.name = name
         self.id = id
+        self.isHuman = isHuman
     }
 
     // MARK: - Conformance: Equatable
@@ -36,6 +39,7 @@ class PlayerModel: Equatable, Codable {
         case activeBid
         case score
         case id
+        case isHuman
     }
 
     required init(from decoder: Decoder) throws {
@@ -45,5 +49,6 @@ class PlayerModel: Equatable, Codable {
         self.activeBid = try values.decode(Bid?.self, forKey: .activeBid)
         self.score = try values.decode(Int.self, forKey: .score)
         self.id = try values.decode(Int.self, forKey: .id)
+        self.isHuman = try values.decode(Bool.self, forKey: .isHuman)
     }
 }

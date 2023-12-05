@@ -60,7 +60,22 @@ class SceneRouter: SceneWireframe {
 
     func routeBackToMainMenu(from module: any ModuleController) {
         navController?.popToRootViewController(animated: false)
-        manager.dismiss(module: module)
+
+        var modulesToRelease: [any ModuleController] = []
+        var moduleToCheck = module
+        while moduleToCheck != mainWindow.rootViewController {
+            modulesToRelease.append(moduleToCheck)
+            if let moduleController = moduleToCheck.presentingViewController as? (any ModuleController) {
+                moduleToCheck = moduleController
+            } else {
+                break
+            }
+        }
+
+        for release in modulesToRelease {
+            manager.dismiss(module: release)
+        }
+//        manager.dismiss(module: module)
         routeToMainMenu()
     }
 

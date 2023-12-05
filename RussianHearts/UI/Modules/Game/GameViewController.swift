@@ -137,7 +137,7 @@ class GameViewController:
         return gameService.getSuitPlayedFirst()
     }
     
-    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit) -> Bool {
+    func playerHasSuitInHand(_ player: PlayerModel, suit: CardSuit?) -> Bool {
         guard let gameService
         else {
             fatalError("Interactor not found, module resolving screwed up")
@@ -146,7 +146,7 @@ class GameViewController:
         return gameService.playerHasSuitInHand(player, suit: suit)
     }
 
-    func isSuit(for card: NumberCard, suit: CardSuit) -> Bool {
+    func isSuit(for card: NumberCard, suit: CardSuit?) -> Bool {
         guard let gameService
         else {
             fatalError("Interactor not found, module resolving screwed up")
@@ -214,6 +214,15 @@ class GameViewController:
         }
 
         return gameService.passesForward()
+    }
+
+    func getEndTurnType() -> EndTurnType {
+        guard let gameService
+        else {
+            fatalError("Interactor not found, module resolving screwed up")
+        }
+
+        return gameService.getEndTurnType()
     }
 
     func routeToMainMenu() {

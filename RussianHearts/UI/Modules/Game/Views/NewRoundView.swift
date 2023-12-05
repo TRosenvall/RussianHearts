@@ -19,6 +19,8 @@ protocol NewRoundViewDelegate {
     func flipCards()
 
     func getPlayerIdForFirstPlayerThisPhase() -> Int
+
+    func getLastPlayer(players: [PlayerModel]) -> PlayerModel
 }
 
 class NewRoundView: UIView {
@@ -452,30 +454,9 @@ class NewRoundView: UIView {
     func getLastPlayer(players: [PlayerModel]) -> PlayerModel {
         guard let delegate
         else {
-            fatalError("Delegate not set")
+            fatalError( "Delegate not configured properly" )
         }
 
-        // Get the first id and the total number of players playing
-        let firstId = delegate.getPlayerIdForFirstPlayerThisPhase()
-        let totalPlayers = players.count
-
-        var lastId: Int = 0
-        // If the firstId is greater than 1, then the last player will be 1 less than the current first id.
-        if firstId > 1 {
-            lastId = firstId - 1
-        } else if firstId == 1 {
-        // If the firstId is 1, then the last player to play will have an id of the total amount of players playing
-            lastId = totalPlayers
-        } else {
-            fatalError("Player Ids should always be >= 1")
-        }
-
-        var lastPlayer: PlayerModel? = nil
-        for player in players where player.id == lastId {
-            lastPlayer = player
-        }
-
-        guard let lastPlayer else { fatalError("Last Player Not Found") }
-        return lastPlayer
+        return delegate.getLastPlayer(players: players)
     }
 }

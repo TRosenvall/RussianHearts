@@ -33,6 +33,8 @@ protocol GameAlertViewDelegate {
     func getWinningPlayers() -> [PlayerModel]
 
     func removeGame()
+
+    func getLastPlayer(players: [PlayerModel]) -> PlayerModel
 }
 
 // This view will be the full size of the containing view controller
@@ -188,6 +190,15 @@ class GameAlertView:
 
     func removeGame() {
         delegate?.removeGame()
+    }
+
+    func getLastPlayer(players: [PlayerModel]) -> PlayerModel {
+        guard let delegate
+        else {
+            fatalError( "Delegate not configured properly" )
+        }
+
+        return delegate.getLastPlayer(players: players)
     }
 
     // MARK: - Conformance: GameOverViewDelegate
