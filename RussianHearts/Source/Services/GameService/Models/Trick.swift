@@ -11,6 +11,8 @@ struct Trick: Model {
 
     // MARK: - Properties
 
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let turns: [Turn]?
     let activeTurn: Turn?

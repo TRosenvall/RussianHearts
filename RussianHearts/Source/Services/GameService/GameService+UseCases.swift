@@ -22,6 +22,8 @@ extension GameService {
 
         // MARK: - Properties
 
+        typealias AssociatedEntity = GameEntity
+
         let id: UUID
         let retrieveGameState: CodingContainer? // With type RetrieveGameStateUseCase
 

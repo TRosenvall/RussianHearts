@@ -13,9 +13,10 @@ struct LaunchViewImpl: LaunchView {
 
     // MARK: - Properties
 
-    let viewModel: LaunchViewModelImpl
     let theme: LaunchTheme
     @State var state: Launch.State
+
+    var eventHandler: ((Launch.UIEvent) -> ())?
 
     // MARK: - Views
 
@@ -39,10 +40,7 @@ struct LaunchViewImpl: LaunchView {
         .onAppear {
             Logger.default.log("Launch View Did Appear")
 
-            viewModel.handleUIEvent(.didAppear)
-            viewModel.getLatestState { state in
-                self.state = state
-            }
+            eventHandler?(.didAppear)
         }
     }
 }

@@ -11,6 +11,9 @@ import Foundation
 struct Turn: Model {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let activePlayer: Player?
     let phaseState: PhaseState?

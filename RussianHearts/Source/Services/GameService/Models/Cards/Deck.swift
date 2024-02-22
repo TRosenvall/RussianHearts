@@ -10,6 +10,9 @@ import Foundation
 struct Deck: Model {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let drawPile: [Card]?
     let trump: CardSuit?

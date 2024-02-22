@@ -20,8 +20,11 @@ class LaunchHostingController: UIHostingController<LaunchViewImpl>, LaunchHost {
 
     // MARK: - Lifecycle
 
-    init(view: LaunchViewImpl) {
+    init(viewModel: LaunchViewModelImpl) {
         Logger.default.log("Initializing Launch Host")
+
+        guard let view = viewModel.view
+        else { Logger.default.logFatal("Launch View Model Missing View") }
 
         super.init(rootView: view)
     }

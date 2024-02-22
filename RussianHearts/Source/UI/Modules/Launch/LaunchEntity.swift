@@ -12,6 +12,7 @@ struct LaunchEntity: Entity {
     // MARK: - Properties
 
     typealias ModuleState = Launch.State
+    typealias AssociatedEntity = Self
 
     static var persistID: String = "com.russianhearts.launchentity"
 

@@ -10,6 +10,9 @@ import Foundation
 struct Round: Model {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let roundName: String?
     let numberOfCardsToPlay: Int?

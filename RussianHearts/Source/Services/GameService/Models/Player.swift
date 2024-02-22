@@ -11,6 +11,9 @@ import Foundation
 struct Player: Model {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let name: String?
     let orderNumber: Int?

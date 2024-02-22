@@ -28,6 +28,8 @@ struct LoadSavedData: LoadSavedDataUseCase {
 
     // MARK: - Properties
 
+    typealias AssociatedEntity = LaunchEntity
+
     let id: UUID
     let entityAccessor: CodingContainer? // With type EntityAccessing
     var completion: ((LoadSavedDataUseCaseResult) -> Void)?

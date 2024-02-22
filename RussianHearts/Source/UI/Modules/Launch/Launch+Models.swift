@@ -33,9 +33,10 @@ extension Launch {
 
         // MARK: - Properties
 
+        typealias AssociatedEntity = LaunchEntity
+
         let id: UUID
         let loadSavedData: CodingContainer? // With type any LoadSavedDataUseCase
-        let getActiveLaunchState: CodingContainer? // With type any GetActiveLaunchStateUseCase
 
         // MARK: - Lifecycle
 
@@ -46,18 +47,16 @@ extension Launch {
         fileprivate init(
             base: Launch.UseCases? = nil,
             id: UUID? = nil,
-            loadSavedData: (any LoadSavedDataUseCase)? = nil,
-            getActiveLaunchState: (any GetActiveLaunchStateUseCase)? = nil
+            loadSavedData: (any LoadSavedDataUseCase)? = nil
         ) {
             self.id = id ?? base?.id ?? UUID()
             self.loadSavedData = CodingContainer(loadSavedData) ?? base?.loadSavedData
-            self.getActiveLaunchState = CodingContainer(getActiveLaunchState) ?? base?.getActiveLaunchState
         }
 
         // MARK: - Conformance: Model
 
         func validate() throws -> Launch.UseCases {
-            guard loadSavedData != nil, getActiveLaunchState != nil
+            guard loadSavedData != nil
             else { throw ModelError.requiredModelPropertiesNotSet(onType: Self.self) }
 
             return self
@@ -70,11 +69,6 @@ extension GenericBuilder where T == Launch.UseCases {
         let newBase = Launch.UseCases(base: base, loadSavedData: loadSavedData)
         return GenericBuilder<Launch.UseCases>(base: newBase)
     }
-
-    func with(getActiveLaunchState: any GetActiveLaunchStateUseCase) -> GenericBuilder<Launch.UseCases> {
-        let newBase = Launch.UseCases(base: base, getActiveLaunchState: getActiveLaunchState)
-        return GenericBuilder<Launch.UseCases>(base: newBase)
-    }
 }
 
 ///------
@@ -83,6 +77,8 @@ extension Launch {
     struct State: Model {
 
         // MARK: - Properties
+
+        typealias AssociatedEntity = LaunchEntity
 
         let id: UUID
         let isLoading: Bool?
@@ -134,6 +130,8 @@ extension Launch.State {
     struct Alerts: Model {
 
         // MARK: - Properties
+
+        typealias AssociatedEntity = LaunchEntity
 
         let id: UUID
         let isShowingErrorAlert: Bool?

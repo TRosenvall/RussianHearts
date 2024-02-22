@@ -28,6 +28,7 @@ struct RetrieveGameState: RetrieveGameStateUseCase {
 
     // MARK: - Properties
 
+    typealias AssociatedEntity = GameEntity
     typealias ResultType = RetrieveGameStateUseCaseResult
 
     let id: UUID

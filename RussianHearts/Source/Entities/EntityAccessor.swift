@@ -32,6 +32,9 @@ struct EntityAccessor: EntityAccessing {
 
     // MARK: - Properties
 
+    typealias AssociatedEntity = DefaultEntity
+
+
     let id: UUID
     let fileManager: RHFileManager
     let encoder: RHEncoder
@@ -65,6 +68,8 @@ struct EntityAccessor: EntityAccessing {
     // MARK: - Conformance: EntityAccessing
 
     func loadAllEntities<T: Entity>() async throws -> [T] {
+        Logger.default.log("Loading All Entities Of Type \(T.self)")
+
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let appURL = appSupportURL.appendingPathComponent(Constants.appShortName)
 
@@ -76,12 +81,16 @@ struct EntityAccessor: EntityAccessing {
     }
 
     func loadActiveEntity<T: Entity>() async throws -> T {
+        Logger.default.log("Loading Active Entity Of Type \(T.self)")
+
         let entities: [T] = try await loadAllEntities()
 
         return try await loadActiveEntityHelper(entities: entities)
     }
 
     func save<T: Entity>(entity: T) async throws {
+        Logger.default.log("Saving Entity \(T.self)")
+
         let data = try encoder.encode(entity)
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         try fileManager.createDirectory(at: appSupportURL,
@@ -97,6 +106,8 @@ struct EntityAccessor: EntityAccessing {
     }
 
     func delete<T: Entity>(entity: T) async throws {
+        Logger.default.log("Deleting Data For \(T.self)")
+
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         try fileManager.createDirectory(at: appSupportURL,
                                         withIntermediateDirectories: true)
@@ -110,13 +121,25 @@ struct EntityAccessor: EntityAccessing {
     }
 
     func update<T: Entity>(entity: T) async throws {
+        Logger.default.log("Updating \(T.self)")
+
         try await self.delete(entity: entity)
         try await self.save(entity: entity)
     }
 
     func validateEntity<T: Entity>(_ entity: T) async throws -> Bool {
-        // TODO: - Check if entity exists, return Bool if true
-        return false
+        Logger.default.log("Validating Entity \(T.self)")
+
+        let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        try fileManager.createDirectory(at: appSupportURL,
+                                        withIntermediateDirectories: true)
+        let appURL = appSupportURL.appendingPathComponent(Constants.appShortName)
+        try FileManager.default.createDirectory(at: appURL,
+                                                withIntermediateDirectories: true)
+
+        let fileName = "\(T.persistID).\(entity.id).json"
+        let fileURL = appURL.appendingPathComponent(fileName)
+        return fileManager.fileExists(atPath: fileURL.absoluteString)
     }
 
     // MARK: - Helpers

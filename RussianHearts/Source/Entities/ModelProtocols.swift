@@ -46,6 +46,9 @@ protocol Model: Equatable, Hashable, Codable {
     /// The coding container type + it's default
     associatedtype CodingContainer: CodingContainerType = TypeContainer
 
+    /// The entity associated with that specific model.
+    associatedtype AssociatedEntity: Entity
+
     /// Provide a generic builder for our models which we can extend as needed
     static var Builder: R { get }
 

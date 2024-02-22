@@ -12,6 +12,8 @@ struct GameEntity: Entity {
     // MARK: - Properties
 
     typealias ModuleState = GameState
+    typealias AssociatedEntity = Self
+
 
     static var persistID: String = "com.russianhearts.gameentity"
 

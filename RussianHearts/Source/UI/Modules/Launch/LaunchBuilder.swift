@@ -30,33 +30,9 @@ class LaunchBuilder {
         let loadSavedData = try LoadSavedData.Builder
             .with(entityAccessor: entityAccessor)
             .build()
-        let getActiveLaunchState = try GetActiveLaunchState.Builder
-            .with(entityAccessor: entityAccessor)
-            .build()
 
         let useCases = try Launch.UseCases.Builder
             .with(loadSavedData: loadSavedData)
-            .with(getActiveLaunchState: getActiveLaunchState)
-            .build()
-
-        // Routing
-        Logger.default.log("Setting Up Routing")
-        let routes: ((Launch.UIRoute) -> ()) = { route in
-            switch route {
-            case .toMainMenu:
-                Logger.default.log("Routing To Main Menu")
-                delegate.routeToMainMenu()
-            }
-        }
-
-        // Transformer
-        let transformer = LaunchTransformer()
-
-        // View Model
-        let viewModel = try LaunchViewModelImpl.Builder
-            .with(useCases: useCases)
-            .with(uiRoutes: routes)
-            .with(transformer: transformer)
             .build()
 
         // App State
@@ -68,20 +44,60 @@ class LaunchBuilder {
             .with(states: [state])
             .with(completionState: .active)
             .build()
-        try UpdateEntityUseCase.update(withNewEntity: entity, using: entityAccessor) { result in
+        try Global.updateEntity(entity, using: entityAccessor) { result in
             switch result {
-            case .success(let entity):
+            case .success:
                 Logger.default.log("Launch Entity Saved On Initialization")
             case .error(let error):
                 Logger.default.logFatal("Error Saving Launch Entity: - \(error)")
             }
         }
 
-        // View and Host
-        let view: LaunchViewImpl = LaunchViewImpl.init(viewModel: viewModel,
-                                                       theme: theme,
-                                                       state: state)
-        let module: any LaunchHost = LaunchHostingController(view: view)
+        // Routing
+        Logger.default.log("Setting Up Routing")
+        let routes: ((Launch.UIRoute) -> ()) = { route in
+            do {
+                // Try To Remove Unneeded Entity
+                try Global.deleteEntity(entity, using: entityAccessor) { result in
+                    switch result {
+                    case .success:
+                        Logger.default.log("Launch Entity Removed On Route")
+                    case .error(let error):
+                        Logger.default.logFatal("Error Saving Launch Entity: - \(error)")
+                    }
+
+                    // Route on Main Thread
+                    Task { @MainActor in
+                        switch route {
+                        case .toMainMenu:
+                            Logger.default.log("Routing To Main Menu")
+                            delegate.routeToMainMenu()
+                        }
+                    }
+                }
+            } catch {
+                Logger.default.log("Error Deleting Entity On Route")
+            }
+        }
+
+        // Transformer
+        let transformer = LaunchTransformer()
+
+        // View
+        let view: LaunchViewImpl = LaunchViewImpl.init(
+            theme: theme,
+            state: state
+        )
+
+        // View Model
+        let viewModel = try LaunchViewModelImpl.Builder
+            .with(useCases: useCases)
+            .with(uiRoutes: routes)
+            .with(transformer: transformer)
+            .with(view: view)
+            .build()
+
+        let module: any LaunchHost = LaunchHostingController(viewModel: viewModel)
 
         return module
     }

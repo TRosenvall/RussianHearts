@@ -126,7 +126,7 @@ struct Logger: LoggerProtocol {
             return
         }
 
-        let logFileURL = documentsDirectory.appendingPathComponent("\(runtimeID)")
+        let logFileURL = documentsDirectory.appendingPathComponent("\(Global.runtimeID)")
 
         do {
             // Check if the file exists
@@ -145,25 +145,25 @@ struct Logger: LoggerProtocol {
     }
 
     func markAsTransmitted() {
-            guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-                return
-            }
-
-            let logFileURL = documentsDirectory.appendingPathComponent("\(runtimeID)")
-
-            do {
-                // Read the contents of the file
-                var fileContents = try String(contentsOf: logFileURL)
-
-                // Update the "Transmitted" line to "Transmitted: true"
-                fileContents = fileContents.replacingOccurrences(of: "Transmitted=False", with: "Transmitted=True")
-
-                // Write the updated contents back to the file
-                try fileContents.write(to: logFileURL, atomically: true, encoding: .utf8)
-            } catch {
-                print("Error marking as transmitted: \(error)")
-            }
+        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return
         }
+
+        let logFileURL = documentsDirectory.appendingPathComponent("\(Global.runtimeID)")
+
+        do {
+            // Read the contents of the file
+            var fileContents = try String(contentsOf: logFileURL)
+
+            // Update the "Transmitted" line to "Transmitted: true"
+            fileContents = fileContents.replacingOccurrences(of: "Transmitted=False", with: "Transmitted=True")
+
+            // Write the updated contents back to the file
+            try fileContents.write(to: logFileURL, atomically: true, encoding: .utf8)
+        } catch {
+            print("Error marking as transmitted: \(error)")
+        }
+    }
 }
 
 extension String {

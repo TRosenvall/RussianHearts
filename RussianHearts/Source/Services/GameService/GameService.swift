@@ -26,6 +26,8 @@ struct GameService:
 
     // MARK: - Properties
 
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let useCase: CodingContainer? // Contains GameService.UseCase
 

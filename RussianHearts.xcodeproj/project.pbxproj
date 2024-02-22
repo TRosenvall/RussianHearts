@@ -102,9 +102,6 @@
 		85FA15702B6FDA5E00050776 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA156F2B6FDA5E00050776 /* Colors.swift */; };
 		85FA157A2B7E598A00050776 /* GameService+UseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA15792B7E598A00050776 /* GameService+UseCases.swift */; };
 		85FA157E2B7ECDEB00050776 /* LaunchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA157D2B7ECDEB00050776 /* LaunchEntity.swift */; };
-		85FA15802B7EDA9E00050776 /* GetActiveLaunchStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA157F2B7EDA9E00050776 /* GetActiveLaunchStateUseCase.swift */; };
-		85FA15822B7EDAD400050776 /* PersistNewLaunchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA15812B7EDAD400050776 /* PersistNewLaunchState.swift */; };
-		85FA15842B7EDAE200050776 /* ClearLaunchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA15832B7EDAE200050776 /* ClearLaunchEntity.swift */; };
 		85FA15872B80BF6A00050776 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA15862B80BF6A00050776 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
@@ -225,9 +222,6 @@
 		85FA156F2B6FDA5E00050776 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		85FA15792B7E598A00050776 /* GameService+UseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameService+UseCases.swift"; sourceTree = "<group>"; };
 		85FA157D2B7ECDEB00050776 /* LaunchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchEntity.swift; sourceTree = "<group>"; };
-		85FA157F2B7EDA9E00050776 /* GetActiveLaunchStateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActiveLaunchStateUseCase.swift; sourceTree = "<group>"; };
-		85FA15812B7EDAD400050776 /* PersistNewLaunchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistNewLaunchState.swift; sourceTree = "<group>"; };
-		85FA15832B7EDAE200050776 /* ClearLaunchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearLaunchEntity.swift; sourceTree = "<group>"; };
 		85FA15862B80BF6A00050776 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -605,9 +599,6 @@
 		85FA156A2B6EBDCA00050776 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				85FA157F2B7EDA9E00050776 /* GetActiveLaunchStateUseCase.swift */,
-				85FA15812B7EDAD400050776 /* PersistNewLaunchState.swift */,
-				85FA15832B7EDAE200050776 /* ClearLaunchEntity.swift */,
 				85FA156B2B6EBDD700050776 /* LoadSavedDataUseCase.swift */,
 			);
 			path = UseCases;
@@ -763,7 +754,6 @@
 				85C95BC32B3CA59F00762ACA /* TaskManager.swift in Sources */,
 				85E181482B0D6FAE00292733 /* SettingsViewController.swift in Sources */,
 				85DD62DB2A33D42D00A6DA51 /* GameViewController.swift in Sources */,
-				85FA15802B7EDA9E00050776 /* GetActiveLaunchStateUseCase.swift in Sources */,
 				85FA157E2B7ECDEB00050776 /* LaunchEntity.swift in Sources */,
 				85E181312B0CC89C00292733 /* RulesBuilder.swift in Sources */,
 				85E24B632A97A7AE00157E70 /* MainMenuBuilder.swift in Sources */,
@@ -774,7 +764,6 @@
 				85E181382B0CC8C800292733 /* RulesMainView.swift in Sources */,
 				85E24B6D2A9B7B8200157E70 /* GameService.swift in Sources */,
 				8541F2EB2AAFD29200208757 /* GameOverView.swift in Sources */,
-				85FA15822B7EDAD400050776 /* PersistNewLaunchState.swift in Sources */,
 				85C95BC52B3CC28D00762ACA /* EndTrickUseCase.swift in Sources */,
 				85E181412B0CCBCE00292733 /* FriendsMainView.swift in Sources */,
 				85DB785E2A36850B00D8A2A1 /* Round.swift in Sources */,
@@ -818,7 +807,6 @@
 				85D00EFD2AAD31810037B2ED /* GameAlertView.swift in Sources */,
 				85DD62D72A33D42D00A6DA51 /* AppDelegate.swift in Sources */,
 				85D8C1EC2AAE7C9300697506 /* NewRoundView.swift in Sources */,
-				85FA15842B7EDAE200050776 /* ClearLaunchEntity.swift in Sources */,
 				858478D72B38282600B68D4E /* Array+RemoveAt.swift in Sources */,
 				853C686B2B0BA7CC00C475BA /* GameMainView.swift in Sources */,
 				85D00EF72AA3D08B0037B2ED /* CardView.swift in Sources */,

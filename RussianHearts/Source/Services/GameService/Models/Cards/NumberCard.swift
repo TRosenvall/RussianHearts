@@ -44,6 +44,9 @@ enum CardSuit: String, CaseIterable, Codable {
 struct NumberCard: CardProtocol {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let value: CardValue?
     let suit: CardSuit?

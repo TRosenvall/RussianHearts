@@ -11,6 +11,9 @@ import Foundation
 struct Bid: Model {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let value: Int?
     let forPlayerWithID: UUID?

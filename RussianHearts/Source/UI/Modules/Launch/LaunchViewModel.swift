@@ -20,8 +20,10 @@ struct LaunchViewModelImpl:
     typealias ModuleError = Launch.ModuleError
     typealias UIRoute = Launch.UIRoute
     typealias ModuleState = Launch.State
+    typealias AssociatedEntity = LaunchEntity
 
     let id: UUID
+    var view: LaunchViewImpl? = nil
 
     let uiRoutes: ((Launch.UIRoute) -> ())?
     let useCases: Launch.UseCases?
@@ -38,18 +40,30 @@ struct LaunchViewModelImpl:
         id: UUID? = nil,
         uiRoutes: ((Launch.UIRoute) -> ())? = nil,
         useCases: Launch.UseCases? = nil,
-        transformer: LaunchTransformer? = nil
+        transformer: LaunchTransformer? = nil,
+        view: LaunchViewImpl? = nil
     ) {
         self.id = id ?? base?.id ?? UUID()
         self.uiRoutes = uiRoutes ?? base?.uiRoutes
         self.useCases = useCases ?? base?.useCases
         self.transformer = transformer ?? base?.transformer
+
+        if var view {
+            view.eventHandler = self.handleUIEvent(_:)
+            self.view = view
+        } else {
+            self.view = base?.view
+        }
+
+        if self.view == nil {
+            Logger.default.log("View Model Created Without View", logType: .warn)
+        }
     }
 
     // MARK: - Conformance: Model
 
     func validate() throws -> Self {
-        guard useCases != nil, transformer != nil
+        guard useCases != nil, transformer != nil, view != nil
         else { throw ModelError.requiredModelPropertiesNotSet(onType: Self.self) }
 
         /// This code is here to ensure uiRoutes have been set on the view model. If they haven't
@@ -59,7 +73,7 @@ struct LaunchViewModelImpl:
         resetScope: do {
             guard uiRoutes != nil 
             else {
-                defer { GlobalSceneDelegate?.reset() }
+                defer { Global.sceneDelegate?.reset() }
                 break resetScope
             }
         }
@@ -105,12 +119,12 @@ struct LaunchViewModelImpl:
         Logger.default.log("Fetching Latest State")
 
         Task { @MainActor in
-            if let getActiveLaunchState = useCases?.getActiveLaunchState?.value() as? (any GetActiveLaunchStateUseCase) {
-                UseCaseManager.sharedInstance.execute(
-                    getActiveLaunchState,
-                    completion: transformer?.transform(completion: completion)
-                )
-            }
+//            if let getActiveLaunchState = useCases?.getActiveLaunchState?.value() as? (any GetActiveLaunchStateUseCase) {
+//                UseCaseManager.sharedInstance.execute(
+//                    getActiveLaunchState,
+//                    completion: transformer?.transform(completion: completion)
+//                )
+//            }
         }
     }
 
@@ -164,6 +178,7 @@ struct LaunchViewModelImpl:
 
         switch result {
         case .success(let gameState):
+//            let updatedState = Launch.State.Builder.with(base: gameState).with(isLoading: false).build()
             print(gameState)
 //                    state.isLoading = false
         case .error(let error):
@@ -189,6 +204,11 @@ extension GenericBuilder where T == LaunchViewModelImpl {
 
     func with(uiRoutes: ((Launch.UIRoute) -> ())?) -> GenericBuilder<LaunchViewModelImpl> {
         let newBase = LaunchViewModelImpl(base: base, uiRoutes: uiRoutes)
+        return GenericBuilder<LaunchViewModelImpl>(base: newBase)
+    }
+
+    func with(view: LaunchViewImpl) -> GenericBuilder<LaunchViewModelImpl> {
+        let newBase = LaunchViewModelImpl(base: base, view: view)
         return GenericBuilder<LaunchViewModelImpl>(base: newBase)
     }
 }

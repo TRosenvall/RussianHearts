@@ -7,7 +7,9 @@
 
 import UIKit
 
-var runtimeID: String = ""
+enum Global {
+    static var runtimeID: String = ""
+}
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let formattedDate = dateFormatter.string(from: Date.now)
-        runtimeID = "RussianHearts:-" + formattedDate
+        Global.runtimeID = "RussianHearts:-" + formattedDate
 
         Logger.default.log("Launching App")
 

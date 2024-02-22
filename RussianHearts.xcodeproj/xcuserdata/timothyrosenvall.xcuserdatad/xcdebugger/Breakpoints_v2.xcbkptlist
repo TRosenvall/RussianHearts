@@ -3,4 +3,166 @@
    uuid = "893D0CAB-EF6B-4C68-9A25-7A7E7B3F1ED4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC48A586-AC19-4F55-924C-765775A9B702"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "init(base:id:uiRoutes:useCases:transformer:view:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BC48A586-AC19-4F55-924C-765775A9B702 - 9fb58657aa7df57e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RussianHearts.LaunchViewModelImpl.init(base: Swift.Optional&lt;RussianHearts.LaunchViewModelImpl&gt;, id: Swift.Optional&lt;Foundation.UUID&gt;, uiRoutes: Swift.Optional&lt;(RussianHearts.Launch.UIRoute) -&gt; ()&gt;, useCases: Swift.Optional&lt;RussianHearts.Launch.UseCases&gt;, transformer: Swift.Optional&lt;RussianHearts.LaunchTransformer&gt;, view: Swift.Optional&lt;RussianHearts.LaunchViewImpl&gt;) -&gt; RussianHearts.LaunchViewModelImpl"
+                  moduleName = "RussianHearts"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "3351">
+               </Location>
+               <Location
+                  uuid = "BC48A586-AC19-4F55-924C-765775A9B702 - 53142ba72425e2dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #7 (RussianHearts.Launch.UIEvent) -&gt; () in implicit closure #6 (RussianHearts.LaunchViewModelImpl) -&gt; (RussianHearts.Launch.UIEvent) -&gt; () in RussianHearts.LaunchViewModelImpl.init(base: Swift.Optional&lt;RussianHearts.LaunchViewModelImpl&gt;, id: Swift.Optional&lt;Foundation.UUID&gt;, uiRoutes: Swift.Optional&lt;(RussianHearts.Launch.UIRoute) -&gt; ()&gt;, useCases: Swift.Optional&lt;RussianHearts.Launch.UseCases&gt;, transformer: Swift.Optional&lt;RussianHearts.LaunchTransformer&gt;, view: Swift.Optional&lt;RussianHearts.LaunchViewImpl&gt;) -&gt; RussianHearts.LaunchViewModelImpl"
+                  moduleName = "RussianHearts"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyrosenvall/Desktop/Projects/RussianHearts/RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "88CD2CB1-65CC-439B-B439-7B0C78561A1A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "init(base:id:uiRoutes:useCases:transformer:view:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20CC8519-E36B-4D4E-BB8F-71E03BB514D9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "init(base:id:uiRoutes:useCases:transformer:view:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20942934-6019-4C8D-A68C-8975F5BE1E9D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "init(base:id:uiRoutes:useCases:transformer:view:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A10ACBD7-3C7F-4BA1-A094-9ECF9B24BB4F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "LaunchViewModelImpl"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A22EDC1D-BE95-44EB-A5D3-DECE1AEA926E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "init(base:id:uiRoutes:useCases:transformer:view:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BEA977B9-4246-492A-AF8C-CEDCE003467E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "validate()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8BAD8D69-8942-42D0-94A4-1C24F6FE6AEB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RussianHearts/Source/UI/Modules/Launch/LaunchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "validate()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

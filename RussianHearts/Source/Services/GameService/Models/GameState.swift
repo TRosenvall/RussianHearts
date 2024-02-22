@@ -16,6 +16,9 @@ enum PhaseState: Codable {
 struct GameState: Model {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let rounds: [Round]?
     let activeRound: Round?

@@ -18,6 +18,9 @@ enum DeckError: Error {
 struct DeckController: Model {
 
     // MARK: - Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     let cards: Deck
 

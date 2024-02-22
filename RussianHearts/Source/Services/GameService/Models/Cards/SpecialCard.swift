@@ -86,6 +86,9 @@ struct SpecialCardName {
 struct SpecialCard: CardProtocol {
 
     // MARK: Properties
+
+    typealias AssociatedEntity = GameEntity
+
     let id: UUID
     var type: SpecialCardType?
     var name: String?
