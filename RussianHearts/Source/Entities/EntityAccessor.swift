@@ -144,8 +144,10 @@ struct EntityAccessor: EntityAccessing {
 
     // MARK: - Helpers
 
-    private func decodeEntityHelper<T: Entity>(urls: [URL],
-                                       decodedEntities: [T] = []) async throws -> [T] {
+    private func decodeEntityHelper<T: Entity>(
+        urls: [URL],
+        decodedEntities: [T] = []
+    ) async throws -> [T] {
         if let url = urls.first {
             let data = try Data(contentsOf: url)
             let entity = try decoder.decode(T.self, from: data)

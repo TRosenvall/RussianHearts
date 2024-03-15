@@ -12,7 +12,6 @@ protocol ModuleFactory {
 
     /// Builds and returns a module of a given type
     func buildModule<T>(delegate: SceneCoordinating) -> T?
-
 }
 
 struct ModuleFactoryImpl: ModuleFactory {
@@ -46,10 +45,20 @@ struct ModuleFactoryImpl: ModuleFactory {
                     colors: colors, 
                     entityAccessor: entityAccessor
                 ) as? T
-            case "\((any MainMenuView).self)":
-                return MainMenuBuilder().build(delegate: delegate) as? T
-            case "\((any NewGameView).self)":
-                return NewGameBuilder().build(delegate: delegate) as? T
+            case "\((any MainMenuHost).self)":
+                return try MainMenuBuilder().build(
+                    delegate: delegate,
+                    assets: assets,
+                    colors: colors,
+                    entityAccessor: entityAccessor
+                ) as? T
+            case "\((any NewGameHost).self)":
+                return try NewGameBuilder().build(
+                    delegate: delegate,
+                    assets: assets,
+                    colors: colors,
+                    entityAccessor: entityAccessor
+                ) as? T
             case "\((any GameView).self)":
                 return GameBuilder().build(delegate: delegate) as? T
             case "\((any HighscoresView).self)":

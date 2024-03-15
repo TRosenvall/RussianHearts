@@ -27,8 +27,6 @@ protocol ModuleViewModel: Model {
     func handleUIEvent(_ event: UIEvent)
 
     func handleError(_ error: ModuleError)
-
-    func getLatestState(completion: @escaping (ModuleState) -> ())
 }
 
 /// Contains all the UI elements for the module

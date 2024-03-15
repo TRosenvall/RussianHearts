@@ -47,3 +47,7 @@ enum Module {
         }
     }
 }
+
+///------
+
+protocol ModuleModelBase {}

@@ -1,5 +1,5 @@
 //
-//  LaunchViewModel.swift
+//  MainMenuViewModel.swift
 //  RussianHearts
 //
 //  Created by Timothy Rosenvall on 1/30/24.
@@ -7,41 +7,43 @@
 
 import SwiftUI
 
-protocol LaunchViewModel: ModuleViewModel {}
+protocol MainMenuViewModel: ModuleViewModel {
+    var view: MainMenuViewImpl? { get }
+}
 
-struct LaunchViewModelImpl:
-    LaunchViewModel,
+struct MainMenuViewModelImpl:
+    MainMenuViewModel,
     LoadSavedDataOutput
 {
 
     // MARK: - Properties
 
-    typealias UIEvent = Launch.UIEvent
-    typealias ModuleError = Launch.ModuleError
-    typealias UIRoute = Launch.UIRoute
-    typealias ModuleState = Launch.State
-    typealias AssociatedEntity = LaunchEntity
+    typealias UIEvent = MainMenu.UIEvent
+    typealias ModuleError = MainMenu.ModuleError
+    typealias UIRoute = MainMenu.UIRoute
+    typealias ModuleState = MainMenu.State
+    typealias AssociatedEntity = MainMenuEntity
 
     let id: UUID
-    var view: LaunchViewImpl? = nil
+    var view: MainMenuViewImpl? = nil
 
-    let uiRoutes: ((Launch.UIRoute) -> ())?
-    let useCases: Launch.UseCases?
-    let transformer: LaunchTransformer?
+    let uiRoutes: ((MainMenu.UIRoute) -> ())?
+    let useCases: MainMenu.UseCases?
+    let transformer: MainMenuTransformer?
 
     // MARK: - Lifecycle
 
-    internal init(with base: LaunchViewModelImpl?, id: UUID?) {
+    internal init(with base: MainMenuViewModelImpl?, id: UUID?) {
         self.init(base: base, id: id)
     }
 
     fileprivate init(
-        base: LaunchViewModelImpl? = nil,
+        base: MainMenuViewModelImpl? = nil,
         id: UUID? = nil,
-        uiRoutes: ((Launch.UIRoute) -> ())? = nil,
-        useCases: Launch.UseCases? = nil,
-        transformer: LaunchTransformer? = nil,
-        view: LaunchViewImpl? = nil
+        uiRoutes: ((MainMenu.UIRoute) -> ())? = nil,
+        useCases: MainMenu.UseCases? = nil,
+        transformer: MainMenuTransformer? = nil,
+        view: MainMenuViewImpl? = nil
     ) {
         self.id = id ?? base?.id ?? UUID()
         self.uiRoutes = uiRoutes ?? base?.uiRoutes
@@ -81,24 +83,32 @@ struct LaunchViewModelImpl:
         return self
     }
 
-    // MARK: - Conformance: LaunchViewModel
+    // MARK: - Conformance: MainMenuViewModel
 
-    func handleUIEvent(_ event: Launch.UIEvent) {
+    func handleUIEvent(_ event: MainMenu.UIEvent) {
         Logger.default.log("Handling \(event) Event")
 
         Task { @MainActor in
             switch event {
             case .didAppear:
-                let loadSavedData = useCases?.loadSavedData?.value() as? (any LoadSavedDataUseCase)
-                UseCaseManager.sharedInstance.execute(
-                    loadSavedData,
-                    completion: handleUseCaseResult(_:)
-                )
+                print("")
+            case .didTapNewGame:
+                uiRoutes?(.toNewGame)
+            case .didTapContinueGame(let entity):
+                uiRoutes?(.toContinueGame(entity: entity))
+            case .didTapRules:
+                uiRoutes?(.toRules)
+            case .didTapHighscores:
+                uiRoutes?(.toHighscores)
+            case .didTapFriends:
+                uiRoutes?(.toFriends)
+            case .didTapSettings:
+                uiRoutes?(.toSettings)
             }
         }
     }
 
-    func handleError(_ error: Launch.ModuleError) {
+    func handleError(_ error: MainMenu.ModuleError) {
         Logger.default.log("Handing \(error) Error")
 
         Task { @MainActor in
@@ -117,11 +127,11 @@ struct LaunchViewModelImpl:
         Logger.default.log("Sorting Use Case Result Type")
 
         Task { @MainActor in
-            if let result = result as? LoadSavedDataUseCaseResult {
-                handleLoadSavedDataUseCaseResult(result)
-            } else {
-                // Handle other UseCaseTypes
-            }
+//            if let result = result as? LoadSavedDataUseCaseResult {
+//                handleLoadSavedDataUseCaseResult(result)
+//            } else {
+//                // Handle other UseCaseTypes
+//            }
         }
     }
 
@@ -136,10 +146,10 @@ struct LaunchViewModelImpl:
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let id = try values.decode(ID.self, forKey: .id)
-        let useCases = try values.decode(Launch.UseCases.self, forKey: .useCases)
-        let transformer = try values.decode(LaunchTransformer.self, forKey: .transformer)
-        let uiRoutes: ((Launch.UIRoute) -> ())? = nil
-        self = try LaunchViewModelImpl.Builder
+        let useCases = try values.decode(MainMenu.UseCases.self, forKey: .useCases)
+        let transformer = try values.decode(MainMenuTransformer.self, forKey: .transformer)
+        let uiRoutes: ((MainMenu.UIRoute) -> ())? = nil
+        self = try MainMenuViewModelImpl.Builder
             .update(id: id)
             .with(useCases: useCases)
             .with(uiRoutes: uiRoutes)
@@ -156,45 +166,21 @@ struct LaunchViewModelImpl:
 
     // MARK: - Helpers
 
-    private func handleLoadSavedDataUseCaseResult(_ result: LoadSavedDataUseCaseResult) {
-        Logger.default.log("Handling Load Saved Data Use Case Result")
-
-        Task { @MainActor in
-            do {
-                try Global.getActive(completion: handleGetActiveEntity)
-
-            } catch {
-                Logger.default.log("Unable To Update State", logType: .warn)
-            }
-
-            switch result {
-            case .success(let gameEntity):
-                uiRoutes?(.toMainMenu(entity: gameEntity))
-            case .error(let error):
-                switch error {
-                case .noGameStateRetrieved:
-                    Logger.default.log("Routing With No Saved Data", logType: .warn)
-                    uiRoutes?(.toMainMenu(entity: nil))
-                }
-            }
-        }
-    }
-
-    private func handleGetActiveEntity(_ result: Global.GetActiveEntityUseCaseResult<LaunchEntity>) {
+    private func handleGetActiveEntity(_ result: Global.GetActiveEntityUseCaseResult<MainMenuEntity>) {
         Logger.default.log("Handling Get Active Entity Use Case Result")
 
         Task { @MainActor in
             do {
                 switch result {
-                case .success(let launchEntity):
-                    if let oldStates = launchEntity.states {
-                        let newState = try Launch.State.Builder
-                            .with(base: launchEntity.states?.last)
+                case .success(let mainMenuEntity):
+                    if let oldStates = mainMenuEntity.states {
+                        let newState = try MainMenu.State.Builder
+                            .with(base: mainMenuEntity.states?.last)
                             .with(isLoading: false)
                             .build()
 
-                        let entity = try LaunchEntity.Builder
-                            .with(base: launchEntity)
+                        let entity = try MainMenuEntity.Builder
+                            .with(base: mainMenuEntity)
                             .with(states: oldStates + [newState])
                             .build()
 
@@ -214,7 +200,7 @@ struct LaunchViewModelImpl:
         Task { @MainActor in
             switch result {
             case .success(let updatedEntity):
-                guard let entity = updatedEntity as? LaunchEntity,
+                guard let entity = updatedEntity as? MainMenuEntity,
                       let newState = entity.states?.last
                 else {
                     Logger.default.log("Entity Did Not Update", logType: .warn)
@@ -228,24 +214,24 @@ struct LaunchViewModelImpl:
     }
 }
 
-extension GenericBuilder where T == LaunchViewModelImpl {
-    func with(transformer: LaunchTransformer) -> GenericBuilder<LaunchViewModelImpl> {
-        let newBase = LaunchViewModelImpl(base: base, transformer: transformer)
-        return GenericBuilder<LaunchViewModelImpl>(base: newBase)
+extension GenericBuilder where T == MainMenuViewModelImpl {
+    func with(transformer: MainMenuTransformer) -> GenericBuilder<MainMenuViewModelImpl> {
+        let newBase = MainMenuViewModelImpl(base: base, transformer: transformer)
+        return GenericBuilder<MainMenuViewModelImpl>(base: newBase)
     }
 
-    func with(useCases: Launch.UseCases) -> GenericBuilder<LaunchViewModelImpl> {
-        let newBase = LaunchViewModelImpl(base: base, useCases: useCases)
-        return GenericBuilder<LaunchViewModelImpl>(base: newBase)
+    func with(useCases: MainMenu.UseCases) -> GenericBuilder<MainMenuViewModelImpl> {
+        let newBase = MainMenuViewModelImpl(base: base, useCases: useCases)
+        return GenericBuilder<MainMenuViewModelImpl>(base: newBase)
     }
 
-    func with(uiRoutes: ((Launch.UIRoute) -> ())?) -> GenericBuilder<LaunchViewModelImpl> {
-        let newBase = LaunchViewModelImpl(base: base, uiRoutes: uiRoutes)
-        return GenericBuilder<LaunchViewModelImpl>(base: newBase)
+    func with(uiRoutes: ((MainMenu.UIRoute) -> ())?) -> GenericBuilder<MainMenuViewModelImpl> {
+        let newBase = MainMenuViewModelImpl(base: base, uiRoutes: uiRoutes)
+        return GenericBuilder<MainMenuViewModelImpl>(base: newBase)
     }
 
-    func with(view: LaunchViewImpl) -> GenericBuilder<LaunchViewModelImpl> {
-        let newBase = LaunchViewModelImpl(base: base, view: view)
-        return GenericBuilder<LaunchViewModelImpl>(base: newBase)
+    func with(view: MainMenuViewImpl) -> GenericBuilder<MainMenuViewModelImpl> {
+        let newBase = MainMenuViewModelImpl(base: base, view: view)
+        return GenericBuilder<MainMenuViewModelImpl>(base: newBase)
     }
 }

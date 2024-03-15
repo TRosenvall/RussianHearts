@@ -9,7 +9,7 @@ import Foundation
 
 ///------
 
-enum Launch {
+enum Launch: ModuleModelBase {
     enum ModuleError: Error, Equatable {
         case failed
         case noSavedGamesFound
@@ -17,8 +17,6 @@ enum Launch {
     
     enum UIEvent: Equatable {
         case didAppear
-        case didFinishLoadingData
-        case didReceiveDataLoadingError
     }
     
     enum UIRoute: Equatable, Codable {

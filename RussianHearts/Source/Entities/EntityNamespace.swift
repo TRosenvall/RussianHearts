@@ -65,6 +65,8 @@ indirect enum TypeContainer: CodingContainerType {
 
     case entityAccessor(EntityAccessor)
     case launchEntity(LaunchEntity)
+    case mainMenuEntity(MainMenuEntity)
+    case newGameEntity(NewGameEntity)
 
     // Use Cases
 
@@ -85,9 +87,13 @@ indirect enum TypeContainer: CodingContainerType {
             self = .loadSavedData(value)
         } else if let value = value as? LaunchEntity {
             self = .launchEntity(value)
+        } else if let value = value as? MainMenuEntity {
+            self = .mainMenuEntity(value)
+        } else if let value = value as? NewGameEntity {
+            self = .newGameEntity(value)
         } else {
             // Add other cases for additional types as needed
-            fatalError( CodingErrors.missingType.rawValue )
+            Logger.default.logFatal("Missing Type In TypeContainer: \(value.self.debugDescription)")
         }
     }
 
@@ -98,6 +104,8 @@ indirect enum TypeContainer: CodingContainerType {
         case .entityAccessor(let value): return value
         case .loadSavedData(let value): return value
         case .launchEntity(let value): return value
+        case .mainMenuEntity(let value): return value
+        case .newGameEntity(let value): return value
         // Add other cases for additional types as needed
         }
     }
@@ -202,11 +210,12 @@ extension Global {
     }
 
     static func getActive<T: Entity>(
-        using entityAccessor: any EntityAccessing,
+        using entityAccessor: (any EntityAccessing)? = nil,
         completion: @escaping ((Global.GetActiveEntityUseCaseResult<T>) -> Void)
     ) throws {
+        let accessor = try entityAccessor ?? EntityAccessor.Builder.build()
         let getActiveEntityUseCase = try GetActiveEntityUseCase<T>.Builder
-            .with(entityAccessor: entityAccessor)
+            .with(entityAccessor: accessor)
             .build()
 
         UseCaseManager.sharedInstance.execute(getActiveEntityUseCase, completion: completion)
@@ -333,12 +342,13 @@ extension Global {
 
     static func updateEntity(
         _ newEntity: any Entity,
-        using entityAccessor: any EntityAccessing,
+        using entityAccessor: (any EntityAccessing)? = nil,
         completion: @escaping ((Global.UpdateEntityUseCaseResult) -> Void)
     ) throws {
+        let accessor = try entityAccessor ?? EntityAccessor.Builder.build()
         let updateEntityUseCase = try UpdateEntityUseCase.Builder
             .with(updatedEntity: newEntity)
-            .with(entityAccessor: entityAccessor)
+            .with(entityAccessor: accessor)
             .build()
 
         UseCaseManager.sharedInstance.execute(updateEntityUseCase, completion: completion)

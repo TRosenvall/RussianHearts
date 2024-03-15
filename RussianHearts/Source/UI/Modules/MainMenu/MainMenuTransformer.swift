@@ -1,5 +1,5 @@
 //
-//  LaunchTransformer.swift
+//  MainMenuTransformer.swift
 //  RussianHearts
 //
 //  Created by Timothy Rosenvall on 1/30/24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct LaunchTransformer: Codable {
+struct MainMenuTransformer: Codable {
 
     // MARK: - Lifecycle
 
-    init() { Logger.default.log("Initializing Launch Transformer") }
+    init() { Logger.default.log("Initializing Main Menu Transformer") }
 
     // MARK: - Transformers
 }

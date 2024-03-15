@@ -8,5 +8,11 @@
 import Foundation
 
 protocol LaunchDelegate: ModuleDelegate {
-    func routeToMainMenu()
+    func routeToMainMenu(with entity: GameEntity?)
+}
+
+extension LaunchDelegate {
+    func routeToMainMenu(with entity: GameEntity? = nil) {
+        routeToMainMenu(with: entity)
+    }
 }

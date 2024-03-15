@@ -69,9 +69,9 @@ class LaunchBuilder {
                     // Route on Main Thread
                     Task { @MainActor in
                         switch route {
-                        case .toMainMenu:
+                        case .toMainMenu(let entity):
                             Logger.default.log("Routing To Main Menu")
-                            delegate.routeToMainMenu()
+                            delegate.routeToMainMenu(with: entity)
                         }
                     }
                 }

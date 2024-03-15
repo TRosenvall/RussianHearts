@@ -64,18 +64,32 @@ class SceneCoordinator: SceneCoordinating {
 
     // MARK: - Conformance: LaunchDelegate
 
-    func routeToMainMenu() {
-        guard let module: (any MainMenuView) = moduleManager.retrieveModule(delegate: self)
+    func routeToMainMenu(with entity: GameEntity?) {
+        Logger.default.log("Routing To Main Menu")
+
+        guard let module: (any MainMenuHost) = moduleManager.retrieveModule(delegate: self)
         else { return }
-        module.modalPresentationStyle = .fullScreen
-        presentModule(module, animated: false)
+
+        do {
+            let updatedModule = try module.with(entity)
+            updatedModule.modalPresentationStyle = .fullScreen
+            presentModule(updatedModule, animated: false)
+        } catch {
+            Logger.default.log("Error found while updating entity: \(error)")
+
+            module.modalPresentationStyle = .fullScreen
+            presentModule(module, animated: false)
+        }
     }
 
     // MARK: - Conformance: MainMenuDelegate
 
-    func routeToNewGameModule() {
-        guard let module: (any NewGameView) = moduleManager.retrieveModule(delegate: self)
+    func routeToNewGame() {
+        Logger.default.log("Routing To New Game")
+
+        guard let module: (any NewGameHost) = moduleManager.retrieveModule(delegate: self)
         else { return }
+
         module.modalPresentationStyle = .fullScreen
         presentModule(module, animated: true)
     }
@@ -86,7 +100,7 @@ class SceneCoordinator: SceneCoordinating {
         dismissModule(animated: animated)
     }
 
-    func routeToGameModule() {
+    func routeToGame(with: GameEntity) {
         guard let module: (any GameView) = moduleManager.retrieveModule(delegate: self)
         else { return }
         module.modalPresentationStyle = .fullScreen
@@ -113,7 +127,7 @@ class SceneCoordinator: SceneCoordinating {
             module.shouldRelease = true
             moduleManager.dismissReleasableModules()
         }
-        routeToMainMenu()
+        routeToMainMenu(with: nil)
     }
 
     func routeToHighScores() {

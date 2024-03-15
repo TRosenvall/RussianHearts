@@ -87,7 +87,7 @@ class GenericBuilder<T: Model>: Builder {
     }
 
     // MARK: - Helpers
-    func with(base: T) -> GenericBuilder<T> {
+    func with(base: T?) -> GenericBuilder<T> {
         let newBase = T(with: base)
         return GenericBuilder<T>(base: newBase)
     }

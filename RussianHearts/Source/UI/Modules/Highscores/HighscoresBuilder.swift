@@ -17,7 +17,7 @@ class HighscoresBuilder {
     // MARK: - Helper Functions
     func build(delegate: SceneCoordinating) -> any HighscoresView {
         let view: any HighscoresView = HighscoresViewController()
-        var worker: any HighscoresWorker = HighscoresWorkerImpl()
+        let worker: any HighscoresWorker = HighscoresWorkerImpl()
 
         view.worker = worker
         view.delegate = delegate
