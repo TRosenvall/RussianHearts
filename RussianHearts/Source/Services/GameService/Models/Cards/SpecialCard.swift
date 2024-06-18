@@ -91,7 +91,6 @@ struct SpecialCard: CardProtocol {
 
     let id: UUID
     var type: SpecialCardType?
-    var name: String?
     let playedBy: Player?
 
     // MARK: - Lifecycle
@@ -105,9 +104,6 @@ struct SpecialCard: CardProtocol {
                      playedBy player: Player? = nil) {
         self.id = id ?? base?.id ?? UUID()
         self.type = type ?? base?.type
-        // TODO: - This eventually needs to be pulled from a settings object.
-        // I've made this a singleton for now but I don't like it.
-        self.name = SpecialCardName.sharedInstance.rawValue(forType: type) ?? nil
         self.playedBy = player ?? base?.playedBy
     }
 
@@ -121,6 +117,16 @@ struct SpecialCard: CardProtocol {
 
     func wrap() -> Card {
         return .special(card: self)
+    }
+}
+
+extension SpecialCard {
+
+    /// The proper name associated with the face card
+    var name: String? {
+        // TODO: - This eventually needs to be pulled from a settings object.
+        // I've made this a singleton for now but I don't like it.
+        SpecialCardName.sharedInstance.rawValue(forType: type)
     }
 }
 

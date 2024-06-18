@@ -15,10 +15,12 @@ struct MainMenuViewImpl: MainMenuView {
 
     // MARK: - Properties
 
+    typealias ModuleState = MainMenu.State
+
     let theme: MainMenuTheme
     @State var state: MainMenu.State
 
-    var eventHandler: ((MainMenu.UIEvent) -> ())?
+    var eventHandler: ((MainMenu.UIEvent) -> Void)?
 
     // MARK: - Views
 

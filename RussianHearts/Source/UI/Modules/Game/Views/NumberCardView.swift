@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NumberCardView: CardView {
+//class NumberCardView: CardView {
 //
 //    // MARK: - Properties
 //    let borderWidth: CGFloat = 3
@@ -190,4 +190,4 @@ class NumberCardView: CardView {
 //        isDisabled = false
 //        disabledView.removeFromSuperview()
 //    }
-}
+//}

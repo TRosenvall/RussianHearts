@@ -25,7 +25,7 @@ struct MainMenuViewModelImpl:
     typealias AssociatedEntity = MainMenuEntity
 
     let id: UUID
-    var view: MainMenuViewImpl? = nil
+    var view: MainMenuViewImpl?
 
     let uiRoutes: ((MainMenu.UIRoute) -> ())?
     let useCases: MainMenu.UseCases?

@@ -101,6 +101,8 @@ class SceneCoordinator: SceneCoordinating {
     }
 
     func routeToGame(with: GameEntity) {
+        Logger.default.log("Routing To Game")
+
         guard let module: (any GameView) = moduleManager.retrieveModule(delegate: self)
         else { return }
         module.modalPresentationStyle = .fullScreen

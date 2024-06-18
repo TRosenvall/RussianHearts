@@ -7,25 +7,27 @@
 
 import SwiftUI
 
-protocol NewGameViewModel: ModuleViewModel {
-    var view: NewGameViewImpl? { get }
+protocol NewGameViewModel: ModuleViewModel, ObservableObject where UIEvent == NewGame.UIEvent {
+    
+    var state: NewGame.State? { get }
 }
 
-struct NewGameViewModelImpl:
+class NewGameViewModelImpl:
     NewGameViewModel,
     LoadSavedDataOutput
 {
 
-    // MARK: - Properties
+    // MARK: - Types
 
-    typealias UIEvent = NewGame.UIEvent
     typealias ModuleError = NewGame.ModuleError
     typealias UIRoute = NewGame.UIRoute
     typealias ModuleState = NewGame.State
     typealias AssociatedEntity = NewGameEntity
 
+    // MARK: - Properties
+
     let id: UUID
-    var view: NewGameViewImpl? = nil
+    @Published var state: NewGame.State?
 
     let uiRoutes: ((NewGame.UIRoute) -> ())?
     let useCases: NewGame.UseCases?
@@ -33,7 +35,7 @@ struct NewGameViewModelImpl:
 
     // MARK: - Lifecycle
 
-    internal init(with base: NewGameViewModelImpl?, id: UUID?) {
+    required internal convenience init(with base: NewGameViewModelImpl?, id: UUID?) {
         self.init(base: base, id: id)
     }
 
@@ -43,29 +45,19 @@ struct NewGameViewModelImpl:
         uiRoutes: ((NewGame.UIRoute) -> ())? = nil,
         useCases: NewGame.UseCases? = nil,
         transformer: NewGameTransformer? = nil,
-        view: NewGameViewImpl? = nil
+        state: NewGame.State? = nil
     ) {
         self.id = id ?? base?.id ?? UUID()
         self.uiRoutes = uiRoutes ?? base?.uiRoutes
         self.useCases = useCases ?? base?.useCases
         self.transformer = transformer ?? base?.transformer
-
-        if var view {
-            view.eventHandler = self.handleUIEvent(_:)
-            self.view = view
-        } else {
-            self.view = base?.view
-        }
-
-        if self.view == nil {
-            Logger.default.log("View Model Created Without View", logType: .warn)
-        }
+        self.state = state ?? base?.state
     }
 
     // MARK: - Conformance: Model
 
     func validate() throws -> Self {
-        guard useCases != nil, transformer != nil, view != nil
+        guard useCases != nil, transformer != nil, state != nil
         else { throw ModelError.requiredModelPropertiesNotSet(onType: Self.self) }
 
         /// This code is here to ensure uiRoutes have been set on the view model. If they haven't
@@ -89,21 +81,37 @@ struct NewGameViewModelImpl:
         Logger.default.log("Handling \(event) Event")
 
         Task { @MainActor in
-            switch event {
-            case .didAppear:
-                print("")
-            case .didTapNewGame:
-                uiRoutes?(.toNewGame)
-            case .didTapContinueGame(let entity):
-                uiRoutes?(.toContinueGame(entity: entity))
-            case .didTapRules:
-                uiRoutes?(.toRules)
-            case .didTapHighscores:
-                uiRoutes?(.toHighscores)
-            case .didTapFriends:
-                uiRoutes?(.toFriends)
-            case .didTapSettings:
-                uiRoutes?(.toSettings)
+            do {
+                switch event {
+                case .didAppear:
+                    break
+                case .didToggleIsHuman(let index, let isHuman):
+                    var players = state?.players
+                    players?[index].isHuman = isHuman
+                    
+                    guard let players,
+                          let newState = try? NewGame.State.Builder.with(base: state).with(players: players).build()
+                    else { return }
+                    
+                    self.state = newState
+                case .didUpdateName(let index, let name):
+                    var players = state?.players
+                    players?[index].name = name
+                    
+                    guard let players,
+                          let newState = try? NewGame.State.Builder.with(base: state).with(players: players).build()
+                    else { return }
+                    
+                    self.state = newState
+                case .didTapStartGameButton:
+                    guard let state,
+                          let entity: GameEntity = try transformer?.transformToEntity(state)
+                    else { Logger.default.logFatal("Unable to build game with input data") }
+                    
+                    uiRoutes?(.toGame(entity: entity))
+                }
+            } catch {
+                Logger.default.logFatal("Error in NewGame.UIEvent - \(error)")
             }
         }
     }
@@ -143,18 +151,14 @@ struct NewGameViewModelImpl:
         case transformer
     }
 
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        let id = try values.decode(ID.self, forKey: .id)
-        let useCases = try values.decode(NewGame.UseCases.self, forKey: .useCases)
-        let transformer = try values.decode(NewGameTransformer.self, forKey: .transformer)
-        let uiRoutes: ((NewGame.UIRoute) -> ())? = nil
-        self = try NewGameViewModelImpl.Builder
-            .update(id: id)
-            .with(useCases: useCases)
-            .with(uiRoutes: uiRoutes)
-            .with(transformer: transformer)
-            .build()
+        self.id = try values.decode(ID.self, forKey: .id)
+        self.useCases = try values.decode(NewGame.UseCases.self, forKey: .useCases)
+        self.transformer = try values.decode(NewGameTransformer.self, forKey: .transformer)
+        self.uiRoutes = nil
+
+        _ = try validate()
     }
 
     func encode(to encoder: Encoder) throws {
@@ -206,8 +210,8 @@ struct NewGameViewModelImpl:
                     Logger.default.log("Entity Did Not Update", logType: .warn)
                     return
                 }
-                
-                self.view?.state = newState
+
+                state = newState
             case .error(let error): Logger.default.log(error.localizedDescription, logType: .warn)
             }
         }
@@ -230,8 +234,8 @@ extension GenericBuilder where T == NewGameViewModelImpl {
         return GenericBuilder<NewGameViewModelImpl>(base: newBase)
     }
 
-    func with(view: NewGameViewImpl) -> GenericBuilder<NewGameViewModelImpl> {
-        let newBase = NewGameViewModelImpl(base: base, view: view)
+    func with(state: NewGame.State) -> GenericBuilder<NewGameViewModelImpl> {
+        let newBase = NewGameViewModelImpl(base: base, state: state)
         return GenericBuilder<NewGameViewModelImpl>(base: newBase)
     }
 }

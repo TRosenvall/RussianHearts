@@ -33,6 +33,14 @@ class NewGameBuilder {
         // App State
         let alerts = try NewGame.State.Alerts.Builder.build()
         let state = try NewGame.State.Builder
+            .with(players: [
+                NewGame.Player(isHuman: true, name: ""),
+                NewGame.Player(isHuman: true, name: ""),
+                NewGame.Player(isHuman: true, name: ""),
+                NewGame.Player(isHuman: true, name: ""),
+                NewGame.Player(isHuman: true, name: ""),
+                NewGame.Player(isHuman: true, name: "")
+            ])
             .with(alerts: alerts)
             .build()
         let entity = try NewGameEntity.Builder
@@ -64,24 +72,9 @@ class NewGameBuilder {
                     // Route on Main Thread
                     Task { @MainActor in
                         switch route {
-                        case .toNewGame:
-                            Logger.default.log("Routing To New Game")
-                            delegate.routeToNewGame()
-                        case .toContinueGame(let entity):
-                            Logger.default.log("Routing To Continue Game")
+                        case .toGame(let entity):
+                            Logger.default.log("Routing To Game")
                             delegate.routeToGame(with: entity)
-                        case .toRules:
-                            Logger.default.log("Routing To Rules")
-                            delegate.routeToRules()
-                        case .toHighscores:
-                            Logger.default.log("Routing To Highscores")
-                            delegate.routeToHighScores()
-                        case .toFriends:
-                            Logger.default.log("Routing To Friends")
-                            delegate.routeToFriends()
-                        case .toSettings:
-                            Logger.default.log("Routing To Settings")
-                            delegate.routeToSettings()
                         }
                     }
                 }
@@ -93,21 +86,21 @@ class NewGameBuilder {
         // Transformer
         let transformer = NewGameTransformer()
 
-        // View
-        let view: NewGameViewImpl = NewGameViewImpl.init(
-            theme: theme,
-            state: state
-        )
-
         // View Model
         let viewModel = try NewGameViewModelImpl.Builder
             .with(useCases: useCases)
             .with(uiRoutes: routes)
             .with(transformer: transformer)
-            .with(view: view)
+            .with(state: state)
             .build()
 
-        let module: any NewGameHost = NewGameHostingController(viewModel: viewModel)
+        // View
+        let view: NewGameViewImpl = NewGameViewImpl<NewGameViewModelImpl>.init(
+            theme: theme,
+            viewModel: viewModel
+        )
+
+        let module: any NewGameHost = NewGameHostingController(rootView: view)
 
         return module
     }

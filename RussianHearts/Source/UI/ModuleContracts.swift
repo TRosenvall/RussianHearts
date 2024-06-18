@@ -30,7 +30,11 @@ protocol ModuleViewModel: Model {
 }
 
 /// Contains all the UI elements for the module
-protocol ModuleView: View {}
+protocol ModuleView: View {
+    associatedtype ModuleState
+
+//    func updateState(_ state: ModuleState)
+}
 
 protocol ModuleTheme {}
 

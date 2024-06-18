@@ -17,21 +17,22 @@ enum NewGame: ModuleModelBase {
     
     enum UIEvent: Equatable {
         case didAppear
-        case didTapNewGame
-        case didTapContinueGame(entity: GameEntity?)
-        case didTapRules
-        case didTapHighscores
-        case didTapFriends
-        case didTapSettings
+        case didToggleIsHuman(index: Int, isHuman: Bool)
+        case didUpdateName(index: Int, name: String)
+        case didTapStartGameButton
     }
     
     enum UIRoute: Equatable, Codable {
-        case toNewGame
-        case toContinueGame(entity: GameEntity?)
-        case toRules
-        case toHighscores
-        case toFriends
-        case toSettings
+        case toGame(entity: GameEntity)
+    }
+}
+
+///------
+
+extension NewGame {
+    struct Player: Codable {
+        var isHuman: Bool
+        var name: String
     }
 }
 
@@ -83,6 +84,8 @@ extension NewGame {
         let gameEntity: GameEntity?
         let alerts: NewGame.State.Alerts?
 
+        let players: [NewGame.Player]
+
         var gameEntityExists: Bool {
             return gameEntity != nil
         }
@@ -97,18 +100,20 @@ extension NewGame {
             base: NewGame.State? = nil,
             id: UUID? = nil,
             isLoading: Bool? = nil,
+            players: [NewGame.Player]? = nil,
             gameEntity: GameEntity? = nil,
             alerts: NewGame.State.Alerts? = nil
         ) {
             self.id = id ?? base?.id ?? UUID()
             self.isLoading = isLoading ?? base?.isLoading ?? false
+            self.players = players ?? base?.players ?? []
             self.gameEntity = gameEntity ?? base?.gameEntity
             self.alerts = alerts ?? base?.alerts
         }
 
         // MARK: - Conformance: Model
 
-        func validate() throws -> NewGame.State {
+        func validate() throws -> Self {
             guard isLoading != nil, alerts != nil
             else { throw ModelError.requiredModelPropertiesNotSet(onType: Self.self) }
 
@@ -120,6 +125,11 @@ extension NewGame {
 extension GenericBuilder where T == NewGame.State {
     func with(isLoading: Bool) -> GenericBuilder<NewGame.State> {
         let newBase = NewGame.State(base: base, isLoading: isLoading)
+        return GenericBuilder<NewGame.State>(base: newBase)
+    }
+
+    func with(players: [NewGame.Player]) -> GenericBuilder<NewGame.State> {
+        let newBase = NewGame.State(base: base, players: players)
         return GenericBuilder<NewGame.State>(base: newBase)
     }
 
