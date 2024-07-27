@@ -55,7 +55,7 @@ class LaunchBuilder {
 
         // Routing
         Logger.default.log("Setting Up Routing")
-        let routes: ((Launch.UIRoute) -> ()) = { route in
+        let routes: ((Launch.UIRoute, (any ModuleController)?) -> ()) = { route, _ in
             do {
                 // Try To Remove Unneeded Entity
                 try Global.deleteEntity(entity, using: entityAccessor) { result in

@@ -50,7 +50,7 @@ class MainMenuBuilder {
 
         // Routing
         Logger.default.log("Setting Up Routing")
-        let routes: ((MainMenu.UIRoute) -> ()) = { route in
+        let routes: ((MainMenu.UIRoute, (any ModuleController)?) -> ()) = { route, _ in
             do {
                 // Try To Remove Unneeded Entity
                 try Global.deleteEntity(entity, using: entityAccessor) { result in

@@ -17,7 +17,7 @@ struct NewGameEntity: Entity {
     static var persistID: String = "com.russianhearts.newgameentity"
 
     let id: UUID
-    let states: [NewGame.State]?
+    let gameStates: [NewGame.State]?
     let completionState: CompletionState?
 
     // MARK: - Lifecycle
@@ -33,14 +33,14 @@ struct NewGameEntity: Entity {
         completionState: CompletionState? = nil
     ) {
         self.id = id ?? base?.id ?? UUID()
-        self.states = states ?? base?.states
+        self.gameStates = states ?? base?.gameStates
         self.completionState = completionState ?? base?.completionState
     }
 
     // MARK: - Conformance: Model
 
     func validate() throws -> NewGameEntity {
-        guard states != nil, completionState != nil
+        guard gameStates != nil, completionState != nil
         else { throw ModelError.requiredModelPropertiesNotSet(onType: Self.self) }
 
         return self

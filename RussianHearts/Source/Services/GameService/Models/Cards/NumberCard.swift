@@ -22,6 +22,25 @@ enum CardValue: Int, CaseIterable, Codable {
     case twelve = 12
     case thirteen = 13
     case fourteen = 14
+
+    var name: String {
+        switch self {
+        case .one: return "One"
+        case .two: return "Two"
+        case .three: return "Three"
+        case .four: return "Four"
+        case .five: return "Five"
+        case .six: return "Six"
+        case .seven: return "Seven"
+        case .eight: return "Eight"
+        case .nine: return "Nine"
+        case .ten: return "Ten"
+        case .eleven: return "Eleven"
+        case .twelve: return "Twelve"
+        case .thirteen: return "Thirteen"
+        case .fourteen: return "Fourteen"
+        }
+    }
 }
 
 // Raw value is the card tint color

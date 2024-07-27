@@ -26,7 +26,8 @@ struct CardView: View {
     // MARK: - Properties
 
     var delegate: CardViewDelegate?
-    var card: Card
+    var card: Card?
+    var player: Player?
 
     // If the card has the face showing or the back
     var isUpsideDown: Bool
@@ -37,31 +38,44 @@ struct CardView: View {
     // If the card was disabled on the last turn
     var wasDisabled: Bool
 
+    // The position to which the card view should move when selected
+    var selectedStateFrame: CGPoint?
+
     // If the card has been tapped and may be selected to be played, this is the raised position
-    var tappedState: CardTappedState
+    @State var tappedState: CardTappedState
 
     // If the card has been played but before the players turn has ended so they can still undo this.
-    var selectedState: CardSelectedState
+    @State var selectedState: CardSelectedState
 
     // MARK: - Lifecycle
 
     // These have default properties set to have the card disabled and upside down, basically uninteractiable and
     // unknowable. Given that these will be updated each turn, these values will be tracked throughout the round.
     init(delegate: CardViewDelegate? = nil,
-         card: Card,
+         card: Card? = nil,
+         player: Player? = nil,
          isUpsideDown: Bool = true,
          isDisabled: Bool = true,
          wasDisabled: Bool = false,
          tappedState: CardTappedState = .notTapped,
          selectedState: CardSelectedState = .notSelected
     ) {
+        if let card {
+            Logger.default.log("Instantiating Card View For Card: \(card)")
+        } else if let player {
+            Logger.default.log("Instantiating Card View For Player: \(player)")
+        } else {
+            Logger.default.log("Instantiating Card View Without Player or Card")
+        }
+
         self.delegate = delegate
         self.card = card
+        self.player = player
         self.isUpsideDown = isUpsideDown
         self.isDisabled = isDisabled
         self.wasDisabled = wasDisabled
-        self.tappedState = tappedState
-        self.selectedState = selectedState
+        _tappedState = State(initialValue: tappedState)
+        _selectedState = State(initialValue: selectedState)
     }
 
     // MARK: - Views
@@ -70,7 +84,7 @@ struct CardView: View {
         backgroundColor.overlay {
             RoundedRectangle(cornerRadius: 20)
                 .inset(by: 5)
-                .stroke(cardColor, lineWidth: borderWidth)
+                .stroke(cardColor, lineWidth: CardView.borderWidth)
             ZStack {
                 VStack(alignment: .center) {
                     HStack(alignment: .center) {
@@ -88,21 +102,25 @@ struct CardView: View {
             }
         }
         .cornerRadius(20)
-        .frame(width: cardRatio * cardHeight, height: cardHeight)
+        .frame(width: CardView.cardRatio * CardView.cardHeight, height: CardView.cardHeight)
         .fixedSize()
+        .onTapGesture {
+            delegate?.tapped(self)
+        }
+        .offset(y: tappedState == .tapped ? -(CardView.cardHeight * CardView.cardRatio) : 0)
     }
 }
 
 extension CardView {
 
-    var cardHeight: CGFloat { 175 }
+    static var cardHeight: CGFloat { 158 }
     // These should probably come through a theme, but they're just constants used in the card view itself.
-    var cardRatio: CGFloat { 62.0/88.0 }
-    var borderWidth: CGFloat { 3 }
+    static var cardRatio: CGFloat { 62.0/88.0 }
+    static var borderWidth: CGFloat { 3 }
 
     var cardColor: Color {
         if !isUpsideDown,
-           let card = card.unwrapNumberCard(),
+           let card = card?.unwrapNumberCard(),
            let color = card.suit?.transformToColor().UI {
             return color
         }
@@ -114,17 +132,17 @@ extension CardView {
             return "Card Back"
         }
 
-        if let card = card.unwrapNumberCard(),
+        if let card = card?.unwrapNumberCard(),
            let value = card.value?.rawValue {
             return value.description
         }
 
-        if let card = card.unwrapSpecialCard(),
+        if let card = card?.unwrapSpecialCard(),
            let name = card.name {
             return name
         }
 
-        return "Placeholder"
+        return player?.name ?? "Placeholder"
     }
 
     var backgroundColor: Color {
@@ -132,7 +150,7 @@ extension CardView {
     }
 
     var cardSuit: CardSuit? {
-        guard let card = card.unwrapNumberCard(),
+        guard let card = card?.unwrapNumberCard(),
               let suit = card.suit
         else { return nil }
 
@@ -140,7 +158,7 @@ extension CardView {
     }
 
     var cardValue: CardValue? {
-        guard let card = card.unwrapNumberCard(),
+        guard let card = card?.unwrapNumberCard(),
               let value = card.value
         else { return nil }
 
@@ -148,7 +166,7 @@ extension CardView {
     }
 
     var cardType: SpecialCardType? {
-        guard let card = card.unwrapSpecialCard(),
+        guard let card = card?.unwrapSpecialCard(),
               let type = card.type
         else { return nil }
 
@@ -295,4 +313,16 @@ extension CardView {
 //        isDisabled = false
 //        disabledView.removeFromSuperview()
 //    }
+}
+
+extension CardView: Equatable {
+    static func == (lhs: CardView, rhs: CardView) -> Bool {
+        return lhs.card == rhs.card &&
+               lhs.isUpsideDown == rhs.isUpsideDown &&
+               lhs.isDisabled == rhs.isDisabled &&
+               lhs.wasDisabled == rhs.wasDisabled &&
+               lhs.selectedState == rhs.selectedState &&
+               lhs.tappedState == rhs.tappedState &&
+               lhs.player == rhs.player
+    }
 }

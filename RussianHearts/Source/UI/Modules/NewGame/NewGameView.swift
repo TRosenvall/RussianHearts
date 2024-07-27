@@ -73,8 +73,6 @@ struct NewGameViewImpl<ViewModel>: NewGameView where ViewModel: NewGameViewModel
                         Spacer()
                     }
 
-                    cardView
-
                     Button {
                         viewModel.handleUIEvent(.didTapStartGameButton)
                     } label: {
@@ -118,46 +116,9 @@ struct NewGameViewImpl<ViewModel>: NewGameView where ViewModel: NewGameViewModel
         }
     }
 
-    func getNewPlayerPosition(player: Binding<Player>) -> some View {
-        Button("Tap Me") {
-            print("Hi")
-        }
-    }
-
-    func getButton(title: String, event: NewGame.UIEvent, disabled: Bool = false) -> some View {
-        Button(action: {
-            viewModel.handleUIEvent(event)
-        }) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 15)
-                    .inset(by: 2)
-                    .stroke(theme.moduleAccentColor, lineWidth: 2)
-
-                Text(title)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.clear)
-                    .foregroundColor(disabled ? theme.moduleAccentColor.opacity(0.3) : theme.moduleAccentColor)
-                    .cornerRadius(20)
-                    .padding(5)
-            }
-        }
-        .disabled(disabled)
-    }
-
     // MARK: - Helpers
 
     var backgroundColor: Color {
         Color.blend(color1: .white, color2: theme.moduleAccentColor, intensity2: 0.03)
-    }
-
-    var cardView: CardView? {
-        let card = try? SpecialCard.Builder.with(type: .highJoker).build().wrap()
-//        let card = try? NumberCard.Builder.with(value: .fourteen).with(suit: .red).build().wrap()
-        if let card {
-            var cardView = CardView(card: card)
-            cardView.isUpsideDown = false
-            return cardView
-        }
-        return nil
     }
 }

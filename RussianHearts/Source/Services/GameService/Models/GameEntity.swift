@@ -14,11 +14,11 @@ struct GameEntity: Entity {
     typealias ModuleState = GameState
     typealias AssociatedEntity = Self
 
-
     static var persistID: String = "com.russianhearts.gameentity"
 
     let id: UUID
-    let states: [GameState]?
+    let gameStates: [GameState]?
+    let uiStates: [Game.State]?
     let completionState: CompletionState?
 
     // MARK: - Lifecycle
@@ -29,17 +29,19 @@ struct GameEntity: Entity {
 
     fileprivate init(base: GameEntity? = nil,
                      id: UUID? = nil,
-                     states: [GameState]? = nil,
+                     gameStates: [GameState]? = nil,
+                     uiStates: [Game.State]? = nil,
                      completionState: CompletionState? = nil) {
         self.id = id ?? base?.id ?? UUID()
-        self.states = states ?? base?.states
+        self.gameStates = gameStates ?? base?.gameStates
+        self.uiStates = uiStates ?? base?.uiStates
         self.completionState = completionState ?? base?.completionState
     }
 
     // MARK: - Helpers
 
     func validate() throws -> Self {
-        guard states != nil, completionState != nil
+        guard gameStates != nil, completionState != nil
         else { throw ModelError.requiredModelPropertiesNotSet(onType: Self.self) }
 
         return self
@@ -47,8 +49,13 @@ struct GameEntity: Entity {
 }
 
 extension GenericBuilder where T == GameEntity {
-    func with(states: [GameState]) -> GenericBuilder<GameEntity> {
-        let newBase = GameEntity(base: base, states: states)
+    func with(gameStates: [GameState]) -> GenericBuilder<GameEntity> {
+        let newBase = GameEntity(base: base, gameStates: gameStates)
+        return GenericBuilder<GameEntity>(base: newBase)
+    }
+
+    func with(uiStates: [Game.State]) -> GenericBuilder<GameEntity> {
+        let newBase = GameEntity(base: base, uiStates: uiStates)
         return GenericBuilder<GameEntity>(base: newBase)
     }
 

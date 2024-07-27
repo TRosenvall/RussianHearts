@@ -64,7 +64,7 @@ class SceneCoordinator: SceneCoordinating {
 
     // MARK: - Conformance: LaunchDelegate
 
-    func routeToMainMenu(with entity: GameEntity?) {
+    func routeToMainMenu(with entity: GameEntity? = nil) {
         Logger.default.log("Routing To Main Menu")
 
         guard let module: (any MainMenuHost) = moduleManager.retrieveModule(delegate: self)
@@ -100,10 +100,10 @@ class SceneCoordinator: SceneCoordinating {
         dismissModule(animated: animated)
     }
 
-    func routeToGame(with: GameEntity) {
+    func routeToGame(with gameEntity: GameEntity) {
         Logger.default.log("Routing To Game")
 
-        guard let module: (any GameView) = moduleManager.retrieveModule(delegate: self)
+        guard let module: (any GameHost) = moduleManager.retrieveModule(delegate: self, gameEntity: gameEntity)
         else { return }
         module.modalPresentationStyle = .fullScreen
         presentModule(module, animated: true)
@@ -111,7 +111,12 @@ class SceneCoordinator: SceneCoordinating {
 
     // MARK: - Conformance: GameDelegate
 
-    func routeBackToMainMenu(from module: any ModuleController) {
+    func routeBackToMainMenu(from module: (any ModuleController)?) {
+        Logger.default.log("Routing Back To Main Menu")
+
+        guard let module
+        else { Logger.default.logFatal("No controller passed into argument, unable to route")}
+
         navController.popToRootViewController(animated: false)
 
         var modulesToRelease: [any ModuleController] = []

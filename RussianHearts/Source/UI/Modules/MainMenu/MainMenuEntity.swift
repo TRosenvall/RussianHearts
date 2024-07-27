@@ -17,7 +17,7 @@ struct MainMenuEntity: Entity {
     static var persistID: String = "com.russianhearts.mainmenuentity"
 
     let id: UUID
-    let states: [MainMenu.State]?
+    let gameStates: [MainMenu.State]?
     let completionState: CompletionState?
 
     // MARK: - Lifecycle
@@ -33,14 +33,14 @@ struct MainMenuEntity: Entity {
         completionState: CompletionState? = nil
     ) {
         self.id = id ?? base?.id ?? UUID()
-        self.states = states ?? base?.states
+        self.gameStates = states ?? base?.gameStates
         self.completionState = completionState ?? base?.completionState
     }
 
     // MARK: - Conformance: Model
 
     func validate() throws -> MainMenuEntity {
-        guard states != nil, completionState != nil
+        guard gameStates != nil, completionState != nil
         else { throw ModelError.requiredModelPropertiesNotSet(onType: Self.self) }
 
         return self

@@ -29,7 +29,7 @@ class NewGameViewModelImpl:
     let id: UUID
     @Published var state: NewGame.State?
 
-    let uiRoutes: ((NewGame.UIRoute) -> ())?
+    let uiRoutes: ((NewGame.UIRoute, (any ModuleController)?) -> ())?
     let useCases: NewGame.UseCases?
     let transformer: NewGameTransformer?
 
@@ -42,7 +42,7 @@ class NewGameViewModelImpl:
     fileprivate init(
         base: NewGameViewModelImpl? = nil,
         id: UUID? = nil,
-        uiRoutes: ((NewGame.UIRoute) -> ())? = nil,
+        uiRoutes: ((NewGame.UIRoute, (any ModuleController)?) -> ())? = nil,
         useCases: NewGame.UseCases? = nil,
         transformer: NewGameTransformer? = nil,
         state: NewGame.State? = nil
@@ -108,7 +108,7 @@ class NewGameViewModelImpl:
                           let entity: GameEntity = try transformer?.transformToEntity(state)
                     else { Logger.default.logFatal("Unable to build game with input data") }
                     
-                    uiRoutes?(.toGame(entity: entity))
+                    uiRoutes?(.toGame(entity: entity), nil)
                 }
             } catch {
                 Logger.default.logFatal("Error in NewGame.UIEvent - \(error)")
@@ -177,9 +177,9 @@ class NewGameViewModelImpl:
             do {
                 switch result {
                 case .success(let newGameEntity):
-                    if let oldStates = newGameEntity.states {
+                    if let oldStates = newGameEntity.gameStates {
                         let newState = try NewGame.State.Builder
-                            .with(base: newGameEntity.states?.last)
+                            .with(base: newGameEntity.gameStates?.last)
                             .with(isLoading: false)
                             .build()
 
@@ -205,7 +205,7 @@ class NewGameViewModelImpl:
             switch result {
             case .success(let updatedEntity):
                 guard let entity = updatedEntity as? NewGameEntity,
-                      let newState = entity.states?.last
+                      let newState = entity.gameStates?.last
                 else {
                     Logger.default.log("Entity Did Not Update", logType: .warn)
                     return
@@ -229,7 +229,7 @@ extension GenericBuilder where T == NewGameViewModelImpl {
         return GenericBuilder<NewGameViewModelImpl>(base: newBase)
     }
 
-    func with(uiRoutes: ((NewGame.UIRoute) -> ())?) -> GenericBuilder<NewGameViewModelImpl> {
+    func with(uiRoutes: ((NewGame.UIRoute, (any ModuleController)?) -> ())?) -> GenericBuilder<NewGameViewModelImpl> {
         let newBase = NewGameViewModelImpl(base: base, uiRoutes: uiRoutes)
         return GenericBuilder<NewGameViewModelImpl>(base: newBase)
     }

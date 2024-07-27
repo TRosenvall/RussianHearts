@@ -35,7 +35,7 @@ protocol Entity: Model {
 
     static var persistID: String { get }
     var id: UUID { get }
-    var states: [ModuleState]? { get }
+    var gameStates: [ModuleState]? { get }
     var completionState: CompletionState? { get }
 }
 
@@ -67,10 +67,13 @@ indirect enum TypeContainer: CodingContainerType {
     case launchEntity(LaunchEntity)
     case mainMenuEntity(MainMenuEntity)
     case newGameEntity(NewGameEntity)
+    case gameEntity(GameEntity)
 
     // Use Cases
 
+    case gameServiceUseCases(GameService.UseCase)
     case loadSavedData(LoadSavedData)
+    case retrieveGameState(RetrieveGameState)
 
     // Add other cases for additional types as needed
 
@@ -91,6 +94,12 @@ indirect enum TypeContainer: CodingContainerType {
             self = .mainMenuEntity(value)
         } else if let value = value as? NewGameEntity {
             self = .newGameEntity(value)
+        } else if let value = value as? GameEntity {
+            self = .gameEntity(value)
+        } else if let value = value as? RetrieveGameState {
+            self = .retrieveGameState(value)
+        } else if let value = value as? GameService.UseCase {
+            self = .gameServiceUseCases(value)
         } else {
             // Add other cases for additional types as needed
             Logger.default.logFatal("Missing Type In TypeContainer: \(value.self.debugDescription)")
@@ -103,9 +112,12 @@ indirect enum TypeContainer: CodingContainerType {
         case .string(let value): return value
         case .entityAccessor(let value): return value
         case .loadSavedData(let value): return value
+        case .retrieveGameState(let value): return value
         case .launchEntity(let value): return value
         case .mainMenuEntity(let value): return value
         case .newGameEntity(let value): return value
+        case .gameEntity(let value): return value
+        case .gameServiceUseCases(let value): return value
         // Add other cases for additional types as needed
         }
     }
@@ -509,7 +521,7 @@ struct DefaultEntity: Entity {
     typealias AssociatedEntity = Self
 
     static let persistID: String = "com.russianhearts.defaultentity"
-    let states: [ModuleState]?
+    let gameStates: [ModuleState]?
     let completionState: CompletionState?
 
     let id: UUID

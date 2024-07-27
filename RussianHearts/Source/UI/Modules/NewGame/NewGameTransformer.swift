@@ -65,7 +65,7 @@ struct NewGameTransformer: Codable {
 
         do {
             let entity = try GameEntity.Builder
-                .with(states: [state])
+                .with(gameStates: [state])
                 .with(completionState: .active)
                 .build()
             return entity

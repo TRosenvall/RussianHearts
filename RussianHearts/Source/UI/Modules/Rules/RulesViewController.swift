@@ -9,7 +9,7 @@ import UIKit
 
 // Determines how to call on required dependencies for routing
 protocol RulesDelegate: ModuleDelegate {
-    func routeBackToMainMenu(from module: any ModuleController)
+    func routeBackToMainMenu(from module: (any ModuleController)?)
 }
 
 protocol RulesView: ModuleController {

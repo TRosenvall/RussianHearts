@@ -8,20 +8,20 @@
 import UIKit
 
 // Determines how to call on required dependencies for routing
-protocol GameDelegate: ModuleDelegate {
-    func routeBackToMainMenu(from module: any ModuleController)
+//protocol GameDelegate: ModuleDelegate {
+//    func routeBackToMainMenu(from module: any ModuleController)
+//
+//    func routeToHighScores()
+//}
 
-    func routeToHighScores()
-}
-
-protocol GameView: ModuleController {
-    var gameService: GameService? { get set }
-    var delegate: GameDelegate? { get set }
-}
+//protocol GameView: ModuleController {
+//    var gameService: GameService? { get set }
+//    var delegate: GameDelegate? { get set }
+//}
 
 class GameViewController:
-    UIViewController,
-    GameView
+    UIViewController
+//    GameView
 //    GameMainViewDelegate
 {
 

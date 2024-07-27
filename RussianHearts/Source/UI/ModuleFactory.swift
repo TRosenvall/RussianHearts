@@ -11,7 +11,7 @@ import Foundation
 protocol ModuleFactory {
 
     /// Builds and returns a module of a given type
-    func buildModule<T>(delegate: SceneCoordinating) -> T?
+    func buildModule<T>(delegate: SceneCoordinating, gameEntity: GameEntity?) -> T?
 }
 
 struct ModuleFactoryImpl: ModuleFactory {
@@ -32,7 +32,10 @@ struct ModuleFactoryImpl: ModuleFactory {
 
     // MARK: - Conformance: ModuleWorks
 
-    func buildModule<T>(delegate: SceneCoordinating) -> T? {
+    func buildModule<T>(
+        delegate: SceneCoordinating,
+        gameEntity: GameEntity? = nil
+    ) -> T? {
         Logger.default.log("Setting Up Builder For \(T.self)")
 
         do {
@@ -59,8 +62,17 @@ struct ModuleFactoryImpl: ModuleFactory {
                     colors: colors,
                     entityAccessor: entityAccessor
                 ) as? T
-            case "\((any GameView).self)":
-                return GameBuilder().build(delegate: delegate) as? T
+            case "\((any GameHost).self)":
+                guard let gameEntity
+                else { Logger.default.logFatal("Attempting to instantiate GameHost Builder without GameEntity") }
+
+                return try GameBuilder().build(
+                    delegate: delegate,
+                    assets: assets,
+                    colors: colors,
+                    entityAccessor: entityAccessor, 
+                    gameEntity: gameEntity
+                ) as? T
             case "\((any HighscoresView).self)":
                 return HighscoresBuilder().build(delegate: delegate) as? T
             case "\((any RulesView).self)":

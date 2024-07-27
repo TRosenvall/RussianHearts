@@ -17,7 +17,7 @@ protocol ModuleManaging {
     var resolvedModules: [any ModuleController] { get set }
 
     /// Calls upon the factory to resolve additional modules if they don't exist
-    func retrieveModule<T>(delegate: SceneCoordinating?) -> T?
+    func retrieveModule<T>(delegate: SceneCoordinating?, gameEntity: GameEntity?) -> T?
 
     /// Removes all modules which are no longer required
     func dismissReleasableModules()
@@ -25,7 +25,7 @@ protocol ModuleManaging {
 
 extension ModuleManaging {
     func retrieveModule<T>(delegate: SceneCoordinating? = nil) -> T? {
-        let module: T? = retrieveModule(delegate: delegate)
+        let module: T? = retrieveModule(delegate: delegate, gameEntity: nil)
         return module
     }
 }
@@ -45,12 +45,12 @@ class ModuleManager: ModuleManaging {
     }
 
     // MARK: - Conformance: ModuleManaging
-    func retrieveModule<T>(delegate: SceneCoordinating? = nil) -> T? {
+    func retrieveModule<T>(delegate: SceneCoordinating? = nil, gameEntity: GameEntity? = nil) -> T? {
         Logger.default.log("Retrieving Module Of Type: - \(T.self)")
 
         dismissReleasableModules()
         if let delegate {
-            let module: T? = resolveModule(delegate: delegate)
+            let module: T? = resolveModule(delegate: delegate, gameEntity: gameEntity)
             return module
         }
         let module: T? = returnModuleIfAvailable()
@@ -87,10 +87,10 @@ class ModuleManager: ModuleManaging {
         return nil
     }
 
-    private func resolveModule<T>(delegate: SceneCoordinating) -> T? {
+    private func resolveModule<T>(delegate: SceneCoordinating, gameEntity: GameEntity? = nil) -> T? {
         Logger.default.log("Resolving Module Of Type: \(T.self)")
 
-        guard let module: T = factory.buildModule(delegate: delegate)
+        guard let module: T = factory.buildModule(delegate: delegate, gameEntity: gameEntity)
         else {
             Logger.default.log("Unable to Build Module Of Type: \(T.self)")
             return nil

@@ -22,7 +22,7 @@ protocol ModuleViewModel: Model {
     associatedtype UIRoute
     associatedtype ModuleState
 
-    var uiRoutes: ((UIRoute) -> ())? { get }
+    var uiRoutes: ((UIRoute, (any ModuleController)?) -> ())? { get }
 
     func handleUIEvent(_ event: UIEvent)
 

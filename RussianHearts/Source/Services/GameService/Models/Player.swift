@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Object
-struct Player: Model {
+struct Player: Model, Identifiable {
 
     // MARK: - Properties
 

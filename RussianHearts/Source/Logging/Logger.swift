@@ -92,7 +92,7 @@ struct Logger: LoggerProtocol {
             logMessage
         )
 
-        exit(0)
+        fatalError()
     }
 
     // MARK: - Helpers

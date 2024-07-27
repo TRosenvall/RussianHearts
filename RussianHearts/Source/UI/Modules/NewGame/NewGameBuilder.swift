@@ -9,12 +9,8 @@ import Foundation
 
 class NewGameBuilder {
 
-    // MARK: - Properties
-
-    // MARK: - Lifecycle
-    init() {}
-
     // MARK: - Helper Functions
+
     func build(
         delegate: SceneCoordinating,
         assets: Assets,
@@ -58,15 +54,15 @@ class NewGameBuilder {
 
         // Routing
         Logger.default.log("Setting Up Routing")
-        let routes: ((NewGame.UIRoute) -> ()) = { route in
+        let routes: ((NewGame.UIRoute, (any ModuleController)?) -> ()) = { route, _ in
             do {
                 // Try To Remove Unneeded Entity
                 try Global.deleteEntity(entity, using: entityAccessor) { result in
                     switch result {
                     case .success:
-                        Logger.default.log("Main Menu Entity Removed On Route")
+                        Logger.default.log("New Game Entity Removed On Route")
                     case .error(let error):
-                        Logger.default.logFatal("Error Saving Main Menu Entity: - \(error)")
+                        Logger.default.logFatal("Error Saving New Game Entity: - \(error)")
                     }
 
                     // Route on Main Thread

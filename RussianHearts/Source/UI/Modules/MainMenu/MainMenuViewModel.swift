@@ -27,7 +27,7 @@ struct MainMenuViewModelImpl:
     let id: UUID
     var view: MainMenuViewImpl?
 
-    let uiRoutes: ((MainMenu.UIRoute) -> ())?
+    let uiRoutes: ((MainMenu.UIRoute, (any ModuleController)?) -> ())?
     let useCases: MainMenu.UseCases?
     let transformer: MainMenuTransformer?
 
@@ -40,7 +40,7 @@ struct MainMenuViewModelImpl:
     fileprivate init(
         base: MainMenuViewModelImpl? = nil,
         id: UUID? = nil,
-        uiRoutes: ((MainMenu.UIRoute) -> ())? = nil,
+        uiRoutes: ((MainMenu.UIRoute, (any ModuleController)?) -> ())? = nil,
         useCases: MainMenu.UseCases? = nil,
         transformer: MainMenuTransformer? = nil,
         view: MainMenuViewImpl? = nil
@@ -93,17 +93,17 @@ struct MainMenuViewModelImpl:
             case .didAppear:
                 print("")
             case .didTapNewGame:
-                uiRoutes?(.toNewGame)
+                uiRoutes?(.toNewGame, nil)
             case .didTapContinueGame(let entity):
-                uiRoutes?(.toContinueGame(entity: entity))
+                uiRoutes?(.toContinueGame(entity: entity), nil)
             case .didTapRules:
-                uiRoutes?(.toRules)
+                uiRoutes?(.toRules, nil)
             case .didTapHighscores:
-                uiRoutes?(.toHighscores)
+                uiRoutes?(.toHighscores, nil)
             case .didTapFriends:
-                uiRoutes?(.toFriends)
+                uiRoutes?(.toFriends, nil)
             case .didTapSettings:
-                uiRoutes?(.toSettings)
+                uiRoutes?(.toSettings, nil)
             }
         }
     }
@@ -148,7 +148,7 @@ struct MainMenuViewModelImpl:
         let id = try values.decode(ID.self, forKey: .id)
         let useCases = try values.decode(MainMenu.UseCases.self, forKey: .useCases)
         let transformer = try values.decode(MainMenuTransformer.self, forKey: .transformer)
-        let uiRoutes: ((MainMenu.UIRoute) -> ())? = nil
+        let uiRoutes: ((MainMenu.UIRoute, (any ModuleController)?) -> ())? = nil
         self = try MainMenuViewModelImpl.Builder
             .update(id: id)
             .with(useCases: useCases)
@@ -173,9 +173,9 @@ struct MainMenuViewModelImpl:
             do {
                 switch result {
                 case .success(let mainMenuEntity):
-                    if let oldStates = mainMenuEntity.states {
+                    if let oldStates = mainMenuEntity.gameStates {
                         let newState = try MainMenu.State.Builder
-                            .with(base: mainMenuEntity.states?.last)
+                            .with(base: mainMenuEntity.gameStates?.last)
                             .with(isLoading: false)
                             .build()
 
@@ -201,7 +201,7 @@ struct MainMenuViewModelImpl:
             switch result {
             case .success(let updatedEntity):
                 guard let entity = updatedEntity as? MainMenuEntity,
-                      let newState = entity.states?.last
+                      let newState = entity.gameStates?.last
                 else {
                     Logger.default.log("Entity Did Not Update", logType: .warn)
                     return
@@ -225,7 +225,7 @@ extension GenericBuilder where T == MainMenuViewModelImpl {
         return GenericBuilder<MainMenuViewModelImpl>(base: newBase)
     }
 
-    func with(uiRoutes: ((MainMenu.UIRoute) -> ())?) -> GenericBuilder<MainMenuViewModelImpl> {
+    func with(uiRoutes: ((MainMenu.UIRoute, (any ModuleController)?) -> ())?) -> GenericBuilder<MainMenuViewModelImpl> {
         let newBase = MainMenuViewModelImpl(base: base, uiRoutes: uiRoutes)
         return GenericBuilder<MainMenuViewModelImpl>(base: newBase)
     }

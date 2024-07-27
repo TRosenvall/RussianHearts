@@ -25,7 +25,7 @@ struct LaunchViewModelImpl:
     let id: UUID
     var view: LaunchViewImpl? = nil
 
-    let uiRoutes: ((Launch.UIRoute) -> ())?
+    let uiRoutes: ((Launch.UIRoute, (any ModuleController)?) -> ())?
     let useCases: Launch.UseCases?
     let transformer: LaunchTransformer?
 
@@ -38,7 +38,7 @@ struct LaunchViewModelImpl:
     fileprivate init(
         base: LaunchViewModelImpl? = nil,
         id: UUID? = nil,
-        uiRoutes: ((Launch.UIRoute) -> ())? = nil,
+        uiRoutes: ((Launch.UIRoute, (any ModuleController)?) -> ())? = nil,
         useCases: Launch.UseCases? = nil,
         transformer: LaunchTransformer? = nil,
         view: LaunchViewImpl? = nil
@@ -138,7 +138,7 @@ struct LaunchViewModelImpl:
         let id = try values.decode(ID.self, forKey: .id)
         let useCases = try values.decode(Launch.UseCases.self, forKey: .useCases)
         let transformer = try values.decode(LaunchTransformer.self, forKey: .transformer)
-        let uiRoutes: ((Launch.UIRoute) -> ())? = nil
+        let uiRoutes: ((Launch.UIRoute, (any ModuleController)?) -> ())? = nil
         self = try LaunchViewModelImpl.Builder
             .update(id: id)
             .with(useCases: useCases)
@@ -169,12 +169,12 @@ struct LaunchViewModelImpl:
 
             switch result {
             case .success(let gameEntity):
-                uiRoutes?(.toMainMenu(entity: gameEntity))
+                uiRoutes?(.toMainMenu(entity: gameEntity), nil)
             case .error(let error):
                 switch error {
                 case .noGameStateRetrieved:
                     Logger.default.log("Routing With No Saved Data", logType: .warn)
-                    uiRoutes?(.toMainMenu(entity: nil))
+                    uiRoutes?(.toMainMenu(entity: nil), nil)
                 }
             }
         }
@@ -187,9 +187,9 @@ struct LaunchViewModelImpl:
             do {
                 switch result {
                 case .success(let launchEntity):
-                    if let oldStates = launchEntity.states {
+                    if let oldStates = launchEntity.gameStates {
                         let newState = try Launch.State.Builder
-                            .with(base: launchEntity.states?.last)
+                            .with(base: launchEntity.gameStates?.last)
                             .with(isLoading: false)
                             .build()
 
@@ -215,7 +215,7 @@ struct LaunchViewModelImpl:
             switch result {
             case .success(let updatedEntity):
                 guard let entity = updatedEntity as? LaunchEntity,
-                      let newState = entity.states?.last
+                      let newState = entity.gameStates?.last
                 else {
                     Logger.default.log("Entity Did Not Update", logType: .warn)
                     return
@@ -239,7 +239,7 @@ extension GenericBuilder where T == LaunchViewModelImpl {
         return GenericBuilder<LaunchViewModelImpl>(base: newBase)
     }
 
-    func with(uiRoutes: ((Launch.UIRoute) -> ())?) -> GenericBuilder<LaunchViewModelImpl> {
+    func with(uiRoutes: ((Launch.UIRoute, (any ModuleController)?) -> ())?) -> GenericBuilder<LaunchViewModelImpl> {
         let newBase = LaunchViewModelImpl(base: base, uiRoutes: uiRoutes)
         return GenericBuilder<LaunchViewModelImpl>(base: newBase)
     }

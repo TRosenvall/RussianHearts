@@ -70,7 +70,7 @@ struct RetrieveGameState: RetrieveGameStateUseCase {
             do {
                 let entity: GameEntity? = try await entityAccessor.loadActiveEntity()
 
-                if let gameState = entity?.states?.last {
+                if let gameState = entity?.gameStates?.last {
                     completion(.success(gameState))
                 } else {
                     completion(.error(.emptyGameStates))

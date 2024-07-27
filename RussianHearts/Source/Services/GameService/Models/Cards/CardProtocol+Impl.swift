@@ -13,7 +13,7 @@ protocol CardProtocol: Model {
     var playedBy: Player? { get }
 }
 
-enum Card: Codable {
+enum Card: Codable, Equatable {
     case number(card: NumberCard)
     case special(card: SpecialCard)
 

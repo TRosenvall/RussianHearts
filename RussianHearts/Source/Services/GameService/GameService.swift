@@ -30,6 +30,7 @@ struct GameService:
 
     let id: UUID
     let useCase: CodingContainer? // Contains GameService.UseCase
+    let entityAccessor: CodingContainer? // Contains EntityAccessor
 
     // MARK: - Lifecycle
 
@@ -40,10 +41,12 @@ struct GameService:
     fileprivate init(
         base: GameService? = nil,
         id: UUID? = nil,
-        useCase: GameService.UseCase? = nil
+        useCase: GameService.UseCase? = nil,
+        entityAccessor: (any EntityAccessing)? = nil
     ) {
         self.id = id ?? base?.id ?? UUID()
         self.useCase = CodingContainer(useCase) ?? base?.useCase
+        self.entityAccessor = CodingContainer(entityAccessor) ?? base?.entityAccessor
     }
 
     // MARK: - Conformance: Model
@@ -56,10 +59,10 @@ struct GameService:
 
     func executeUseCase(
         for useCase: UseCaseType,
-        withAccessor accessor: (any EntityAccessing)?,
         completion: ((UseCaseResultType) -> Void)? = nil
     ) throws {
-        if let useCases = self.useCase?.value() as? GameService.UseCase {
+        if let useCases = self.useCase?.value() as? GameService.UseCase,
+           let accessor = self.entityAccessor?.value() as? EntityAccessor {
             switch useCase {
             case .retrieveGameState:
                 guard let retrieveGameState = useCases.retrieveGameState?.value() as? (any RetrieveGameStateUseCase)
@@ -85,6 +88,30 @@ struct GameService:
                 print("TODO")
             }
         }
+    }
+
+    // MARK: - Conformance: Codable
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case useCases
+        case entityAccessor
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try values.decode(ID.self, forKey: .id)
+        self.useCase = try values.decode(CodingContainer.self, forKey: .useCases)
+        self.entityAccessor = try values.decode(CodingContainer.self, forKey: .entityAccessor)
+
+        _ = try validate()
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(useCase, forKey: .useCases)
+        try container.encode(entityAccessor, forKey: .entityAccessor)
     }
 
 //    var games: [GameModel] {
@@ -926,4 +953,16 @@ struct GameService:
 //
 //        return trump
 //    }
+}
+
+extension GenericBuilder where T == GameService {
+    func with(useCase: GameService.UseCase) -> GenericBuilder<GameService> {
+        let newBase = GameService(base: base, useCase: useCase)
+        return GenericBuilder<GameService>(base: newBase)
+    }
+    
+    func with(entityAccessor: (any EntityAccessing)?) -> GenericBuilder<GameService> {
+        let newBase = GameService(base: base, entityAccessor: entityAccessor)
+        return GenericBuilder<GameService>(base: newBase)
+    }
 }
