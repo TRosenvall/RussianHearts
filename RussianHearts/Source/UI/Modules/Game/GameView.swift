@@ -65,8 +65,8 @@ struct GameViewImpl<ViewModel>: GameView, CardViewDelegate where ViewModel: Game
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                backgroundColor.overlay {
+            backgroundColor.overlay {
+                ZStack {
                     
                     RoundedRectangle(cornerRadius: 20)
                         .inset(by: 5)
@@ -75,7 +75,7 @@ struct GameViewImpl<ViewModel>: GameView, CardViewDelegate where ViewModel: Game
                     VStack(alignment: .center) {
                         // Status Bar View
                         statusBarView
-
+                        
                         // Play Area View
                         playAreaView {
                             print("Play Area Tapped")
@@ -88,11 +88,11 @@ struct GameViewImpl<ViewModel>: GameView, CardViewDelegate where ViewModel: Game
                                 }
                             }
                         }
-
+                        
                         // Hand View
                         Spacer()
                         handView
-
+                        
                         // End Turn Button
                         Button {
                             viewModel.handleUIEvent(.didTapEndTurn)
@@ -310,6 +310,6 @@ struct GameViewImpl<ViewModel>: GameView, CardViewDelegate where ViewModel: Game
         let frame = geometry.frame(in: .global)
         frames.wrappedValue.append(CGPoint(x: frame.minX, y: frame.minY))
 
-//        Logger.default.log(frames.wrappedValue.debugDescription)
+        Logger.default.log(frames.wrappedValue.debugDescription)
     }
 }

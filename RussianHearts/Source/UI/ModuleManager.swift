@@ -45,6 +45,7 @@ class ModuleManager: ModuleManaging {
     }
 
     // MARK: - Conformance: ModuleManaging
+
     func retrieveModule<T>(delegate: SceneCoordinating? = nil, gameEntity: GameEntity? = nil) -> T? {
         Logger.default.log("Retrieving Module Of Type: - \(T.self)")
 
